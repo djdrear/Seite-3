@@ -1,0 +1,3684 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>UNDRA – Heldenbrief</title>
+
+<!-- CSS: füge den kompletten CSS‑Block direkt nach diesem Kommentar ein -->
+
+<style>
+/* ===== SEITE 3 – LAYOUT ===== */
+
+#step-3 {
+    padding: 10px;
+}
+
+/* Zeilen-Panel */
+.s3-panel {
+    border: 1px solid gold;
+    margin: 8px 10px;
+    border-radius: 6px;
+    background: rgba(0,0,0,.35);
+    padding: 8px 10px;
+}
+
+/* Kopfzeile Seite 3 */
+.s3-header-title {
+    font-size: 18px;
+    color: #f3e3a2;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 0 6px rgba(255,215,0,0.5);
+}
+
+/* Zeile 2: Merkmale / Portrait / SP */
+.s3-row-flex {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.s3-col {
+    flex: 1;
+}
+
+.s3-col-fixed {
+    width: 180px;
+}
+
+/* Merkmalsblock */
+.s3-hero-summary {
+    border: 1px solid gold;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* SP Anzeige */
+.s3-sp-box {
+    border: 1px solid gold;
+    border-radius: 6px;
+    padding: 6px;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.s3-sp-value {
+    color: #ffe7a8;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(255,215,0,0.5);
+}
+
+/* Attribute (Zeile 3) – Raster einfach gehalten */
+.s3-attr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 12px;
+    font-size: 12px;
+}
+
+.s3-attr-row {
+    display: grid;
+    grid-template-columns: 1.2fr 24px 26px;
+    gap: 4px;
+    align-items: center;
+}
+
+.s3-attr-name {
+    white-space: nowrap;
+}
+
+.s3-attr-value {
+    border: 1px solid gold;
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+}
+
+.s3-attr-arrow {
+    opacity: 0;
+    cursor: default;
+    transition: 0.2s ease;
+    font-size: 16px;
+    text-align: center;
+    color: gold;
+    text-shadow: 0 0 6px rgba(255,215,0,0.7);
+}
+
+.s3-attr-arrow.active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* Zeile 4: Vitalwerte */
+.s3-vital-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+    font-size: 13px;
+}
+
+.s3-vital-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.s3-vital-btn {
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 10px;
+    border: 1px solid gold;
+    background: #130707;
+    color: gold;
+    cursor: pointer;
+}
+
+.s3-vital-btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Zeile 5: Kampfblock */
+.s3-combat-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 10px;
+}
+
+.s3-combat-grid {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    gap: 4px 8px;
+    font-size: 12px;
+}
+
+.s3-txtarea {
+    width: 100%;
+    min-height: 60px;
+    resize: vertical;
+    background: #050306;
+    color: #eaddca;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.s3-hitzones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    font-size: 11px;
+    text-align: center;
+}
+
+.s3-hitzone-cell {
+    border: 1px solid #444;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.s3-diagram-box,
+.s3-figure-box,
+.s3-orb-box {
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #050306;
+    text-align: center;
+    padding: 6px;
+    font-size: 11px;
+    color: #aaa;
+}
+
+/* Zeile 6: Fähigkeiten */
+.s3-skill-section-title {
+    font-size: 14px;
+    color: #ffe7a8;
+    margin-bottom: 4px;
+}
+
+.s3-skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 8px;
+    font-size: 11px;
+}
+
+.s3-skill-row {
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 3px 4px;
+    display: grid;
+    grid-template-columns: 1.2fr 30px 46px;
+    gap: 2px;
+    align-items: center;
+}
+
+.s3-skill-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.s3-skill-level {
+    text-align: center;
+}
+
+.s3-skill-btn {
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 8px;
+    border: 1px solid gold;
+    background: #160909;
+    color: gold;
+    cursor: pointer;
+}
+
+.s3-skill-btn[disabled] {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Zeile 7: Inventar (einfaches Grid) */
+.s3-inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+    font-size: 10px;
+}
+
+.s3-inventory-slot {
+    border: 1px solid #333;
+    border-radius: 4px;
+    height: 32px;
+    background: #050306;
+}
+
+/* Zeile 8: Prozentanzeige */
+.s3-percent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    font-size: 11px;
+}
+
+.s3-percent-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.s3-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.s3-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#7a121b,#f3e3a2);
+}
+
+/* Zeile 9: Timeline */
+.s3-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    gap: 2px;
+    font-size: 9px;
+}
+
+.s3-day-btn {
+    padding: 3px 0;
+    border-radius: 4px;
+    border: 1px solid #444;
+    text-align: center;
+    cursor: default;
+    background: #050306;
+    color: #aaa;
+}
+
+.s3-day-btn.active {
+    border-color: gold;
+    color: #ffe7a8;
+    box-shadow: 0 0 6px rgba(255,215,0,0.4);
+}
+
+.s3-day-btn.checked {
+    background: linear-gradient(135deg,#004400,#001a00);
+    border-color: #00aa44;
+    color: #88ff88;
+    box-shadow:
+        0 0 8px rgba(0,255,120,0.5),
+        inset 0 0 6px rgba(0,255,120,0.4);
+}
+
+/* Zeile 10: Footer */
+#s3-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    padding: 6px 10px;
+    border-top: 2px solid gold;
+    background: #0a050a;
+    margin: 10px 10px 0 10px;
+    border-radius: 0 0 6px 6px;
+}
+
+.s3-footer-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.s3-footer-btn {
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 1px solid gold;
+    background: #160909;
+    color: gold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.s3-footer-btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.s3-currency-box {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    font-size: 12px;
+    color: #ffe7a8;
+    text-shadow: 0 0 6px rgba(255,215,0,0.5);
+}
+
+.s3-currency-label {
+    color: gold;
+}
+
+/* Tagesabschluss-Freeze Overlay für Seite 3 */
+#s3-freeze-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 980px;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+    border-radius: 8px;
+}
+
+#s3-freeze-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* alles, was bei Freeze ausgegraut wird */
+.s3-freezable.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Popup Tagesabschluss */
+#dayend-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+}
+
+#dayend-box {
+    background:#120a12;
+    border:2px solid gold;
+    border-radius:10px;
+    width:480px;
+    padding:14px;
+    color:#eaddca;
+    text-align:center;
+}
+
+.dayend-msg {
+    font-size:14px;
+    color:#ffe7a8;
+    margin-bottom:8px;
+}
+
+.dayend-row {
+    display:flex;
+    justify-content:space-between;
+    margin:4px 0;
+    font-size:13px;
+}
+
+/* ============================
+GLOBAL
+============================ */
+/* ============================
+GLOBAL – UNDRA BLOODCORE R2
+============================ */
+body {
+    background: #050307;
+    color: #f5f1ff;
+    font-family: "Georgia", serif;
+
+    margin: 0;
+    padding: 20px 0;
+    box-sizing: border-box;
+
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 60, 60, 0.08), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(255, 200, 80, 0.06), transparent 60%);
+}
+
+/* ============================
+ANMERKUNG – BOX (Bloodcore R2)
+============================ */
+#anmerkungBlock {
+    width: 450px;
+    max-width: 100%;
+    margin: 30px auto 0 auto;
+
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    border-radius: 6px;
+    padding: 16px 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    box-shadow:
+        0 0 28px rgba(0,0,0,1),
+        0 0 26px rgba(255, 60, 60, 0.55),
+        0 0 18px rgba(255, 200, 80, 0.45),
+        inset 0 0 18px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+}
+/* ============================
+ANMERKUNG – TITEL (Bloodcore R2)
+============================ */
+.anmerkung-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffe9b4;
+
+    letter-spacing: 0.6px;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+
+    border-bottom: 1px solid rgba(255, 210, 120, 0.6);
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 10px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+ANMERKUNG – TEXTFELD (Bloodcore R2)
+============================ */
+#anmerkungText {
+    width: 100%;
+    height: 140px;
+
+    background: rgba(10, 4, 6, 0.92);
+    border: 2px solid #603020;
+    border-radius: 4px;
+
+    color: #fff8e8;
+    padding: 10px;
+    resize: none;
+
+    font-family: "Georgia", serif;
+    font-size: 14px;
+    line-height: 1.4;
+
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        inset 0 0 10px rgba(255, 0, 40, 0.25);
+}
+
+#anmerkungText::placeholder {
+    color: #b38c76;
+}
+
+/* ============================
+ANMERKUNG – COUNTER (Bloodcore R2)
+============================ */
+#anmerkungCounter {
+    font-size: 12px;
+    color: #f7dfaf;
+    text-align: right;
+    opacity: 0.9;
+
+    letter-spacing: 0.3px;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+KOPFZEILE – TITEL "Heldenbrief"
+============================ */
+#kopf-titel {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffe9b4;
+
+    letter-spacing: 1px;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+
+    border-bottom: 2px solid rgba(255, 210, 120, 0.6);
+
+    font-variant: small-caps;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 14px rgba(255, 60, 60, 0.4);
+}
+/* ============================
+KOPFZEILE – NAME (Bloodcore R2)
+============================ */
+#kopf-name {
+    margin-top: 4px;
+    font-size: 18px;
+    color: #ffe9c4;
+
+    word-wrap: break-word;
+    line-height: 1.3;
+    font-style: italic;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 14px rgba(255, 60, 60, 0.45);
+}
+
+/* ============================
+DREIER-LINIE – Bloodcore R2
+============================ */
+#merkmale-row {
+    width: 950px;
+    max-width: 950px;
+    margin: 0 auto 24px auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 210, 120, 0.4);
+    box-sizing: border-box;
+}
+
+/* ============================
+MERKMALE LINKS – Bloodcore R2
+============================ */
+#merkmale-links {
+    flex: 1;
+    min-width: 475px;
+    max-width: 530px;
+
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    border-radius: 6px;
+    padding: 16px 18px;
+
+    box-shadow:
+        0 0 28px rgba(0,0,0,1),
+        0 0 26px rgba(255, 60, 60, 0.55),
+        0 0 18px rgba(255, 200, 80, 0.45),
+        inset 0 0 18px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+
+    box-sizing: border-box;
+}
+
+/* ============================
+MERKMALE – TITEL (Bloodcore R2)
+============================ */
+.merk-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #ffe9b4;
+    letter-spacing: 0.6px;
+
+    border-bottom: 1px solid rgba(255, 210, 120, 0.6);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 10px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+MERKMALE – GRID (Bloodcore R2)
+============================ */
+.merk-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ============================
+MERKMAL – EINZELFELD (Bloodcore R2)
+============================ */
+.merk-item {
+    position: relative;
+
+    background: rgba(10, 4, 6, 0.92);
+    padding: 10px 14px;
+    border-radius: 4px;
+
+    border: 1px solid #8a5200;
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        0 0 8px rgba(255, 60, 60, 0.25);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+    color: #ffe9d8;
+
+    box-sizing: border-box;
+}
+
+/* ============================
+MERKMAL – ECKEN-ORNAMENTE (Bloodcore R2)
+============================ */
+.merk-item::before,
+.merk-item::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+
+    border: 1px solid #e2b44a;
+    opacity: 0.9;
+}
+
+.merk-item::before {
+    top: -3px;
+    left: -3px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 3px 0 0 0;
+}
+
+.merk-item::after {
+    bottom: -3px;
+    right: -3px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 3px 0;
+}
+
+/* ============================
+MERKMAL – LABEL LINKS (Bloodcore R2)
+============================ */
+.merk-item span:first-child {
+    color: #ffe9b4;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+/* ============================
+PORTRAIT – DSA Retro
+============================ */
+#portrait-block {
+    flex: 1;
+    min-width: 200px;
+    max-width: 260px;
+
+    background: #f2e9d8;                 /* Pergament */
+    border: 2px solid #5a4633;           /* dunkles Sepia */
+    border-radius: 4px;
+
+    padding: 12px 14px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.15),
+        inset 0 0 2px rgba(255,255,255,0.4); /* Papierstruktur */
+    box-sizing: border-box;
+}
+
+/* Rahmen-Ornament */
+#portrait-block::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid #bfa98a;           /* warmes Sepia */
+    border-radius: 3px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+
+
+
+
+/* ============================
+PORTRAIT – INNENBEREICH (Bloodcore R2)
+============================ */
+#portrait-inner {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border-radius: 6px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    box-shadow:
+        0 0 22px rgba(0,0,0,1),
+        0 0 18px rgba(255, 60, 60, 0.45),
+        inset 0 0 16px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+
+    box-sizing: border-box;
+}
+
+/* Bild */
+#portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+/* Platzhalter */
+#portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    color: #ffe9c4;
+    font-size: 14px;
+    opacity: 0.8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 12px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+DIAGRAMM – AUSSENBLOCK (Bloodcore R2)
+============================ */
+#diagramm-block {
+    flex: 1;
+    min-width: 180px;
+    max-width: 240px;
+
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    border-radius: 6px;
+    padding: 12px 14px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-shadow:
+        0 0 26px rgba(0,0,0,1),
+        0 0 20px rgba(255, 60, 60, 0.45),
+        0 0 14px rgba(255, 200, 80, 0.35),
+        inset 0 0 14px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+
+    box-sizing: border-box;
+}
+
+/* ============================
+DIAGRAMM – ZIERLINIEN (Bloodcore R2)
+============================ */
+#diagramm-block::before,
+#diagramm-block::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 210, 120, 0.8),
+        rgba(255, 60, 60, 0.6),
+        rgba(255, 210, 120, 0.8)
+    );
+}
+
+#diagramm-block::before {
+    top: -6px;
+}
+
+#diagramm-block::after {
+    bottom: -6px;
+}
+
+/* ============================
+DIAGRAMM – INNENBEREICH (Bloodcore R2)
+============================ */
+#diagramm-inner {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    background: rgba(10, 4, 6, 0.92);
+    border: 1px solid #8a5200;
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25),
+        inset 0 0 6px rgba(255, 200, 80, 0.25);
+
+    box-sizing: border-box;
+}
+
+/* ============================
+ATTRIBUTE-BLOCK – Bloodcore R2
+============================ */
+#attribute-block {
+    width: 950px;
+    height: 400px;
+
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    border-radius: 6px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 auto 30px auto;
+
+    box-shadow:
+        0 0 28px rgba(0,0,0,1),
+        0 0 26px rgba(255, 60, 60, 0.55),
+        0 0 18px rgba(255, 200, 80, 0.45),
+        inset 0 0 18px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+}
+
+/* ============================
+ATTRIBUTE – TITEL (Bloodcore R2)
+============================ */
+#attribute-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+
+    color: #ffe9b4;
+    letter-spacing: 0.8px;
+
+    border-bottom: 1px solid rgba(255, 210, 120, 0.6);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 14px rgba(255, 60, 60, 0.45);
+}
+
+/* ============================
+ATTRIBUTE – GRID
+============================ */
+#attribute-grid {
+    display: auto;
+    flex-direction: auto;
+    gap: 6px;
+    height: calc(100% - 34px);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: auto(17 fr);
+    gap: 6px;
+}
+
+.center-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* ============================
+ATTRIBUTE – SLOT (Bloodcore R2)
+============================ */
+.attribute-slot {
+    background: rgba(10, 4, 6, 0.92);
+    border: 1px solid #8a5200;
+    border-radius: 4px;
+
+    padding: 4px 16px;
+    display: grid;
+    grid-template-columns: 2fr auto auto;
+    align-items: center;
+
+    font-size: 17px;
+    color: #ffe9d8;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25),
+        inset 0 0 6px rgba(255, 200, 80, 0.25),
+        0 0 8px rgba(255, 60, 60, 0.25);
+}
+
+/* ============================
+ATTRIBUTE – LEVEL (Bloodcore R2)
+============================ */
+.attr-level {
+    color: #ffe9b4;
+    font-weight: bold;
+    margin-right: 4px;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+ATTRIBUTE – PFEILE (Bloodcore R2)
+============================ */
+.attr-arrow {
+    width: 18px;
+    height: 18px;
+
+    background: rgba(10, 4, 6, 0.92);
+    border: 1px solid #8a5200;
+    border-radius: 3px;
+
+    color: #ffe9b4;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        inset 0 0 10px rgba(255, 0, 40, 0.25);
+}
+
+.attr-arrow:hover {
+    background: rgba(40, 10, 10, 0.95);
+    border-color: #ffe9a8;
+    color: #ffe9a8;
+
+    box-shadow:
+        0 0 10px rgba(255, 200, 80, 0.8),
+        0 0 14px rgba(255, 60, 60, 0.5),
+        inset 0 0 10px rgba(255, 200, 80, 0.25);
+}
+/* ============================
+VITALWERTE + AUFWERTUNGEN – UNDRA Bloodcore R2
+============================ */
+#vitalWrapper {
+    width: 950px;
+    margin: 0 auto 40px auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* ============================
+VITALWERTE – BOXEN (Bloodcore R2)
+============================ */
+#vitalDisplay,
+#vitalBonusPanel {
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+    border-radius: 6px;
+
+    padding: 16px 18px;
+    box-sizing: border-box;
+
+    box-shadow:
+        0 0 28px rgba(0,0,0,1),
+        0 0 26px rgba(255, 60, 60, 0.55),
+        0 0 18px rgba(255, 200, 80, 0.45),
+        inset 0 0 18px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+}
+
+/* ============================
+VITALWERTE – TITEL (Bloodcore R2)
+============================ */
+.vital-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #ffe9b4;
+    letter-spacing: 1px;
+
+    border-bottom: 1px solid rgba(255, 210, 120, 0.6);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 14px rgba(255, 60, 60, 0.45);
+}
+
+/* ============================
+VITALWERTE – EINZELZEILE (Bloodcore R2)
+============================ */
+.vital-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+
+    padding: 6px 6px;
+    margin-bottom: 10px;
+
+    background: rgba(10, 4, 6, 0.92);
+    border-radius: 4px;
+    border: 1px solid #8a5200;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25),
+        inset 0 0 6px rgba(255, 200, 80, 0.25),
+        0 0 8px rgba(255, 60, 60, 0.25);
+}
+
+/* ============================
+VITALWERTE – ICON (Bloodcore R2)
+============================ */
+.vital-icon {
+    font-size: 22px;
+    text-align: center;
+    color: #ffe9b4;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 12px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+VITALWERTE – LABEL (Bloodcore R2)
+============================ */
+.vital-label {
+    color: #ffe9d8;
+    font-weight: 600;
+    font-size: 15px;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+VITALWERTE – WERT (Bloodcore R2)
+============================ */
+.vital-value {
+    color: #fff4e6;
+    font-size: 15px;
+    text-align: right;
+    font-weight: bold;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+ICON-ANIMATIONEN (unverändert)
+============================ */
+.heart { animation: heartPulse 1.8s infinite ease-in-out; }
+@keyframes heartPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+.energy { animation: energyZap 1.4s infinite; }
+@keyframes energyZap {
+    0%, 90% { transform: translateX(0); }
+    92% { transform: translateX(-2px); }
+    94% { transform: translateX(2px); }
+    96% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+}
+
+.shield { animation: shieldShine 3s infinite linear; }
+@keyframes shieldShine {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.35); }
+    100% { filter: brightness(1); }
+}
+
+.brain { animation: brainWave 2.4s infinite ease-in-out; }
+@keyframes brainWave {
+    0% { filter: drop-shadow(0 0 2px #6a3f8f); }
+    50% { filter: drop-shadow(0 0 8px #b57cff); }
+    100% { filter: drop-shadow(0 0 2px #6a3f8f); }
+}
+
+.target { animation: targetPing 2.2s infinite ease-out; }
+@keyframes targetPing {
+    0% { transform: scale(1); opacity: 1; }
+    70% { transform: scale(1.15); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================
+AUFWERTUNGEN – OPTIMIERTE ABSTÄNDE (Bloodcore R2)
+============================ */
+
+.vb-row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+
+    min-height: 40px; /* sorgt für identische Zeilenhöhe */
+}
+
+/* Label links */
+.vb-label {
+    font-size: 0.85rem;
+    color: #ffe9d8;
+    line-height: 1;
+    padding-top: 2px; /* optische Zentrierung */
+}
+
+/* Icon */
+.vb-icon {
+    font-size: 22px;
+    width: 28px;
+    text-align: center;
+    color: #ffe9b4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-shadow:
+        0 0 6px rgba(255, 200, 80, 0.7),
+        0 0 12px rgba(255, 60, 60, 0.4);
+}
+
+/* Crystal‑Reihe */
+.vb-crystals {
+    display: flex;
+    gap: 6px;
+    align-items: center; /* vertikale Zentrierung */
+    height: 100%;
+}
+
+.vb-crystal {
+    width: 36px;
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(40, 20, 20, 0.6);
+    transition: 0.2s;
+}
+
+.vb-crystal.active {
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    box-shadow:
+        0 0 10px rgba(255, 200, 80, 0.9),
+        0 0 14px rgba(255, 60, 60, 0.5);
+}
+
+/* Upgrade‑Button */
+.vb-upgrade {
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    border: 2px solid #8a5200;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 4px 10px;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 28px; /* exakt gleiche Höhe wie Icons */
+    box-shadow:
+        0 0 10px rgba(255, 200, 80, 0.8),
+        0 0 14px rgba(255, 60, 60, 0.5);
+}
+
+.vb-upgrade:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+
+
+
+
+
+
+/* ============================
+KAMPF + RÜSTUNGSSYSTEM – Bloodcore R2 (Fix)
+============================ */
+#kampfWrapper {
+    width: 450px;
+    max-width: 100%;
+    margin: 0 auto 40px auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    box-sizing: border-box;
+}
+
+/* Alle Elemente im Wrapper dürfen NICHT breiter werden als die Spalte */
+#kampfWrapper > div {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ============================
+LINKER BLOCK – ANGRIFF (Bloodcore R2)
+============================ */
+.kampf-panel {
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+    border-radius: 6px;
+
+    padding: 14px 16px;
+    min-height: 260px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    box-shadow:
+        0 0 26px rgba(0,0,0,1),
+        0 0 20px rgba(255, 60, 60, 0.45),
+        0 0 14px rgba(255, 200, 80, 0.35),
+        inset 0 0 14px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+}
+
+/* Kampfzeilen */
+.kampf-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+
+    padding: 8px 8px;
+    background: rgba(10, 4, 6, 0.92);
+    border-radius: 4px;
+
+    border: 1px solid #8a5200;
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25),
+        inset 0 0 6px rgba(255, 200, 80, 0.25),
+        0 0 8px rgba(255, 60, 60, 0.25);
+}
+
+.kampf-label {
+    color: #ffe9b4;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+.kampf-value {
+    color: #fff4e6;
+    font-size: 15px;
+    text-align: right;
+    font-weight: bold;
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.7),
+        0 0 8px rgba(255, 60, 60, 0.4);
+}
+
+/* ============================
+RECHTER BLOCK – RÜSTUNGSSYSTEM (Bloodcore R2)
+============================ */
+#ruestungsBlock {
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+    border-radius: 6px;
+
+    padding: 14px 16px;
+
+    box-shadow:
+        0 0 26px rgba(0,0,0,1),
+        0 0 20px rgba(255, 60, 60, 0.45),
+        0 0 14px rgba(255, 200, 80, 0.35),
+        inset 0 0 14px rgba(255, 200, 80, 0.25),
+        inset 0 0 10px rgba(255, 0, 40, 0.25),
+        inset 0 0 4px rgba(255,255,255,0.08);
+}
+
+/* ============================
+RÜSTUNGSSYSTEM – INNENBLOCK
+============================ */
+#armorSystem {
+    width: 100%;              /* statt 475px */
+    max-width: 100%;          /* verhindert Überbreite */
+    background: rgba(10, 4, 6, 0.92);
+    border: 1px solid #8a5200;
+    border-radius: 6px;
+
+    padding: 6px;             /* kompakter */
+    font-size: 11px;
+    color: #ffe9d8;
+    font-family: "Georgia", serif;
+
+    min-height: 260px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Männchen + Werte sauber verteilt */
+    gap: 6px;
+
+    box-sizing: border-box;   /* verhindert Überlaufen */
+    overflow: hidden;         /* falls etwas minimal übersteht */
+}
+
+
+
+/* Linke Seite */
+#armorLeft {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ============================
+ZONEN-AUSWAHL
+============================ */
+#zoneSelectGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+
+    background: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #8a5200;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25);
+}
+
+#zoneSelectGrid div {
+    padding: 6px 8px;
+    background: rgba(40, 20, 20, 0.6);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.15s ease;
+    color: #ffe9d8;
+}
+
+#zoneSelectGrid div:hover {
+    background: rgba(255, 200, 80, 0.15);
+    transform: translateY(-1px);
+}
+
+#zoneSelectGrid div.active-zone {
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    border: 1px solid #8a5200;
+    color: #111;
+    box-shadow:
+        0 0 10px rgba(255, 200, 80, 0.9),
+        0 0 14px rgba(255, 60, 60, 0.5);
+}
+
+/* Inputs */
+#armorLeft input,
+#armorLeft button {
+    width: 100%;
+    height: 22px;
+    font-size: 11px;
+
+    background: rgba(10, 4, 6, 0.92);
+    border: 1px solid #8a5200;
+    color: #ffe9d8;
+    border-radius: 3px;
+
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        inset 0 0 10px rgba(255, 0, 40, 0.25);
+}
+
+/* Zonenliste */
+#zoneList {
+    flex: 1;
+    font-size: 11px;
+    line-height: 14px;
+    color: #ffe9d8;
+}
+
+.zone-box {
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #8a5200;
+}
+
+/* ============================
+RECHTE SEITE – FIGUR
+============================ */
+#armorRight {
+    width: 30%;
+    background: #000;
+    border: 1px solid #8a5200;
+    border-radius: 4px;
+
+    min-height: 260px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.9),
+        inset 0 0 14px rgba(255, 0, 40, 0.25);
+}
+
+#zoneFigure {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================
+SVG-ZONEN
+============================ */
+.armor-zone {
+    fill: #4b5563;
+    stroke: #8a5200;
+    stroke-width: 2;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.armor-zone:hover {
+    filter: brightness(1.3);
+    stroke: #ffe9a8;
+}
+
+.active-zone-svg {
+    stroke: #ffe9a8 !important;
+    stroke-width: 3 !important;
+    filter: drop-shadow(0 0 6px #ffe9a8);
+}
+
+
+
+
+
+
+/* ============================
+POPUP – Bloodcore R2
+============================ */
+.popup-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+/* sichtbarer Zustand (z.B. .popup-bg.active) */
+.popup-bg.active {
+    display: flex;
+}
+
+/* Popup-Karte */
+.popup {
+    width: 280px;
+    max-width: calc(100% - 40px);
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    color: #fff4e6;
+    padding: 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.95),
+        0 0 22px rgba(255,60,60,0.45),
+        0 0 14px rgba(255,200,80,0.35),
+        inset 0 0 12px rgba(255,200,80,0.18);
+
+    font-size: 13px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+/* Kopfzeile / Titel innerhalb des Popups (optional) */
+.popup .title {
+    font-weight: 700;
+    color: #ffe9b4;
+    margin-bottom: 8px;
+    text-shadow:
+        0 0 6px rgba(255,200,80,0.7),
+        0 0 12px rgba(255,60,60,0.35);
+}
+
+/* Inhaltstext */
+.popup p {
+    margin: 0 0 10px 0;
+    color: #fff1df;
+}
+
+/* Buttons */
+.popup button {
+    width: 100%;
+    height: 34px;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    border: 2px solid #8a5200;
+    color: #111;
+    font-weight: 700;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 10px rgba(255,200,80,0.85),
+        0 0 14px rgba(255,60,60,0.45),
+        inset 0 0 6px rgba(255,255,255,0.12);
+}
+
+/* Button Hover / Focus */
+.popup button:hover,
+.popup button:focus {
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 14px rgba(255,200,80,0.95),
+        0 0 18px rgba(255,60,60,0.55),
+        inset 0 0 8px rgba(255,255,255,0.14);
+    outline: none;
+}
+
+/* Sekundärer Button (z.B. Abbrechen) */
+.popup .btn-secondary {
+    background: rgba(10,4,6,0.92);
+    color: #ffe9b4;
+    border: 1px solid rgba(255,210,120,0.25);
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        0 0 8px rgba(255,60,60,0.18);
+}
+
+/* Accessibility: Fokus sichtbar */
+.popup button:focus-visible {
+    outline: 3px solid rgba(255,200,80,0.25);
+    outline-offset: 2px;
+}
+/* ============================
+INVENTAR, TIMELINE, FOOTER – Bloodcore R2
+============================ */
+#inventoryWrapper {
+    width: 950px;
+    margin: 0 auto 18px auto;
+}
+
+#inventoryPanel {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+/* Inventar Spalte */
+.inv-column {
+    width: 950px;
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-image: linear-gradient(to bottom, #ffe9a8, #e2b44a, #8a5200) 1;
+    padding: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #fff4e6;
+    box-shadow:
+        0 0 22px rgba(0,0,0,1),
+        0 0 18px rgba(255,60,60,0.45),
+        inset 0 0 12px rgba(255,200,80,0.18);
+}
+
+.inv-title {
+    color: #ffe9b4;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow:
+        0 0 6px rgba(255,200,80,0.7),
+        0 0 10px rgba(255,60,60,0.35);
+}
+
+/* Inventarzeilen */
+.inv-list .inv-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+.inv-row input {
+    flex: 1;
+    padding: 6px;
+    background: rgba(10,4,6,0.92);
+    border: 1px solid #8a5200;
+    color: #fff4e6;
+    border-radius: 4px;
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9),
+        inset 0 0 8px rgba(255,0,40,0.18);
+}
+
+/* Aktionstaste */
+.inv-action {
+    width: 100%;
+    max-width: 950px;
+    height: 34px;
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    border: 2px solid #8a5200;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #111;
+    font-weight: 700;
+    box-shadow:
+        0 0 10px rgba(255,200,80,0.85),
+        0 0 14px rgba(255,60,60,0.45);
+}
+
+/* ============================
+TAP PROGRESS
+============================ */
+#tap-progress-container {
+    width: 950px;
+    margin: 18px auto 12px auto;
+    background: linear-gradient(135deg, #12020a 0%, #070306 100%);
+    border: 2px solid #8a5200;
+    border-radius: 6px;
+    padding: 8px;
+    box-sizing: border-box;
+    box-shadow:
+        0 0 20px rgba(0,0,0,0.95),
+        0 0 14px rgba(255,60,60,0.35);
+}
+
+#tap-progress-bar {
+    height: 18px;
+    width: 100%;
+    background: linear-gradient(90deg, #4b5563, #6b7280);
+    border-radius: 4px;
+    transition: width 0.3s;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+}
+
+#tap-progress-text {
+    color: #fff4e6;
+    margin-top: 6px;
+    text-align: right;
+    font-size: 12px;
+    text-shadow:
+        0 0 4px rgba(255,200,80,0.6);
+}
+
+/* ============================
+TIMELINE 2x30 – Bloodcore R2 (funktionierende Version)
+============================ */
+#tap-timeline {
+    width: 950px;
+    margin: 0 auto 20px auto;
+    background: linear-gradient(135deg, #3a0006 0%, #150003 45%, #000000 100%);
+    border: 2px solid #8a5200;
+    border-radius: 6px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #fff4e6;
+    box-shadow:
+        0 0 22px rgba(0,0,0,1),
+        0 0 18px rgba(255,60,60,0.45);
+
+    display: grid;
+    grid-template-columns: repeat(30, 1fr); /* 30 Felder pro Zeile */
+    grid-auto-rows: 48px;                   /* Höhe jeder Zeile */
+    gap: 8px;
+}
+
+/* Einzelner Tag */
+.tap-day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(10,4,6,0.92);
+    border: 1px solid #8a5200;
+    border-radius: 4px;
+    color: #fff4e6;
+
+    padding: 4px;
+    font-size: 12px;
+
+    box-shadow:
+        inset 0 0 8px rgba(0,0,0,0.9),
+        0 0 6px rgba(255,60,60,0.12);
+}
+
+/* Tagnummer */
+.tap-day .day-num {
+    font-weight: 700;
+    color: #ffe9b4;
+    margin-bottom: 2px;
+    text-shadow:
+        0 0 4px rgba(255,200,80,0.7),
+        0 0 8px rgba(255,60,60,0.35);
+}
+/* optionaler Text */
+.tap-day .day-text {
+    font-size: 11px;
+    color: #fff4e6;
+    opacity: 0.95;
+}
+
+/* Hover / aktive Tage */
+.tap-day:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 14px rgba(255,200,80,0.9),
+        0 0 18px rgba(255,60,60,0.45);
+    cursor: pointer;
+}
+
+/* Markierter Tag */
+.tap-day.active {
+    background: linear-gradient(90deg, #ffe9a8, #e2b44a);
+    color: #111;
+    border: 2px solid #8a5200;
+    box-shadow:
+        0 0 12px rgba(255,200,80,0.95),
+        0 0 18px rgba(255,60,60,0.5);
+}
+
+/* Responsive: bei kleinen Bildschirmen horizontal scrollen */
+@media (max-width: 980px) {
+    #tap-timeline {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 12px;
+    }
+    .tap-day {
+        display: inline-flex;
+        width: 80px;
+        margin-right: 8px;
+    }
+}
+
+
+
+
+
+
+
+/* ============================
+FOOTER
+============================ */
+#footer-container {
+    width: 90px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.footer-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffe9d8;
+}
+
+.footer-value {
+    color: #fff4e6;
+    text-shadow:
+        0 0 4px rgba(255,200,80,0.6);
+}
+
+.attr-arrow.small {
+    padding: 4px 8px;
+    background: rgba(10,4,6,0.92);
+    border: 1px solid #8a5200;
+    color: #ffe9b4;
+    border-radius: 4px;
+    box-shadow:
+        inset 0 0 6px rgba(0,0,0,0.9);
+}
+
+/* ============================
+RESPONSIVE TWEAKS (Bloodcore R2)
+============================ */
+@media (max-width:1000px) {
+  body { padding:12px 6px; }
+  #merkmale-row, #attribute-block, #vitalWrapper, #kampfWrapper, #inventoryWrapper, #tap-timeline, #footer-container {
+    width: 950px !important;
+    max-width: 100% !important;
+  }
+  .row { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================
+KOPFZEILE
+============================ -->
+<div id="kopfzeile">
+    <div id="kopf-titel">Heldenbrief</div>
+    <div id="kopf-name"></div>
+</div>
+
+
+<div class="page3-center-slot">
+    <div class="arcane-bloodcore">
+        <div class="orbit-core"></div>
+    </div>
+</div>
+
+
+<!-- ============================
+DREIER-LINIE
+============================ -->
+<div id="merkmale-row">
+
+    <!-- Merkmale links -->
+    <div id="merkmale-links">
+        <div class="merk-title">KÖRPERLICHE MERKMALE</div>
+        <div class="merk-list">
+            <div class="merk-item"><span>Alter</span><span id="ml-age">–</span></div>
+            <div class="merk-item"><span>Größe</span><span id="ml-height">–</span></div>
+            <div class="merk-item"><span>Gewicht</span><span id="ml-weight">–</span></div>
+            <div class="merk-item"><span>Augenfarbe</span><span id="ml-eyes">–</span></div>
+            <div class="merk-item"><span>Haarfarbe</span><span id="ml-hair">–</span></div>
+            <div class="merk-item"><span>Stimme</span><span id="ml-voice">–</span></div>
+            <div class="merk-item"><span>Kleidung / Rüstung</span><span id="ml-armor">–</span></div>
+            <div class="merk-item"><span>Besondere Merkmale</span><span id="ml-special">–</span></div>
+        </div>
+    </div>
+
+    <!-- Portrait -->
+    <div id="portrait-block">
+        <div id="portrait-inner">
+            <img id="portrait-img" src="" alt="Portrait">
+            <div id="portrait-placeholder">PORTRAIT</div>
+        </div>
+    </div>
+
+    <!-- Diagramm -->
+    <div id="diagramm-block">
+        <div id="diagramm-inner">
+            <canvas id="radarCanvas" width="175" height="175"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================
+ATTRIBUTE-BLOCK
+============================ -->
+<div id="attribute-block">
+    <div id="attribute-title">Attribut‑Fähigkeiten</div>
+    <div id="attribute-grid">
+
+        <div class="row">
+            <div class="attribute-slot" data-short="MU"><span class="attr-name">Mut (MU)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="IN"><span class="attr-name">Intelligenz (IN)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="FF"><span class="attr-name">Fingerfertigkeit (FF)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="GE"><span class="attr-name">Gewandtheit (GE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="KK"><span class="attr-name">Körperkraft (KK)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+        </div>
+
+        <div class="row">
+            <div class="attribute-slot" data-short="KB"><span class="attr-name">Körperbewusstsein (KB)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="KO"><span class="attr-name">Konstitution (KO)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="CH"><span class="attr-name">Charisma (CH)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="SS"><span class="attr-name">Sozialstatus (SS)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="GZ"><span class="attr-name">Geistiger Zustand (GZ)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+        </div>
+
+        <div class="row">
+            <div class="attribute-slot" data-short="IT"><span class="attr-name">Intuition (IT)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="AN"><span class="attr-name">Angriff (AN)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="VE"><span class="attr-name">Verteidigung (VE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="AS"><span class="attr-name">Abwehrschlag (AS)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="FK"><span class="attr-name">Fernkampf (FK)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+        </div>
+
+        <div class="row center-row">
+            <div class="attribute-slot" data-short="TC"><span class="attr-name">Trefferchance (TC)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            <div class="attribute-slot" data-short="TE"><span class="attr-name">Technik (TE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================
+VITALWERTE + AUFWERTUNGEN
+============================ -->
+<div id="vitalWrapper">
+
+    <!-- LINKER BLOCK: Vitalwerte -->
+    <div id="vitalDisplay">
+        <div class="vital-title">Vitalwerte</div>
+
+        <div class="vital-row">
+            <div class="vital-icon heart">❤️</div>
+            <div class="vital-label">Leben</div>
+            <div class="vital-value" id="vital-le">–</div>
+        </div>
+
+        <div class="vital-row">
+            <div class="vital-icon energy">⚡</div>
+            <div class="vital-label" id="vital-dyn-label">Ausdauer</div>
+            <div class="vital-value" id="vital-dyn">–</div>
+        </div>
+
+        <div class="vital-row">
+            <div class="vital-icon shield">🛡️</div>
+            <div class="vital-label">Rüstung</div>
+            <div class="vital-value" id="vital-ruest">–</div>
+        </div>
+
+        <div class="vital-row">
+            <div class="vital-icon brain">🧠</div>
+            <div class="vital-label">Geistige Gesundheit</div>
+            <div class="vital-value" id="vital-gg">–</div>
+        </div>
+
+        <div class="vital-row">
+            <div class="vital-icon target">🎯</div>
+            <div class="vital-label">Trefferchance</div>
+            <div class="vital-value" id="vital-tc">–</div>
+        </div>
+    </div>
+
+    <!-- RECHTER BLOCK: Aufwertungen -->
+    <div id="vitalBonusPanel">
+        <div class="vital-title">Aufwertungen</div>
+
+        <div class="vb-row">
+            <div class="vb-label">(LE)</div>
+            <div class="vb-icon">❤️</div>
+            <div class="vb-crystals" data-stat="LE"></div>
+            <button class="vb-upgrade" data-stat="LE">▲</button>
+        </div>
+
+        <div class="vb-row">
+            <div class="vb-label">(Rüst)</div>
+            <div class="vb-icon">🛡️</div>
+            <div class="vb-crystals" data-stat="RUEST"></div>
+            <button class="vb-upgrade" data-stat="RUEST">▲</button>
+        </div>
+
+        <div class="vb-row" id="vb-dynamic-row">
+            <div class="vb-label" id="vb-dyn-label">(AU)</div>
+            <div class="vb-icon" id="vb-dyn-icon">⚡</div>
+            <div class="vb-crystals" data-stat="DYN"></div>
+            <button class="vb-upgrade" data-stat="DYN">▲</button>
+        </div>
+
+        <div class="vb-row">
+            <div class="vb-label">(GG)</div>
+            <div class="vb-icon">🧠</div>
+            <div class="vb-crystals" data-stat="GG"></div>
+            <button class="vb-upgrade" data-stat="GG">▲</button>
+        </div>
+
+        <div class="vb-row">
+            <div class="vb-label">(TC)</div>
+            <div class="vb-icon">🎯</div>
+            <div class="vb-crystals" data-stat="TC"></div>
+            <button class="vb-upgrade" data-stat="TC">▲</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================
+KAMPF + RÜSTUNGSSYSTEM
+============================ -->
+<div id="kampfWrapper">
+
+    <!-- LINKER BLOCK: Angriffsblock -->
+    <div id="angriffsBlock" class="kampf-panel">
+        <div class="vital-title">Angriffsblock</div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Angriff</div>
+            <div class="kampf-value" id="kampf-angriff">–</div>
+        </div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Verteidigung</div>
+            <div class="kampf-value" id="kampf-verteidigung">–</div>
+        </div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Abwehr</div>
+            <div class="kampf-value" id="kampf-abwehr">–</div>
+        </div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Gegenangriff</div>
+            <div class="kampf-value" id="kampf-gegenangriff">–</div>
+        </div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Statusveränderung</div>
+            <div class="kampf-value" id="kampf-status">–</div>
+        </div>
+
+        <div class="kampf-row">
+            <div class="kampf-label">Verbesserte Anpassungen</div>
+            <div class="kampf-value" id="kampf-anpassungen">–</div>
+        </div>
+        <div id="anmerkungBlock">
+    <div class="anmerkung-title">Anmerkung</div>
+    <textarea id="anmerkungText" maxlength="500"></textarea>
+    <div id="anmerkungCounter">0 / 500</div>
+</div>
+    </div>
+
+    <!-- RECHTER BLOCK: Rüstungssystem -->
+    <div id="ruestungsBlock">
+        <div class="vital-title">Rüstungssystem</div>
+
+        <div id="armorSystem">
+
+            <!-- Linke Seite -->
+            <div id="armorLeft">
+
+                <div id="zoneSelectGrid">
+                    <div data-value="1">1. Kopf</div>
+                    <div data-value="2">2. Hals</div>
+                    <div data-value="3">3. Oberkörper</div>
+                    <div data-value="4">4. Linker Arm</div>
+                    <div data-value="5">5. Rechter Arm</div>
+                    <div data-value="6">6. Unterkörper</div>
+                    <div data-value="7">7. Linkes Bein</div>
+                    <div data-value="8">8. Rechtes Bein</div>
+                </div>
+
+                <input id="damageInput" type="number" placeholder="Schaden">
+                <button onclick="applyDamage()">Treffer anwenden</button>
+                <button onclick="openArmorPopup()">Rüstwert</button>
+
+                <div id="zoneList"></div>
+            </div>
+
+            <!-- Rechte Seite: Figur -->
+            <div id="armorRight">
+                <svg id="zoneFigure" viewBox="0 0 120 360">
+
+                    <!-- Körper-Silhouette -->
+                    <path d="M60 10
+                             C45 10, 40 25, 40 40
+                             L40 70
+                             C40 85, 30 95, 30 110
+                             L30 160
+                             C30 180, 40 200, 40 220
+                             L40 260
+                             C40 280, 50 300, 60 300
+                             C70 300, 80 280, 80 260
+                             L80 220
+                             C80 200, 90 180, 90 160
+                             L90 110
+                             C90 95, 80 85, 80 70
+                             L80 40
+                             C80 25, 75 10, 60 10
+                             Z"
+                          fill="#0d0d0d" stroke="#3a1f47" stroke-width="2"/>
+
+                    <!-- Kopf -->
+                    <circle id="zone1" cx="60" cy="35" r="22"
+                            class="zone-click armor-zone"/>
+
+                    <!-- Hals -->
+                    <rect id="zone2" x="50" y="55" width="20" height="18" rx="4"
+                          class="zone-click armor-zone"/>
+
+                    <!-- Brust / Oberkörper -->
+                    <rect id="zone3" x="35" y="75" width="50" height="70" rx="10"
+                          class="zone-click armor-zone"/>
+
+                    <!-- Linker Arm -->
+                    <rect id="zone4" x="20" y="80" width="12" height="80" rx="6"
+                          class="zone-click armor-zone"/>
+
+                    <!-- Rechter Arm -->
+                    <rect id="zone5" x="88" y="80" width="12" height="80" rx="6"
+                          class="zone-click armor-zone"/>
+
+                    <!-- Unterkörper -->
+                    <rect id="zone6" x="45" y="150" width="30" height="40" rx="8"
+                          class="zone-click armor-zone"/>
+
+                    <!-- Linkes Bein -->
+                    <rect id="zone7" x="48" y="190" width="12" height="120" rx="6"
+                          class="zone-click  armor-zone"/>
+
+                    <!-- Rechtes Bein -->
+                    <rect id="zone8" x="60" y="190" width="12" height="120" rx="6"
+                          class="zone-click armor-zone"/>
+
+                </svg>
+            </div>
+
+        </div>
+
+        <div id="armorPopup" class="popup-bg">
+            <div class="popup">
+                <h3 id="popupTitle"></h3>
+                <div id="popupContent"></div>
+                <button onclick="confirmArmorAction()">Bestätigen</button>
+                <button onclick="closeArmorPopup()">Abbrechen</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================
+INVENTAR (ergänzt)
+============================ -->
+<div id="inventoryWrapper">
+  <div id="inventoryPanel">
+    <div class="inv-column">
+      <div class="inv-title">Klein</div>
+      <button class="inv-sort" id="sort-small">Sortieren</button>
+      <div class="inv-list" id="inv-small"></div>
+    </div>
+
+    <div class="inv-column">
+      <div class="inv-title">Mittel</div>
+      <button class="inv-sort" id="sort-medium">Sortieren</button>
+      <div class="inv-list" id="inv-medium"></div>
+    </div>
+
+    <div class="inv-column">
+      <div class="inv-title">Groß</div>
+      <button class="inv-sort" id="sort-large">Sortieren</button>
+      <div class="inv-list" id="inv-large"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Inventar Popups -->
+<div id="invActionPopup" class="popup-bg" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true">
+    <h3>Aktion wählen</h3>
+    <div style="display:flex;gap:8px;">
+      <button id="invSellBtn">Verkaufen</button>
+      <button id="invDiscardBtn">Wegwerfen</button>
+      <button id="invCancelBtn">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<div id="invSellPopup" class="popup-bg" aria-hidden="true">
+  <div class="popup" role="dialog" aria-modal="true">
+    <h3>Verkauf</h3>
+    <label for="sellGold">Gold</label>
+    <input id="sellGold" type="number" min="0" value="0">
+    
+    <label for="sellSilver">Silber</label>
+    <input id="sellSilver" type="number" min="0" value="0">
+    
+    <label for="sellCopper">Kupfer</label>
+    <input id="sellCopper" type="number" min="0" value="0">
+    <label for="sellPin">PIN (vom DM)</label>
+    <input id="sellPin" type="text" maxlength="4" value="">
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button id="sellConfirmBtn">Verkaufen</button>
+      <button id="sellCancelBtn">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+TAP PROGRESS + TIMELINE
+============================ -->
+<div id="tap-progress-container">
+  <div id="tap-progress-bar"></div>
+  <div id="tap-progress-text">0%</div>
+</div>
+
+<div id="tap-timeline">
+  <div id="tap-title">Tagesabschluss‑Timeline</div>
+  <div class="tap-row" id="tap-row-1"></div>
+  <div class="tap-row" id="tap-row-2"></div>
+  <div id="tap-button-row" style="text-align:center;">
+    <button id="tap-finish-btn" class="attr-arrow small">Tagesabschluss</button>
+  </div>
+</div>
+
+<!-- ============================
+FOOTER
+============================ -->
+<div id="footer-container">
+  <div class="footer-section">
+    <label class="footer-label">Laden:</label>
+    <select id="load-slot">
+      <option value="">– Slot wählen –</option>
+      <option value="1">Charakter 1</option>
+      <option value="2">Charakter 2</option>
+      <option value="3">Charakter 3</option>
+      <option value="4">Charakter 4</option>
+      <option value="5">Charakter 5</option>
+      <option value="6">Charakter 6</option>
+    </select>
+    <button class="attr-arrow small" id="btn-load">Laden</button>
+  </div>
+
+  <div class="footer-section">
+    <label class="footer-label">Speichern:</label>
+    <select id="save-slot">
+      <option value="">– Slot wählen –</option>
+      <option value="1">Charakter 1</option>
+      <option value="2">Charakter 2</option>
+      <option value="3">Charakter 3</option>
+      <option value="4">Charakter 4</option>
+      <option value="5">Charakter 5</option>
+      <option value="6">Charakter 6</option>
+    </select>
+    <button class="attr-arrow small" id="btn-save">Speichern</button>
+  </div>
+
+  <div id="footer-middle" style="display:flex;align-items:center;gap:12px;">
+    <div class="footer-value"><span class="footer-label">TP:</span> <span id="footer-tp">0</span></div>
+    <div class="footer-value"><span class="footer-label">SP:</span> <span id="footer-sp">0</span></div>
+    <div class="footer-value"><span class="footer-label">Gold:</span> <span id="money-gold">0</span> <span style="margin-left:8px;" class="footer-label">Silber:</span> <span id="money-silver">0</span> <span style="margin-left:8px;" class="footer-label">Kupfer:</span> <span id="money-copper">0</span></div>
+  </div>
+
+  <div class="footer-section">
+    <button class="attr-arrow small" id="btn-end-day">Spieltag beenden</button>
+  </div>
+</div>
+
+<!-- End‑Day Popup -->
+<div id="endday-popup-bg" class="popup-bg" style="display:none;">
+  <div id="endday-popup" class="popup" role="dialog" aria-modal="true" style="width:520px;">
+    <h2 style="color:#f5d77a;margin-top:0;">Spieltag Zusammenfassung</h2>
+    <div id="endday-summary" style="margin-bottom:12px;"></div>
+    <button id="endday-close-btn" class="attr-arrow small">Spieltag Abschließen</button>
+  </div>
+</div>
+
+<!-- JS: füge den kompletten JS‑Block direkt nach diesem Kommentar ein -->
+<script>
+    
+    /* ============================
+KOPFZEILE – Name + Zusatz
+============================ */
+function updateKopfzeile() {
+    const name = document.getElementById("charNameInput")?.value || "";
+    const zusatz = document.getElementById("charTitleInput")?.value || "";
+    const ziel = document.getElementById("kopf-name");
+    if (ziel) {
+        ziel.textContent = name
+            ? (zusatz ? `${name} – ${zusatz}` : name)
+            : "";
+    }
+}
+try { updateKopfzeile(); } catch(e){}
+
+/* ============================
+MERKMALE – Übernahme von Seite 1
+============================ */
+function copyMerkmale() {
+    const map = [
+        ["ageInput", "ml-age"],
+        ["heightInput", "ml-height"],
+        ["weightInput", "ml-weight"],
+        ["eyesInput", "ml-eyes"],
+        ["hairInput", "ml-hair"],
+        ["voiceInput", "ml-voice"],
+        ["armorInput", "ml-armor"],
+        ["specialInput", "ml-special"]
+    ];
+    map.forEach(([src, dest]) => {
+        const s = document.getElementById(src);
+        const d = document.getElementById(dest);
+        if (s && d) d.textContent = s.value || "–";
+    });
+}
+try { copyMerkmale(); } catch(e){}
+
+/* ============================
+VITALWERTE-LOGIK
+============================ */
+const magicalClasses = [
+    "Feuermagier","Druide","Necromant","Hexer","Schamane",
+    "Illusionist","Alchemist","Kampfmagier","Drachendisciple"
+];
+const paladinClass = "Paladin";
+
+function getBonusType(profession) {
+    if (profession === paladinClass) return "SGP";
+    if (magicalClasses.includes(profession)) return "AS";
+    return "AU";
+}
+function getSpCostForLevel(level) { return level * 1000; }
+function getLinearBonus(level) { return level * 10; }
+function getPercentBonus(level) { return level * 10; }
+
+function loadCharacterFromStorage() {
+    const saved = localStorage.getItem("demoCharacter");
+    if (saved) return JSON.parse(saved);
+    return {
+        name: "Test",
+        profession: "Barbar",
+        race: "Mensch",
+        class: "Krieger",
+        sp: 20000,
+        attributes: {},
+        vitalBonus: { LE: 0, RUEST: 0, DYN: 0, GG: 0, TC: 0 },
+        hp: 100
+    };
+}
+function saveCharacter(c) { localStorage.setItem("demoCharacter", JSON.stringify(c)); }
+
+function ensureVitalBonusStructure(c) {
+    if (!c.vitalBonus) c.vitalBonus = { LE:0, RUEST:0, DYN:0, GG:0, TC:0 };
+}
+
+function renderVitalBonusCrystals(c) {
+    ensureVitalBonusStructure(c);
+
+    const dynType = getBonusType(c.profession);
+    const dynLabelEl = document.getElementById("vb-dyn-label");
+    const dynIconEl = document.getElementById("vb-dyn-icon");
+    if (dynLabelEl) dynLabelEl.textContent =
+        dynType === "AU" ? "(AU)" :
+        dynType === "AS" ? "(AS)" : "(SGP)";
+    if (dynIconEl) dynIconEl.textContent =
+        dynType === "AU" ? "⚡" :
+        dynType === "AS" ? "✨" : "🔆";
+
+    function renderRow(stat, sel) {
+        const container = document.querySelector(sel);
+        if (!container) return;
+        container.innerHTML = "";
+        const lvl = c.vitalBonus[stat] || 0;
+        for (let i=1;i<=7;i++) {
+            const el = document.createElement("div");
+            el.className = "vb-crystal";
+            if (i <= lvl) el.classList.add("active");
+            container.appendChild(el);
+        }
+    }
+
+    renderRow("LE", '.vb-crystals[data-stat="LE"]');
+    renderRow("RUEST", '.vb-crystals[data-stat="RUEST"]');
+    renderRow("DYN", '.vb-crystals[data-stat="DYN"]');
+    renderRow("GG", '.vb-crystals[data-stat="GG"]');
+    renderRow("TC", '.vb-crystals[data-stat="TC"]');
+
+    document.querySelectorAll(".vb-upgrade").forEach(btn => {
+        const stat = btn.dataset.stat;
+        const lvl = c.vitalBonus[stat] || 0;
+        const cost = getSpCostForLevel(lvl+1);
+        btn.disabled = lvl >= 7 || c.sp < cost;
+    });
+}
+
+function setupVitalBonusHandlers(c, onChange) {
+    document.querySelectorAll(".vb-upgrade").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const stat = btn.dataset.stat;
+            let lvl = c.vitalBonus[stat] || 0;
+            if (lvl >= 7) return;
+            const cost = getSpCostForLevel(lvl+1);
+            if (c.sp < cost) return;
+            c.sp -= cost;
+            c.vitalBonus[stat] = lvl+1;
+            renderVitalBonusCrystals(c);
+            if (typeof onChange === "function") onChange(c);
+            saveCharacter(c);
+        });
+    });
+}
+
+function calculateBaseVitals(attr) {
+    return {
+        hp: 100,
+        armorTotal: 10,
+        energy_stamina: 50,
+        energy_ae_spg: 30,
+        sgp: 20,
+        gg: 100,
+        tc: 10
+    };
+}
+function applyVitalBonus(base, race, cls, prof) {
+    return { ...base };
+}
+function applyLevel1Scaling(v) {
+    return { ...v };
+}
+
+function applyVitalBonusToVitals(base, c) {
+    const vb = c.vitalBonus || {};
+    const dynType = getBonusType(c.profession);
+    const r = { ...base };
+
+    r.hp = c.hp ?? r.hp;
+    r.hp += getLinearBonus(vb.LE || 0);
+    r.armorTotal += getLinearBonus(vb.RUEST || 0);
+
+    if (dynType === "AU") r.energy_stamina += getLinearBonus(vb.DYN || 0);
+    else if (dynType === "AS") r.energy_ae_spg += getLinearBonus(vb.DYN || 0);
+    else r.sgp += getLinearBonus(vb.DYN || 0);
+
+    if ((vb.GG || 0) > 0) r.gg = Math.round(r.gg * (1 + getPercentBonus(vb.GG)/100));
+    if ((vb.TC || 0) > 0) r.tc = Math.round(r.tc * (1 + getPercentBonus(vb.TC)/100));
+
+    return r;
+}
+
+function renderVitalsDisplay(v, c) {
+    const elHp = document.getElementById("vital-le");
+    const elArmor = document.getElementById("vital-ruest");
+    const elGg = document.getElementById("vital-gg");
+    const elTc = document.getElementById("vital-tc");
+    if (elHp) elHp.textContent = v.hp;
+    if (elArmor) elArmor.textContent = v.armorTotal;
+    if (elGg) elGg.textContent = v.gg;
+    if (elTc) elTc.textContent = v.tc;
+
+    const dynType = getBonusType(c.profession);
+    const dynLabel = document.getElementById("vital-dyn-label");
+    if (dynLabel) dynLabel.textContent =
+        dynType === "AU" ? "Ausdauer" :
+        dynType === "AS" ? "Astralenergie" :
+        "Segenspunkte";
+
+    const dynValue = document.getElementById("vital-dyn");
+    if (dynValue) dynValue.textContent =
+        dynType === "AU" ? v.energy_stamina :
+        dynType === "AS" ? v.energy_ae_spg :
+        v.sgp;
+}
+
+function updateVitalsDisplay(c) {
+    const base = calculateBaseVitals(c.attributes);
+    const withRaceClass = applyVitalBonus(base, c.race, c.class, c.profession);
+    const scaled = applyLevel1Scaling(withRaceClass);
+    const finalVitals = applyVitalBonusToVitals(scaled, c);
+    renderVitalsDisplay(finalVitals, c);
+}
+
+/* ============================
+CURRENCY MODULE
+============================ */
+window.undra = window.undra || {};
+undra.engine = undra.engine || {};
+
+undra.engine.currency = {
+  gold: 0,
+  silver: 0,
+  copper: 0,
+  addCopper(amount) {
+    let total = (this.gold * 10000) + (this.silver * 100) + this.copper + (amount || 0);
+    this.gold = Math.floor(total / 10000);
+    total %= 10000;
+    this.silver = Math.floor(total / 100);
+    this.copper = total % 100;
+    this.render();
+  },
+  render() {
+    const g = document.getElementById("money-gold");
+    const s = document.getElementById("money-silver");
+    const c = document.getElementById("money-copper");
+    if (g) g.textContent = this.gold;
+    if (s) s.textContent = this.silver;
+    if (c) c.textContent = this.copper;
+  }
+};
+
+/* ============================
+INVENTAR ENGINE + UI
+============================ */
+const DM_PIN_LIST = [
+  "1023","3844","9281","5520","7712","4499","6601","8834","1209","3348",
+  "9921","4410","5582","7719","6623","1188","9033","2201","7744","6655",
+  "1102","9901","4488","5567","7723","6644","1199","9077","2233","7788",
+  "6677","1120","9944","4477","5599","7733","6688","1133","9002","2255",
+  "7799","6699","1144","9966","4490","5578","7711","6633","1166","9090",
+  "2288","7700","6600","1111","9999","4444","5555","7777","6666","2222"
+];
+
+undra.engine.inventory = {
+  state: {
+    items: { small: Array(10).fill(""), medium: Array(10).fill(""), large: Array(10).fill("") },
+    dmCodes: DM_PIN_LIST.slice(),
+    selected: null
+  },
+  _onUpdate: null,
+  onUpdate(cb){ this._onUpdate = cb; },
+  cleanItemText(text){ return (text||"").trim().replace(/\s{2,}/g," "); },
+  validateItemText(text){
+    if(!text) return true;
+    if(/[,\/|;]/.test(text)) return false;
+    if(/\s{3,}/.test(text)) return false;
+    return true;
+  },
+  setItem(category,index,text){
+    const cleaned = this.cleanItemText(text);
+    if(!this.validateItemText(cleaned)){ alert("Ungültiger Eintrag. Ein Slot darf nur EIN Item enthalten."); return false; }
+    this.state.items[category][index] = cleaned;
+    if(this._onUpdate) this._onUpdate();
+    return true;
+  },
+  removeItem(category,index){ this.state.items[category][index] = ""; if(this._onUpdate) this._onUpdate(); },
+  validatePin(pin){ return this.state.dmCodes.includes(pin); },
+  convertToCopper(g,s,c){ return (g*10000)+(s*100)+c; },
+  sellItem(category,index,g,s,c,pin){
+    if(!this.validatePin(pin)){ alert("PIN ungültig."); return false; }
+    const totalCopper = this.convertToCopper(g,s,c);
+    undra.engine.currency.addCopper(totalCopper);
+    this.removeItem(category,index);
+    return true;
+  },
+  /* ===================== SEITE 3 – ZUSTAND ===================== */
+
+let s3_state = {
+    totalSP: 0,
+    hiddenSP: 0,
+    gold: 0,
+    silver: 0,
+    copper: 0,
+    currentDay: 1,
+    dayFinalized: false,
+    attributePoints: 0,
+    skills: {
+        base: [],
+        race: [],
+        prof: []
+    },
+    vitals: {
+        "Lebenspunkte": 10,
+        "Ausdauer": 10,
+        "Fokus": 10,
+        "Geistige Stabilität": 10,
+        "Regeneration": 1
+    },
+    combatStats: {
+        "Angriff": 0,
+        "Verteidigung": 0,
+        "Trefferchance": 0,
+        "Fernkampf": 0,
+        "Abwehrschlag": 0,
+        "Technik": 0
+    }
+};
+
+/* Beispielhafte Basis-Fähigkeitspools – Platzhalter */
+const baseSkillList = [
+    "Athletik","Wahrnehmung","Überleben","Diplomatie","Heilkunde","Schleichen","Schlösser öffnen",
+    "Akrobatik","Geschichtenkunde","Magiekunde","Taschendiebstahl","Handel","Bedrohung",
+    "Etikette","Reiten","Schwimmen","Klettern","Analyse","Fokus sammeln","Meditation"
+];
+
+/* nur Platzhalter – hier kannst du später rassen-/professionslogische Pools einsetzen */
+const raceSkillPools = { generic: [
+    "Blutlinie","Instinkt","Ahnenruf","Naturverbundenheit","Scharfe Sinne","Zähigkeit",
+    "Stammeskraft","Widerstand","Tierverbundenheit","Jägerinstinkt","Pfadfinder",
+    "Steinherz","Waldläuferinstinkt","Überlebenstraining","Tradition","Regeneration",
+    "Schutzsegen","Wildes Herz","Körperkraft","Willenskraft"
+]};
+
+const professionSkillPools = { generic: [
+    "Waffentraining","Schildkampf","Kampfmagie","Heilmagie","Hinterhalt",
+    "Präzisionsschuss","Taktik","Anführen","Runenwirken","Alchemie",
+    "Illusionen","Berserkerwut","Spähen","Sabotage","Verteidigungshaltung",
+    "Blitzangriff","Konzentration","Barriere","Blutrausch","Fokusstoß"
+]};
+
+/* ===================== SEITE 3 – INIT ===================== */
+
+function initStep3FromStep1() {
+    // Name & Titel
+    const name = document.getElementById("in-name").value || "-";
+    const title = document.getElementById("in-titel").value || "-";
+
+    document.getElementById("s3-header-name").textContent = name || "Seite 3 – Heldenübersicht";
+    document.getElementById("s3-name").textContent = name;
+    document.getElementById("s3-title").textContent = title;
+
+    // Rasse/Untergruppe/Profession/Spezialfähigkeit
+    document.getElementById("s3-race").textContent = document.getElementById("s-race").textContent;
+    document.getElementById("s3-sub").textContent  = document.getElementById("s-sub").textContent;
+    document.getElementById("s3-prof").textContent = document.getElementById("s-prof").textContent;
+    document.getElementById("s3-spec").innerHTML   = document.getElementById("spec-summary").innerText || "-";
+
+    // Portrait spiegeln
+    const srcBox = document.getElementById("portrait-box");
+    const dstBox = document.getElementById("s3-portrait-mirror");
+    dstBox.innerHTML = srcBox.innerHTML;
+
+    // Attribute übernehmen + Attributpfeile
+    buildS3Attributes();
+
+    // Vitalwerte füllen
+    buildS3Vitals();
+
+    // Kampfwerte aus char.attrs abgeleitet (einfaches Beispiel)
+    syncCombatStatsFromAttrs();
+
+    // Fähigkeiten generieren (Platzhalter: generic Pools)
+    buildS3Skills();
+
+    // Inventar-Slots erzeugen
+    buildS3Inventory();
+
+    // Timeline erzeugen
+    buildS3Timeline();
+
+    // SP/Gold initial anzeigen
+    updateS3SPAndCurrency();
+
+    // Event für Tagesabschluss
+    document.getElementById("btn-s3-dayend").onclick = openDayEndPopup;
+    document.getElementById("btn-dayend-confirm").onclick = finalizeDayEnd;
+}
+
+/* ===================== SEITE 3 – ATTRIBUTE ===================== */
+
+function buildS3Attributes() {
+    const grid = document.getElementById("s3-attr-grid");
+    grid.innerHTML = "";
+    attributes.forEach(a => {
+        const row = document.createElement("div");
+        row.className = "s3-attr-row";
+        row.id = "s3-attr-row-" + a;
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "s3-attr-name";
+        nameSpan.textContent = a;
+        const valDiv = document.createElement("div");
+        valDiv.className = "s3-attr-value";
+        valDiv.id = "s3-attr-val-" + a;
+
+        const arrow = document.createElement("div");
+        arrow.className = "s3-attr-arrow";
+        arrow.id = "s3-attr-arrow-" + a;
+        arrow.textContent = "▲";
+        arrow.onclick = () => chooseAttributeIncrease(a);
+
+        row.appendChild(nameSpan);
+        row.appendChild(valDiv);
+        row.appendChild(arrow);
+        grid.appendChild(row);
+
+        // Startwerte aus char.attrs + specialBonus
+        const base = char.attrs[a] || 0;
+        const bonus = specialAttrBonus[a] || 0;
+        valDiv.textContent = base + bonus;
+    });
+
+    document.getElementById("s3-attr-points").textContent = s3_state.attributePoints;
+    updateAttributeArrowsState();
+}
+
+function chooseAttributeIncrease(attrName) {
+    if (s3_state.attributePoints <= 0) return;
+    // erhöhe Attribut auf Seite 3 (und optional in char.attrs, wenn du es synchron willst)
+    const valDiv = document.getElementById("s3-attr-val-" + attrName);
+    let val = parseInt(valDiv.textContent,10) || 0;
+    if (val >= 10) return;
+    val++;
+    valDiv.textContent = val;
+    s3_state.attributePoints = 0;
+    document.getElementById("s3-attr-points").textContent = 0;
+    // nach Steigerung Pfeile deaktivieren
+    disableAllAttributeArrows();
+}
+
+function updateAttributeArrowsState() {
+    attributes.forEach(a => {
+        const arrow = document.getElementById("s3-attr-arrow-" + a);
+        if (!arrow) return;
+        if (s3_state.attributePoints > 0 && !s3_state.dayFinalized) {
+            arrow.classList.add("active");
+        } else {
+            arrow.classList.remove("active");
+        }
+    });
+}
+
+function disableAllAttributeArrows() {
+    attributes.forEach(a => {
+        const arrow = document.getElementById("s3-attr-arrow-" + a);
+        if (arrow) arrow.classList.remove("active");
+    });
+}
+
+/* ===================== SEITE 3 – VITALWERTE ===================== */
+
+function buildS3Vitals() {
+    const grid = document.getElementById("s3-vital-grid");
+    grid.innerHTML = "";
+    Object.keys(s3_state.vitals).forEach(key => {
+        const row = document.createElement("div");
+        row.className = "s3-vital-row";
+        const label = document.createElement("span");
+        label.textContent = key;
+        const right = document.createElement("span");
+        const valSpan = document.createElement("span");
+        valSpan.id = "s3-vital-" + key;
+        valSpan.textContent = s3_state.vitals[key];
+        const btn = document.createElement("button");
+        btn.className = "s3-vital-btn";
+        btn.textContent = "+";
+        btn.onclick = () => increaseVital(key);
+        right.appendChild(valSpan);
+        right.appendChild(document.createTextNode(" "));
+        right.appendChild(btn);
+        row.appendChild(label);
+        row.appendChild(right);
+        grid.appendChild(row);
+    });
+}
+
+function increaseVital(key) {
+    // Beispiel: Steigerung kostet 100 SP
+    const cost = 100;
+    if (s3_state.totalSP < cost || s3_state.dayFinalized) return;
+    s3_state.totalSP -= cost;
+    s3_state.vitals[key]++;
+    document.getElementById("s3-vital-" + key).textContent = s3_state.vitals[key];
+    updateS3SPAndCurrency();
+}
+
+/* ===================== SEITE 3 – KAMPFSTATS ===================== */
+
+function syncCombatStatsFromAttrs() {
+    // sehr einfache Ableitungen als Beispiel
+    s3_state.combatStats["Angriff"]      = (char.attrs["Angriff"] || 0);
+    s3_state.combatStats["Verteidigung"] = (char.attrs["Verteidigung"] || 0);
+    s3_state.combatStats["Trefferchance"]= (char.attrs["Trefferchance"] || 0);
+    s3_state.combatStats["Fernkampf"]    = (char.attrs["Fernkampf"] || 0);
+    s3_state.combatStats["Abwehrschlag"] = (char.attrs["Abwehrschlag"] || 0);
+    s3_state.combatStats["Technik"]      = (char.attrs["Technik"] || 0);
+
+    const grid = document.getElementById("s3-combat-grid");
+    grid.innerHTML = "";
+    Object.keys(s3_state.combatStats).forEach(key => {
+        const label = document.createElement("div");
+        label.textContent = key;
+        const val = document.createElement("div");
+        val.textContent = s3_state.combatStats[key];
+        grid.appendChild(label);
+        grid.appendChild(val);
+    });
+}
+
+/* ===================== SEITE 3 – FÄHIGKEITEN ===================== */
+
+function buildS3Skills() {
+    // Basisfähigkeiten
+    s3_state.skills.base = baseSkillList.map(n => ({ name:n, level:1, type:"basis" }));
+    // einfache Pools für Demo
+    const racePool = raceSkillPools.generic;
+    const profPool = professionSkillPools.generic;
+
+    s3_state.skills.race = pickRandomSkills(racePool);
+    s3_state.skills.prof = pickRandomSkills(profPool);
+
+    renderSkillGrid("s3-skill-base", s3_state.skills.base);
+    renderSkillGrid("s3-skill-race", s3_state.skills.race);
+    renderSkillGrid("s3-skill-prof", s3_state.skills.prof);
+}
+
+function pickRandomSkills(pool) {
+    const arr = [...pool];
+    arr.sort(() => Math.random() - 0.5);
+    return arr.slice(0,20).map(n => ({ name:n, level:0, type:"dyn" }));
+}
+
+function renderSkillGrid(containerId, list) {
+    const box = document.getElementById(containerId);
+    box.innerHTML = "";
+    list.forEach((sk, idx) => {
+        const row = document.createElement("div");
+        row.className = "s3-skill-row";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "s3-skill-name";
+        nameDiv.textContent = sk.name;
+
+        const lvlDiv = document.createElement("div");
+        lvlDiv.className = "s3-skill-level";
+        lvlDiv.id = containerId + "-lvl-" + idx;
+        lvlDiv.textContent = "Stufe " + sk.level;
+
+        const btn = document.createElement("button");
+        btn.className = "s3-skill-btn";
+        btn.textContent = "Kaufen";
+        btn.onclick = () => buySkillLevel(containerId, list, idx);
+
+        row.appendChild(nameDiv);
+        row.appendChild(lvlDiv);
+        row.appendChild(btn);
+        box.appendChild(row);
+    });
+}
+
+function buySkillLevel(containerId, list, idx) {
+    if (s3_state.dayFinalized) return;
+    const sk = list[idx];
+    if (sk.level >= 10) return;
+    let cost = 0;
+    if (containerId === "s3-skill-base") {
+        cost = 100 * (sk.level + 1);
+    } else if (containerId === "s3-skill-race") {
+        cost = 400 + 100 * (sk.level + 1);
+    } else {
+        cost = 600 + 100 * (sk.level + 1);
+    }
+    if (s3_state.totalSP < cost) return;
+    s3_state.totalSP -= cost;
+    sk.level++;
+    document.getElementById(containerId + "-lvl-" + idx).textContent = "Stufe " + sk.level;
+    updateS3SPAndCurrency();
+}
+
+/* ===================== SEITE 3 – INVENTAR ===================== */
+
+function buildS3Inventory() {
+    const grid = document.getElementById("s3-inventory-grid");
+    grid.innerHTML = "";
+    for (let i=0;i<32;i++) {
+        const slot = document.createElement("div");
+        slot.className = "s3-inventory-slot";
+        grid.appendChild(slot);
+    }
+}
+
+/* ===================== SEITE 3 – TIMELINE ===================== */
+
+function buildS3Timeline() {
+    const top = document.getElementById("s3-timeline-top");
+    const bottom = document.getElementById("s3-timeline-bottom");
+    top.innerHTML = "";
+    bottom.innerHTML = "";
+    for (let i=1;i<=60;i++) {
+        const d = document.createElement("div");
+        d.className = "s3-day-btn";
+        d.id = "s3-day-" + i;
+        d.textContent = i;
+        if (i === s3_state.currentDay) {
+            d.classList.add("active");
+        }
+        (i <= 30 ? top : bottom).appendChild(d);
+    }
+}
+
+function checkOffTimelineDay(day) {
+    const btn = document.getElementById("s3-day-" + day);
+    if (btn) {
+        btn.classList.remove("active");
+        btn.classList.add("checked");
+    }
+}
+
+function activateNextDay(day) {
+    const next = document.getElementById("s3-day-" + (day+1));
+    if (next) {
+        next.classList.add("active");
+    }
+}
+
+/* ===================== SEITE 3 – SP & GOLD ===================== */
+
+function updateS3SPAndCurrency() {
+    document.getElementById("s3-sp-total").textContent = s3_state.totalSP;
+    document.getElementById("s3-sp-hidden").textContent = s3_state.hiddenSP;
+
+    document.getElementById("s3-gold").textContent = s3_state.gold;
+    document.getElementById("s3-silver").textContent = s3_state.silver;
+    document.getElementById("s3-copper").textContent = s3_state.copper;
+}
+
+/* Beispiel: SP hinzufügen – kannst du von Aktionen auf Seite 3 aus aufrufen */
+function addHiddenSP(amount) {
+    if (s3_state.dayFinalized) return;
+    s3_state.hiddenSP += amount;
+    document.getElementById("s3-sp-hidden").textContent = s3_state.hiddenSP;
+}
+
+/* ===================== SEITE 3 – TAGESABSCHLUSS ===================== */
+
+const dayEndMessages = [
+    "Danke, dass du heute wieder Teil von Avalon warst. Deine Reise prägt die Welt.",
+    "Ein weiterer Tag endet – und du hast ihn mit Leben gefüllt. Danke für deine Zeit.",
+    "Wir schätzen deine Anwesenheit in UNDRA. Jeder Schritt, den du machst, hinterlässt Spuren.",
+    "Danke, dass du heute wieder Mut, Wille und Herz gezeigt hast.",
+    "Dein heutiger Weg war nicht selbstverständlich. Danke, dass du ihn gegangen bist.",
+    "Ein Tag mehr, ein Kapitel weiter. Danke, dass du die Geschichte vorantreibst.",
+    "Deine Entscheidungen formen Avalon. Danke, dass du heute dabei warst.",
+    "Wieder ein Tag, an dem du die Welt verändert hast. Danke für deine Teilnahme.",
+    "Danke, dass du UNDRA heute mit deiner Präsenz bereichert hast.",
+    "Dein Einsatz heute war wertvoll. Danke, dass du Teil dieser Welt bist."
+];
+
+function getRandomDayEndMessage() {
+    const i = Math.floor(Math.random()*dayEndMessages.length);
+    return dayEndMessages[i];
+}
+
+function openDayEndPopup() {
+    if (s3_state.dayFinalized) return;
+
+    // Tagesbonus – Beispiel-Formel: 400 + 100 * Tag
+    const dayBonus = Math.min(400 + 100 * s3_state.currentDay, 6000);
+    s3_state.hiddenSP += dayBonus;
+
+    const spThisDay = s3_state.hiddenSP;
+    const goldGain = Math.floor(spThisDay / 100);
+
+    document.getElementById("dayend-message").textContent = getRandomDayEndMessage();
+    document.getElementById("dayend-sp").textContent = spThisDay;
+    document.getElementById("dayend-gold").textContent = goldGain;
+    document.getElementById("dayend-ap").textContent = 1;
+
+    document.getElementById("dayend-modal").style.display = "flex";
+}
+
+function finalizeDayEnd() {
+    if (s3_state.dayFinalized) return;
+
+    const spThisDay = s3_state.hiddenSP;
+    const goldGain = Math.floor(spThisDay / 100);
+
+    // SP & Gold gutschreiben
+    s3_state.totalSP += spThisDay;
+    s3_state.gold += goldGain;
+    s3_state.hiddenSP = 0;
+
+    // Attributpunkt vergeben
+    s3_state.attributePoints = 1;
+    document.getElementById("s3-attr-points").textContent = 1;
+    updateAttributeArrowsState();
+
+    updateS3SPAndCurrency();
+
+    // Timeline
+    checkOffTimelineDay(s3_state.currentDay);
+    activateNextDay(s3_state.currentDay);
+    s3_state.currentDay++;
+
+    // Tagesabschluss sperren
+    s3_state.dayFinalized = true;
+    freezePage3();
+
+    // Popup schließen
+    document.getElementById("dayend-modal").style.display = "none";
+}
+
+function freezePage3() {
+    // Overlay aktivieren
+    const overlay = document.getElementById("s3-freeze-overlay");
+    overlay.classList.add("active");
+
+    // alles Freezable ausgrauen
+    document.querySelectorAll(".s3-freezable").forEach(el => {
+        el.classList.add("disabled");
+    });
+
+    // Tagesabschluss-Button deaktivieren
+    document.getElementById("btn-s3-dayend").disabled = true;
+
+    // Attributpfeile bleiben aktiv, bis der Spieler einen Punkt gesetzt hat
+}
+
+/* ===================== SEITE 3 – NAVIGATIONSHOOK ===================== */
+
+/* Wenn du von Seite 2 nach Seite 3 wechselst, rufst du initStep3FromStep1 auf */
+
+function goToStep3() {
+    document.getElementById("step-2").classList.remove("active");
+    document.getElementById("step-3").classList.add("active");
+    initStep3FromStep1();
+}
+
+function backToStep2() {
+    document.getElementById("step-3").classList.remove("active");
+    document.getElementById("step-2").classList.add("active");
+}
+  discardItem(category,index){ this.removeItem(category,index); },
+  sortCategory(category){
+    const arr = this.state.items[category];
+    const filled = arr.filter(x=>x.trim()!=="");
+    const empty = arr.filter(x=>x.trim()==="");
+    this.state.items[category] = [...filled,...empty];
+    if(this._onUpdate) this._onUpdate();
+  },
+  init(){ if(this._onUpdate) this._onUpdate(); }
+};
+
+/* INVENTAR UI */
+(function(){
+  const engine = undra.engine.inventory;
+  const small = document.getElementById("inv-small");
+  const medium = document.getElementById("inv-medium");
+  const large = document.getElementById("inv-large");
+  const actionPopup = document.getElementById("invActionPopup");
+  const sellPopup = document.getElementById("invSellPopup");
+
+  let selCat = null, selIndex = null;
+
+  function renderColumn(container, category){
+    if(!container) return;
+    container.innerHTML = "";
+    for(let i=0;i<10;i++){
+      const row = document.createElement("div"); row.className="inv-row";
+      row.style.display="flex"; row.style.gap="6px"; row.style.marginBottom="6px";
+      const input = document.createElement("input"); input.value = engine.state.items[category][i]||""; input.style.flex="1"; input.draggable=true;
+      input.addEventListener("change", ()=> engine.setItem(category,i,input.value));
+      input.addEventListener("dragstart", e=> e.dataTransfer.setData("text/plain", JSON.stringify({category,index:i})));
+      input.addEventListener("dragover", e=> e.preventDefault());
+      input.addEventListener("drop", e=>{
+        e.preventDefault();
+        try{
+          const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+          const srcCat = data.category, srcIndex = data.index;
+          const temp = engine.state.items[srcCat][srcIndex];
+          engine.state.items[srcCat][srcIndex] = engine.state.items[category][i];
+          engine.state.items[category][i] = temp;
+          if(engine._onUpdate) engine._onUpdate();
+        }catch(err){}
+      });
+      const btn = document.createElement("div"); btn.className="inv-action"; btn.style.width="28px"; btn.style.height="28px"; btn.style.cursor="pointer";
+      btn.addEventListener("click", ()=>{ selCat = category; selIndex = i; if(actionPopup) actionPopup.style.display="flex"; });
+      row.appendChild(input); row.appendChild(btn); container.appendChild(row);
+    }
+  }
+
+  engine.onUpdate(()=>{ renderColumn(small,"small"); renderColumn(medium,"medium"); renderColumn(large,"large"); });
+
+  const sortSmallBtn = document.getElementById("sort-small");
+  const sortMediumBtn = document.getElementById("sort-medium");
+  const sortLargeBtn = document.getElementById("sort-large");
+  if (sortSmallBtn) sortSmallBtn.addEventListener("click", ()=> engine.sortCategory("small"));
+  if (sortMediumBtn) sortMediumBtn.addEventListener("click", ()=> engine.sortCategory("medium"));
+  if (sortLargeBtn) sortLargeBtn.addEventListener("click", ()=> engine.sortCategory("large"));
+
+  if(document.getElementById("invCancelBtn")) document.getElementById("invCancelBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; });
+  if(document.getElementById("invSellBtn")) document.getElementById("invSellBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; if(sellPopup) sellPopup.style.display="flex"; });
+  if(document.getElementById("invDiscardBtn")) document.getElementById("invDiscardBtn").addEventListener("click", ()=> { if(selCat!==null && selIndex!==null) engine.discardItem(selCat,selIndex); if(actionPopup) actionPopup.style.display="none"; });
+
+  if(document.getElementById("sellCancelBtn")) document.getElementById("sellCancelBtn").addEventListener("click", ()=> { if(sellPopup) sellPopup.style.display="none"; });
+  if(document.getElementById("sellConfirmBtn")) document.getElementById("sellConfirmBtn").addEventListener("click", ()=>{
+    const g = parseInt(document.getElementById("sellGold").value)||0;
+    const s = parseInt(document.getElementById("sellSilver").value)||0;
+    const c = parseInt(document.getElementById("sellCopper").value)||0;
+    const pin = document.getElementById("sellPin").value||"";
+    engine.sellItem(selCat,selIndex,g,s,c,pin);
+    if(sellPopup) sellPopup.style.display="none";
+  });
+
+  engine.init();
+})();
+
+/* ============================
+TAP TIMELINE + FORTSCHRITT
+============================ */
+let TAP = 0;
+
+function saveTimeline() {
+  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
+  const state = [];
+  boxes.forEach(box => state.push(box.checked ? 1 : 0));
+  localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(state));
+  localStorage.setItem("UNDRA_TAP_VALUE", TAP.toString());
+}
+
+function loadTimeline() {
+  const savedState = JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]");
+  const savedTAP = parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0;
+  TAP = savedTAP;
+  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
+  boxes.forEach((box, i) => {
+    if (savedState[i] === 1) box.checked = true;
+  });
+}
+
+function updateTapProgress() {
+  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
+  const total = boxes.length;
+  let done = 0;
+  boxes.forEach(b => { if (b.checked) done++; });
+
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  const bar = document.getElementById("tap-progress-bar");
+  const text = document.getElementById("tap-progress-text");
+
+  if (bar) bar.style.width = percent + "%";
+  if (text) text.textContent = percent + "%";
+
+  if (bar) {
+    if (percent < 30) bar.style.background = "linear-gradient(90deg, #4b5563, #6b7280)";
+    else if (percent < 60) bar.style.background = "linear-gradient(90deg, #166534, #22c55e)";
+    else bar.style.background = "linear-gradient(90deg, #15803d, #4ade80)";
+    bar.style.animation = "none";
+    setTimeout(() => { bar.style.animation = ""; }, 600);
+  }
+}
+
+/* ============================
+FOOTER: SAVE / LOAD SLOTS + HANDLER
+============================ */
+function collectFooterData() {
+  return {
+    tp: parseInt(document.getElementById("footer-tp")?.textContent || "0", 10),
+    sp: parseInt(document.getElementById("footer-sp")?.textContent || "0", 10),
+    currency: {
+      gold: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.gold || 0 : 0,
+      silver: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.silver || 0 : 0,
+      copper: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.copper || 0 : 0
+    },
+    inventory: (undra && undra.engine && undra.engine.inventory) ? JSON.parse(JSON.stringify(undra.engine.inventory.state.items)) : { small: [], medium: [], large: [] },
+    tapState: JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]"),
+    tapValue: parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0
+  };
+}
+
+function applyFooterData(data) {
+  if (!data) return;
+
+  const tpEl = document.getElementById("footer-tp");
+  const spEl = document.getElementById("footer-sp");
+  if (tpEl) tpEl.textContent = data.tp ?? 0;
+  if (spEl) spEl.textContent = data.sp ?? 0;
+
+  if (data.currency && undra && undra.engine && undra.engine.currency) {
+    undra.engine.currency.gold = data.currency.gold || 0;
+    undra.engine.currency.silver = data.currency.silver || 0;
+    undra.engine.currency.copper = data.currency.copper || 0;
+    if (typeof undra.engine.currency.render === "function") undra.engine.currency.render();
+  }
+
+  if (data.inventory && undra && undra.engine && undra.engine.inventory) {
+    undra.engine.inventory.state.items = JSON.parse(JSON.stringify(data.inventory));
+    if (typeof undra.engine.inventory._onUpdate === "function") undra.engine.inventory._onUpdate();
+  }
+
+  if (Array.isArray(data.tapState)) {
+    localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(data.tapState));
+    localStorage.setItem("UNDRA_TAP_VALUE", String(data.tapValue || 0));
+    if (typeof updateTapProgress === "function") updateTapProgress();
+  }
+}
+
+function saveToSlot(slot, data) {
+  if (!slot) throw new Error("Kein Slot angegeben");
+  localStorage.setItem("UNDRA_SLOT_" + slot, JSON.stringify(data));
+}
+
+function loadFromSlot(slot) {
+  if (!slot) throw new Error("Kein Slot angegeben");
+  const raw = localStorage.getItem("UNDRA_SLOT_" + slot);
+  return raw ? JSON.parse(raw) : null;
+}
+
+/* Button handlers with confirmations */
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "btn-save") {
+    const slot = document.getElementById("save-slot").value;
+    if (!slot) return alert("Bitte Slot wählen!");
+    const existing = loadFromSlot(slot);
+    const data = collectFooterData();
+    if (existing) {
+      if (!confirm("Slot ist belegt. Überschreiben?")) return;
+    }
+    saveToSlot(slot, data);
+    alert("Daten gespeichert.");
+  }
+
+  if (e.target && e.target.id === "btn-load") {
+    const slot = document.getElementById("load-slot").value;
+    if (!slot) return alert("Bitte Slot wählen!");
+    const data = loadFromSlot(slot);
+    if (!data) return alert("Slot ist leer.");
+    applyFooterData(data);
+    alert("Daten geladen.");
+  }
+});
+
+/* End day */
+<div id="step-3" class="step-content">
+
+    <!-- Freeze-Overlay für Tagesabschluss -->
+    <div id="s3-freeze-overlay"></div>
+
+    <!-- 1. Kopfzeile -->
+    <div class="s3-panel s3-freezable" id="s3-header-panel">
+        <h2 class="s3-header-title" id="s3-header-name">Seite 3 – Heldenübersicht</h2>
+    </div>
+
+    <!-- 2. Merkmale, Portrait, SP -->
+    <div class="s3-panel s3-freezable">
+        <div class="s3-row-flex">
+            <!-- Portrait (übernommen aus Seite 1) -->
+            <div class="s3-col-fixed">
+                <div id="s3-portrait-mirror" style="width:150px;height:200px;border:2px solid gold;background:#000;margin-bottom:4px;overflow:hidden;"></div>
+            </div>
+            <!-- Merkmale + SP -->
+            <div class="s3-col">
+                <div class="s3-hero-summary">
+                    <b>Name:</b> <span id="s3-name">-</span><br>
+                    <b>Titel:</b> <span id="s3-title">-</span><br><br>
+                    <b>Rasse:</b> <span id="s3-race">-</span><br>
+                    <b>Untergruppe:</b> <span id="s3-sub">-</span><br>
+                    <b>Profession:</b> <span id="s3-prof">-</span><br><br>
+                    <b>Spezialfähigkeit:</b> <span id="s3-spec">-</span>
+                </div>
+                <div class="s3-sp-box">
+                    SP gesamt: <span class="s3-sp-value" id="s3-sp-total">0</span><br>
+                    Tages-SP (versteckt, für Abschluss): <span id="s3-sp-hidden">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Attribute -->
+    <div class="s3-panel s3-freezable" id="s3-attr-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <div><b>Attribute</b></div>
+            <div>Verfügbare Attributpunkte: <span id="s3-attr-points">0</span></div>
+        </div>
+        <div class="s3-attr-grid" id="s3-attr-grid"></div>
+    </div>
+
+    <!-- 4. Vitalwerte -->
+    <div class="s3-panel s3-freezable">
+        <div><b>Vitalwerte</b></div>
+        <div class="s3-vital-grid" id="s3-vital-grid">
+            <!-- wird per JS gefüllt -->
+        </div>
+    </div>
+
+    <!-- 5. Kampfblock / Textfeld / Trefferzonen / Diagramm / Figur / Orb -->
+    <div class="s3-panel s3-freezable">
+        <div><b>Kampf & Trefferzonen</b></div>
+        <div class="s3-combat-layout">
+            <!-- links: Kampfwerte + Textfeld + Trefferzonen -->
+            <div>
+                <div class="s3-combat-grid" id="s3-combat-grid">
+                    <!-- Angriffswerte per JS -->
+                </div>
+                <div style="margin-top:6px;">
+                    <small>Kampfnotizen</small><br>
+                    <textarea class="s3-txtarea" id="s3-combat-notes"></textarea>
+                </div>
+                <div style="margin-top:6px;">
+                    <small>Trefferzonen</small>
+                    <div class="s3-hitzones-grid" id="s3-hitzones-grid">
+                        <div class="s3-hitzone-cell">Kopf</div>
+                        <div class="s3-hitzone-cell">Torso</div>
+                        <div class="s3-hitzone-cell">Arme</div>
+                        <div class="s3-hitzone-cell">Beine</div>
+                        <div class="s3-hitzone-cell">Hände</div>
+                        <div class="s3-hitzone-cell">Füße</div>
+                    </div>
+                </div>
+            </div>
+            <!-- rechts: Diagramm, Figur, Orb -->
+            <div>
+                <div class="s3-diagram-box">Trefferzonen-Diagramm (Platzhalter)</div>
+                <div class="s3-figure-box" style="margin-top:6px;">Figur (Platzhalter)</div>
+                <div class="s3-orb-box" style="margin-top:6px;">Orb (Platzhalter)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Fähigkeiten (60 Stück) -->
+    <div class="s3-panel s3-freezable">
+        <div class="s3-skill-section-title">Basisfähigkeiten</div>
+        <div class="s3-skill-grid" id="s3-skill-base"></div>
+
+        <div class="s3-skill-section-title" style="margin-top:8px;">Rassenfähigkeiten</div>
+        <div class="s3-skill-grid" id="s3-skill-race"></div>
+
+        <div class="s3-skill-section-title" style="margin-top:8px;">Professionsfähigkeiten</div>
+        <div class="s3-skill-grid" id="s3-skill-prof"></div>
+    </div>
+
+    <!-- 7. Inventar -->
+    <div class="s3-panel s3-freezable">
+        <div><b>Inventar</b></div>
+        <div class="s3-inventory-grid" id="s3-inventory-grid">
+            <!-- 32 Slots -->
+        </div>
+    </div>
+
+    <!-- 8. Prozentanzeige -->
+    <div class="s3-panel s3-freezable">
+        <div><b>Fortschritt</b></div>
+        <div class="s3-percent-grid">
+            <div class="s3-percent-row">
+                <span>Charakterentwicklung</span>
+                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-char" style="width:10%;"></div></div>
+            </div>
+            <div class="s3-percent-row">
+                <span>Fähigkeiten</span>
+                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-skills" style="width:10%;"></div></div>
+            </div>
+            <div class="s3-percent-row">
+                <span>Vitalwerte</span>
+                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-vital" style="width:10%;"></div></div>
+            </div>
+            <div class="s3-percent-row">
+                <span>Tagesfortschritt</span>
+                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-day" style="width:0%;"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. Timeline (60 Tage) -->
+    <div class="s3-panel s3-freezable">
+        <div><b>Timeline – 60 Tage</b></div>
+        <div class="s3-timeline-grid" id="s3-timeline-top"></div>
+        <div class="s3-timeline-grid" id="s3-timeline-bottom" style="margin-top:4px;"></div>
+    </div>
+
+    <!-- 10. Footer -->
+    <div id="s3-footer">
+        <div class="s3-footer-group">
+            <button class="s3-footer-btn" id="btn-s3-load">Charakter laden</button>
+        </div>
+        <div class="s3-footer-group">
+            <div class="s3-currency-box">
+                <span><span class="s3-currency-label">Gold:</span> <span id="s3-gold">0</span></span>
+                <span><span class="s3-currency-label">Silber:</span> <span id="s3-silver">0</span></span>
+                <span><span class="s3-currency-label">Kupfer:</span> <span id="s3-copper">0</span></span>
+            </div>
+        </div>
+        <div class="s3-footer-group">
+            <button class="s3-footer-btn" id="btn-s3-save">Zwischenspeichern</button>
+            <button class="s3-footer-btn" id="btn-s3-dayend">Tagesabschluss</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Tagesabschluss-Popup -->
+<div id="dayend-modal">
+    <div id="dayend-box">
+        <div class="dayend-msg" id="dayend-message"></div>
+        <div class="dayend-row">
+            <span>SP dieses Tages:</span><span id="dayend-sp">0</span>
+        </div>
+        <div class="dayend-row">
+            <span>Gold-Gewinn:</span><span id="dayend-gold">0</span>
+        </div>
+        <div class="dayend-row">
+            <span>Attributspunkte:</span><span id="dayend-ap">1</span>
+        </div>
+        <div style="margin-top:10px;">
+            <button class="s3-footer-btn" id="btn-dayend-confirm">Beenden</button>
+        </div>
+    </div>
+</div>
+/* TP logic (attribute arrows) */
+let TP = 5;
+document.addEventListener("DOMContentLoaded", () => {
+  const tpEl = document.getElementById("footer-tp");
+  if (tpEl) tpEl.textContent = TP;
+  document.querySelectorAll(".attr-arrow").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (TP <= 0 || btn.disabled) return;
+      const slot = btn.closest(".attribute-slot");
+      const levelEl = slot.querySelector(".attr-level");
+      levelEl.textContent = parseInt(levelEl.textContent) + 1;
+      TP--;
+      const tpEl2 = document.getElementById("footer-tp");
+      if (tpEl2) tpEl2.textContent = TP;
+    });
+  });
+});
+
+/* Timeline init */
+document.addEventListener("DOMContentLoaded", () => {
+  const row1 = document.getElementById("tap-row-1");
+  const row2 = document.getElementById("tap-row-2");
+  if (row1 && row2) {
+    for (let i = 1; i <= 60; i++) {
+      const box = document.createElement("div");
+      box.className = "tap-box";
+      box.style.width = "90px";
+      box.style.display = "flex";
+      box.style.alignItems = "center";
+      box.style.gap = "8px";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.dataset.day = i;
+      const label = document.createElement("label");
+      label.textContent = "Tag " + i;
+      box.appendChild(checkbox);
+      box.appendChild(label);
+      if (i <= 30) row1.appendChild(box);
+      else row2.appendChild(box);
+      checkbox.addEventListener("change", () => { saveTimeline(); updateTapProgress(); });
+    }
+  }
+  loadTimeline();
+  updateTapProgress();
+});
+
+const tapFinishBtn = document.getElementById("tap-finish-btn");
+if (tapFinishBtn) {
+  tapFinishBtn.addEventListener("click", () => {
+    const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
+    for (let i = 0; i < boxes.length; i++) {
+      if (!boxes[i].checked) {
+        boxes[i].checked = true;
+        TAP++;
+        boxes[i].closest(".tap-box").classList.add("glow");
+        setTimeout(() => boxes[i].closest(".tap-box").classList.remove("glow"), 600);
+        saveTimeline();
+        updateTapProgress();
+        return;
+      }
+    }
+    console.log("Alle 60 Tage abgeschlossen.");
+  });
+}
+
+/* Ensure currency render initial */
+if (undra && undra.engine && undra.engine.currency) undra.engine.currency.render();
+
+/* ============================
+RÜSTUNG / ZONEN (Handlers)
+============================ */
+const stageColors = {
+  disabled: "#4b5563",
+  full: "#e8d9f0",
+  yellow: "#fbbf24",
+  orange: "#f59e0b",
+  red: "#ef4444"
+};
+
+let zoneState = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
+let zoneArmor = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
+let zoneMaxArmor = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
+let zoneArmorType = {1:null,2:null,3:null,4:null,5:null,6:null,7:null,8:null};
+
+let gold = 100;
+let selectedZone = 1;
+let popupMode = null;
+
+window.applyVitalDamage = function(dmg) {
+  const c = (typeof loadCharacterFromStorage === "function") ? loadCharacterFromStorage() : { hp:100 };
+  c.hp = Math.max(0, (c.hp ?? 100) - dmg);
+  if (typeof saveCharacter === "function") saveCharacter(c);
+  if (typeof updateVitalsDisplay === "function") updateVitalsDisplay(c);
+};
+
+function getStageColor(zone) {
+  const max = zoneMaxArmor[zone];
+  const cur = zoneArmor[zone];
+  if (!max || max === 0) return stageColors.disabled;
+  if (cur === max) return stageColors.full;
+  const pct = (cur / max) * 100;
+  if (pct >= 75) return stageColors.yellow;
+  if (pct >= 50) return stageColors.orange;
+  if (pct > 0) return stageColors.red;
+  return stageColors.disabled;
+}
+
+function applyDamage() {
+  const input = document.getElementById("damageInput");
+  const dmg = input ? parseInt(input.value) : 0;
+  if (!dmg || dmg <= 0) return;
+  const zone = selectedZone;
+  if (!zoneMaxArmor[zone] || zoneMaxArmor[zone] === 0) {
+    window.applyVitalDamage(dmg);
+    renderZones(); updateFigureColors(); return;
+  }
+  if (dmg <= zoneArmor[zone]) zoneArmor[zone] -= dmg;
+  else { const rest = dmg - zoneArmor[zone]; zoneArmor[zone] = 0; zoneMaxArmor[zone] = 0; zoneArmorType[zone] = null; window.applyVitalDamage(rest); }
+  renderZones(); updateFigureColors();
+}
+
+function openArmorPopup(){
+  const zone = selectedZone; let html = "";
+  if(!zoneMaxArmor[zone] || zoneMaxArmor[zone] === 0){
+    html += `<p>Zone ist deaktiviert.</p><p>Kaufpreis: <b>10 Gold</b></p><p>Rüstungsart wählen:</p>`;
+    html += `<select id="armorTypeSelect"><option value="stoff">Stoff (+1)</option><option value="leder">Leder (+3)</option><option value="stahl">Stahl (+8)</option></select>`;
+    popupMode = "buy";
+  } else { html += `<p>Rüstung: ${zoneArmor[zone]} / ${zoneMaxArmor[zone]}</p><p>Reparatur: <b>5 Gold</b></p>`; popupMode = "repair"; }
+  const titleEl = document.getElementById("popupTitle"); const contentEl = document.getElementById("popupContent"); const popupEl = document.getElementById("armorPopup");
+  if(titleEl) titleEl.innerText = "Zone " + zone; if(contentEl) contentEl.innerHTML = html; if(popupEl) popupEl.style.display = "flex";
+}
+
+function closeArmorPopup(){ const popupEl = document.getElementById("armorPopup"); if(popupEl) popupEl.style.display = "none"; }
+
+function confirmArmorAction(){
+  const zone = selectedZone;
+  if(popupMode === "buy"){
+    if(gold < 10) return alert("Nicht genug Gold!");
+    gold -= 10;
+    const typeEl = document.getElementById("armorTypeSelect"); const type = typeEl ? typeEl.value : "stoff";
+    const bonus = type === "stoff" ? 1 : type === "leder" ? 3 : 8;
+    zoneMaxArmor[zone] = 5 + bonus; zoneArmor[zone] = zoneMaxArmor[zone]; zoneArmorType[zone] = type;
+  } else {
+    if(gold < 5) return alert("Nicht genug Gold!");
+    gold -= 5; zoneArmor[zone] = zoneMaxArmor[zone];
+  }
+  closeArmorPopup(); renderZones(); updateFigureColors();
+}
+
+function renderZones(){
+  const listEl = document.getElementById("zoneList"); if(!listEl) return;
+  let html = `<p><b>Gold:</b> ${gold}</p>`;
+  for(let z=1; z<=8; z++){
+    const color = getStageColor(z);
+    html += `<div class="zone-box"><b>${z}. Zone</b><span style="display:inline-block;width:10px;height:10px;background:${color};border-radius:2px;margin-left:4px;"></span><br>Rüstung: ${zoneArmor[z]} / ${zoneMaxArmor[z]}</div>`;
+  }
+  listEl.innerHTML = html;
+}
+
+function updateFigureColors(){
+  for(let z=1; z<=8; z++){
+    const color = getStageColor(z);
+    const el = document.getElementById(`zone${z}`);
+    if(el) el.setAttribute("fill", color);
+    if(el) el.setAttribute("stroke", (z===selectedZone) ? "#fff" : "#555");
+  }
+  document.querySelectorAll("#zoneSelectGrid div").forEach(el => {
+    const val = parseInt(el.getAttribute("data-value"));
+    el.classList.toggle("active-zone", val === selectedZone);
+  });
+  document.querySelectorAll(".armor-zone").forEach(z => z.classList.remove("active-zone-svg"));
+  const selEl = document.getElementById(`zone${selectedZone}`); if(selEl) selEl.classList.add("active-zone-svg");
+}
+
+/* Attach zone click handlers safely after DOM ready */
+document.addEventListener("DOMContentLoaded", ()=>{
+  document.querySelectorAll("#zoneSelectGrid div").forEach(el=>{
+    el.addEventListener("click", ()=>{ selectedZone = parseInt(el.getAttribute("data-value")); updateFigureColors(); });
+  });
+  for(let z=1; z<=8; z++){
+    const el = document.getElementById(`zone${z}`);
+    if(el) el.addEventListener("click", ()=>{ selectedZone = z; updateFigureColors(); });
+  }
+
+  /* Init character/vitals if functions exist */
+  const c = (typeof loadCharacterFromStorage === "function") ? loadCharacterFromStorage() : { hp:100, profession:"Barbar", sp:20000, attributes:{}, vitalBonus:{LE:0,RUEST:0,DYN:0,GG:0,TC:0} };
+  try { renderVitalBonusCrystals(c); } catch(e){}
+  try { setupVitalBonusHandlers(c, updateVitalsDisplay); } catch(e){}
+  try { updateVitalsDisplay(c); } catch(e){}
+  renderZones(); updateFigureColors();
+
+  /* Anmerkung counter */
+  const an = document.getElementById("anmerkungText"); const ac = document.getElementById("anmerkungCounter");
+  if(an && ac){ an.addEventListener("input", ()=> { ac.textContent = `${an.value.length} / 500`; }); }
+});
+
+/* SAFEGUARDS: ensure demo data and timeline exist */
+if(!localStorage.getItem("demoCharacter")) localStorage.setItem("demoCharacter", JSON.stringify({name:"Testheld",profession:"Barbar",race:"Mensch",class:"Krieger",sp:20000,attributes:{},vitalBonus:{LE:0,RUEST:0,DYN:0,GG:0,TC:0},hp:100}));
+if(!localStorage.getItem("UNDRA_TAP_STATE")){ localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(Array(60).fill(0))); localStorage.setItem("UNDRA_TAP_VALUE","0"); }
+
+/* Ensure inventory render once DOM loaded */
+window.addEventListener("load", ()=>{ if(undra && undra.engine && undra.engine.inventory && typeof undra.engine.inventory._onUpdate === "function") undra.engine.inventory._onUpdate(); });</script>
+
+</body>
+</html>
