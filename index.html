@@ -125,6 +125,14 @@
     align-items: center;
 }
 
+
+
+
+
+
+
+
+
 .s3-vital-btn {
     padding: 2px 8px;
     font-size: 11px;
@@ -317,115 +325,11 @@
         inset 0 0 6px rgba(0,255,120,0.4);
 }
 
-/* Zeile 10: Footer */
-#s3-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    padding: 6px 10px;
-    border-top: 2px solid gold;
-    background: #0a050a;
-    margin: 10px 10px 0 10px;
-    border-radius: 0 0 6px 6px;
-}
 
-.s3-footer-group {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
 
-.s3-footer-btn {
-    padding: 4px 10px;
-    border-radius: 14px;
-    border: 1px solid gold;
-    background: #160909;
-    color: gold;
-    font-size: 12px;
-    cursor: pointer;
-}
 
-.s3-footer-btn[disabled] {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
 
-.s3-currency-box {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    font-size: 12px;
-    color: #ffe7a8;
-    text-shadow: 0 0 6px rgba(255,215,0,0.5);
-}
 
-.s3-currency-label {
-    color: gold;
-}
-
-/* Tagesabschluss-Freeze Overlay für Seite 3 */
-#s3-freeze-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 980px;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 20;
-    border-radius: 8px;
-}
-
-#s3-freeze-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* alles, was bei Freeze ausgegraut wird */
-.s3-freezable.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-/* Popup Tagesabschluss */
-#dayend-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.85);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-}
-
-#dayend-box {
-    background:#120a12;
-    border:2px solid gold;
-    border-radius:10px;
-    width:480px;
-    padding:14px;
-    color:#eaddca;
-    text-align:center;
-}
-
-.dayend-msg {
-    font-size:14px;
-    color:#ffe7a8;
-    margin-bottom:8px;
-}
-
-.dayend-row {
-    display:flex;
-    justify-content:space-between;
-    margin:4px 0;
-    font-size:13px;
-}
 
 /* ============================
 GLOBAL
@@ -540,38 +444,100 @@ ANMERKUNG – COUNTER (Bloodcore R2)
 /* ============================
 KOPFZEILE – TITEL "Heldenbrief"
 ============================ */
-#kopf-titel {
-    font-size: 26px;
+#heldenbriefBanner {
+    width: 600px;
+    height: 160px;
+    margin: 30px auto 0 auto;
+
+    /* HIER DEIN PINTEREST-BANNER EINSETZEN */
+    background-image: url('https://pin.it/6yLWAkUDB');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+/* Textblock */
+.heldenbriefText {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+/* Titel */
+.heldenbriefTitel {
+    font-size: 28px;
     font-weight: bold;
-    color: #ffe9b4;
-
-    letter-spacing: 1px;
-    padding-bottom: 6px;
-    margin-bottom: 8px;
-
-    border-bottom: 2px solid rgba(255, 210, 120, 0.6);
-
-    font-variant: small-caps;
+    font-family: "Georgia", serif;
+    color: #ffe9c4;
+    font-style: italic;
+    line-height: 1.3;
 
     text-shadow:
         0 0 6px rgba(255, 200, 80, 0.7),
-        0 0 14px rgba(255, 60, 60, 0.4);
+        0 0 14px rgba(140, 80, 255, 0.45);
 }
+
+/* Name */
+.heldenbriefName {
+    margin-top: 4px;
+    font-size: 20px;
+    font-family: "Georgia", serif;
+    color: #f5f1ff;
+    font-style: italic;
+    line-height: 1.3;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.5),
+        0 0 10px rgba(106, 13, 173, 0.3);
+}
+.heldenbriefName {
+    margin-top: 4px;
+    font-size: 20px;
+    font-family: "Georgia", serif;
+    color: #f5f1ff;
+    font-style: italic;
+    line-height: 1.3;
+
+    text-shadow:
+        0 0 4px rgba(255, 200, 80, 0.5),
+        0 0 10px rgba(106, 13, 173, 0.3);
+}
+
+
 /* ============================
 KOPFZEILE – NAME (Bloodcore R2)
 ============================ */
-#kopf-name {
-    margin-top: 4px;
-    font-size: 18px;
+#hero-header {
+    text-align: center;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+#hero-title-main {
+    font-size: 40px;
+    font-weight: 700;
     color: #ffe9c4;
-
-    word-wrap: break-word;
-    line-height: 1.3;
     font-style: italic;
-
     text-shadow:
         0 0 6px rgba(255, 200, 80, 0.7),
-        0 0 14px rgba(255, 60, 60, 0.45);
+        0 0 14px rgba(140, 80, 255, 0.45);
+    letter-spacing: 2px;
+}
+
+#hero-title-name {
+    margin-top: 6px;
+    font-size: 22px;
+    color: #ffffff;
+    opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 /* ============================
@@ -592,6 +558,10 @@ DREIER-LINIE – Bloodcore R2
     border-top: 1px solid rgba(255, 210, 120, 0.4);
     box-sizing: border-box;
 }
+
+
+
+
 
 /* ============================
 MERKMALE LINKS – Bloodcore R2
@@ -785,6 +755,10 @@ PORTRAIT – INNENBEREICH (Bloodcore R2)
     box-sizing: border-box;
 }
 
+
+
+
+
 /* Bild */
 #portrait-img {
     width: 100%;
@@ -960,6 +934,10 @@ ATTRIBUTE – GRID
     justify-content: center;
     gap: 40px;
 }
+
+
+
+
 
 /* ============================
 ATTRIBUTE – SLOT (Bloodcore R2)
@@ -1192,6 +1170,10 @@ ICON-ANIMATIONEN (unverändert)
     100% { transform: scale(1); opacity: 1; }
 }
 
+
+
+
+
 /* ============================
 AUFWERTUNGEN – OPTIMIERTE ABSTÄNDE (Bloodcore R2)
 ============================ */
@@ -1279,12 +1261,6 @@ AUFWERTUNGEN – OPTIMIERTE ABSTÄNDE (Bloodcore R2)
     opacity: 0.4;
     cursor: default;
 }
-
-
-
-
-
-
 
 /* ============================
 KAMPF + RÜSTUNGSSYSTEM – Bloodcore R2 (Fix)
@@ -1498,6 +1474,10 @@ ZONEN-AUSWAHL
     padding-bottom: 4px;
     border-bottom: 1px solid #8a5200;
 }
+
+
+
+
 
 /* ============================
 RECHTE SEITE – FIGUR
@@ -1731,6 +1711,53 @@ INVENTAR, TIMELINE, FOOTER – Bloodcore R2
         0 0 14px rgba(255,60,60,0.45);
 }
 
+.uf-popup-bg {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+
+.uf-popup {
+    background:#120a12;
+    border:2px solid gold;
+    border-radius:10px;
+    padding:16px;
+    width:360px;
+    color:#ffe7c2;
+}
+
+.uf-popup-title {
+    margin-top:0;
+    color:#f5d77a;
+    text-align:center;
+}
+
+.uf-input {
+    width:100%;
+    padding:6px;
+    margin:4px 0 10px 0;
+    background:#1a0f1a;
+    border:1px solid #8a5200;
+    color:#ffe7c2;
+    border-radius:4px;
+}
+
+.uf-btn {
+    padding:6px 12px;
+    background:#1a0f1a;
+    border:1px solid #8a5200;
+    color:#ffdca8;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+
+
 /* ============================
 TAP PROGRESS
 ============================ */
@@ -1850,14 +1877,7 @@ TIMELINE 2x30 – Bloodcore R2 (funktionierende Version)
         white-space: nowrap;
         padding-bottom: 12px;
     }
-    .tap-day {
-        display: inline-flex;
-        width: 80px;
-        margin-right: 8px;
-    }
-}
-
-
+   
 
 
 
@@ -1866,39 +1886,48 @@ TIMELINE 2x30 – Bloodcore R2 (funktionierende Version)
 /* ============================
 FOOTER
 ============================ */
-#footer-container {
-    width: 90px;
-    margin: 0 auto 30px auto;
+#undra-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    box-sizing: border-box;
+    padding: 8px 14px;
+    margin: 12px 10px 0 10px;
+    background: #0a050a;
+    border-top: 2px solid gold;
+    border-radius: 0 0 6px 6px;
+    color: #ffe7c2;
+    font-size: 13px;
 }
 
-.footer-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffe9d8;
-}
-
-.footer-value {
-    color: #fff4e6;
-    text-shadow:
-        0 0 4px rgba(255,200,80,0.6);
-}
-
-.attr-arrow.small {
-    padding: 4px 8px;
-    background: rgba(10,4,6,0.92);
+.uf-btn {
+    padding: 6px 12px;
+    background: rgba(20,10,12,0.9);
     border: 1px solid #8a5200;
-    color: #ffe9b4;
     border-radius: 4px;
-    box-shadow:
-        inset 0 0 6px rgba(0,0,0,0.9);
+    color: #ffdca8;
+    cursor: pointer;
+    text-shadow: 0 0 4px rgba(255,200,80,0.6);
 }
 
+.uf-btn:hover {
+    background: rgba(40,20,22,0.9);
+}
+
+#uf-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.uf-value {
+    color: #fff4e6;
+    text-shadow: 0 0 4px rgba(255,200,80,0.6);
+}
+
+.uf-label {
+    color: gold;
+}
 /* ============================
 RESPONSIVE TWEAKS (Bloodcore R2)
 ============================ */
@@ -1918,18 +1947,12 @@ RESPONSIVE TWEAKS (Bloodcore R2)
 <!-- ============================
 KOPFZEILE
 ============================ -->
-<div id="kopfzeile">
-    <div id="kopf-titel">Heldenbrief</div>
-    <div id="kopf-name"></div>
-</div>
-
-
-<div class="page3-center-slot">
-    <div class="arcane-bloodcore">
-        <div class="orbit-core"></div>
+<div id="heldenbriefBanner">
+    <div class="heldenbriefText">
+        <div class="heldenbriefTitel">Heldenbrief</div>
+        <div class="heldenbriefName" id="heldenbriefName"></div>
     </div>
 </div>
-
 
 <!-- ============================
 DREIER-LINIE
@@ -1977,11 +2000,24 @@ ATTRIBUTE-BLOCK
 
         <div class="row">
             <div class="attribute-slot" data-short="MU"><span class="attr-name">Mut (MU)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
+            
             <div class="attribute-slot" data-short="IN"><span class="attr-name">Intelligenz (IN)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
             <div class="attribute-slot" data-short="FF"><span class="attr-name">Fingerfertigkeit (FF)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
             <div class="attribute-slot" data-short="GE"><span class="attr-name">Gewandtheit (GE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
             <div class="attribute-slot" data-short="KK"><span class="attr-name">Körperkraft (KK)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="row">
             <div class="attribute-slot" data-short="KB"><span class="attr-name">Körperbewusstsein (KB)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
@@ -2046,6 +2082,10 @@ VITALWERTE + AUFWERTUNGEN
             <div class="vital-value" id="vital-tc">–</div>
         </div>
     </div>
+
+
+
+
 
     <!-- RECHTER BLOCK: Aufwertungen -->
     <div id="vitalBonusPanel">
@@ -2134,6 +2174,14 @@ KAMPF + RÜSTUNGSSYSTEM
 </div>
     </div>
 
+
+
+
+
+
+
+
+
     <!-- RECHTER BLOCK: Rüstungssystem -->
     <div id="ruestungsBlock">
         <div class="vital-title">Rüstungssystem</div>
@@ -2184,6 +2232,15 @@ KAMPF + RÜSTUNGSSYSTEM
                              Z"
                           fill="#0d0d0d" stroke="#3a1f47" stroke-width="2"/>
 
+
+
+
+
+
+
+
+
+
                     <!-- Kopf -->
                     <circle id="zone1" cx="60" cy="35" r="22"
                             class="zone-click armor-zone"/>
@@ -2233,6 +2290,7 @@ KAMPF + RÜSTUNGSSYSTEM
     </div>
 
 </div>
+
 
 <!-- ============================
 INVENTAR (ergänzt)
@@ -2292,321 +2350,274 @@ INVENTAR (ergänzt)
 </div>
 
 <!-- ============================
-TAP PROGRESS + TIMELINE
+POPUP: Cloud-Laden (Name + Zuname)
 ============================ -->
-<div id="tap-progress-container">
-  <div id="tap-progress-bar"></div>
-  <div id="tap-progress-text">0%</div>
-</div>
+<div id="uf-load-popup-bg" class="uf-popup-bg" style="display:none;">
+  <div id="uf-load-popup" class="uf-popup">
+    <h2 class="uf-popup-title">Charakter laden</h2>
 
-<div id="tap-timeline">
-  <div id="tap-title">Tagesabschluss‑Timeline</div>
-  <div class="tap-row" id="tap-row-1"></div>
-  <div class="tap-row" id="tap-row-2"></div>
-  <div id="tap-button-row" style="text-align:center;">
-    <button id="tap-finish-btn" class="attr-arrow small">Tagesabschluss</button>
+    <label class="uf-label">Name:</label>
+    <input id="uf-load-name" class="uf-input" type="text">
+
+    <label class="uf-label">Zuname / Titel:</label>
+    <input id="uf-load-title" class="uf-input" type="text">
+
+    <div style="margin-top:12px; display:flex; justify-content:space-between;">
+      <button id="uf-load-cancel" class="uf-btn">Abbrechen</button>
+      <button id="uf-load-confirm" class="uf-btn">Laden</button>
+    </div>
   </div>
 </div>
+
 
 <!-- ============================
-FOOTER
+UNDRA FOOTER (NEU)
 ============================ -->
-<div id="footer-container">
-  <div class="footer-section">
-    <label class="footer-label">Laden:</label>
-    <select id="load-slot">
-      <option value="">– Slot wählen –</option>
-      <option value="1">Charakter 1</option>
-      <option value="2">Charakter 2</option>
-      <option value="3">Charakter 3</option>
-      <option value="4">Charakter 4</option>
-      <option value="5">Charakter 5</option>
-      <option value="6">Charakter 6</option>
-    </select>
-    <button class="attr-arrow small" id="btn-load">Laden</button>
+<div id="undra-footer">
+
+  <!-- LINKS: Charakter Laden -->
+  <button id="uf-load" class="uf-btn">Charakter Laden</button>
+
+  <!-- MITTE: SP & ATB -->
+  <div id="uf-center">
+    <div class="uf-value">
+      <span class="uf-label">SP:</span>
+      <span id="uf-sp-used">0</span> /
+      <span id="uf-sp-left">0</span>
+    </div>
+
+    <div class="uf-value">
+      <span class="uf-label">ATB:</span>
+      <span id="uf-atb-used">0</span> /
+      <span id="uf-atb-left">0</span>
+    </div>
   </div>
 
-  <div class="footer-section">
-    <label class="footer-label">Speichern:</label>
-    <select id="save-slot">
-      <option value="">– Slot wählen –</option>
-      <option value="1">Charakter 1</option>
-      <option value="2">Charakter 2</option>
-      <option value="3">Charakter 3</option>
-      <option value="4">Charakter 4</option>
-      <option value="5">Charakter 5</option>
-      <option value="6">Charakter 6</option>
-    </select>
-    <button class="attr-arrow small" id="btn-save">Speichern</button>
-  </div>
+  <!-- RECHTS: Speichern -->
+  <button id="uf-save" class="uf-btn">Speichern</button>
 
-  <div id="footer-middle" style="display:flex;align-items:center;gap:12px;">
-    <div class="footer-value"><span class="footer-label">TP:</span> <span id="footer-tp">0</span></div>
-    <div class="footer-value"><span class="footer-label">SP:</span> <span id="footer-sp">0</span></div>
-    <div class="footer-value"><span class="footer-label">Gold:</span> <span id="money-gold">0</span> <span style="margin-left:8px;" class="footer-label">Silber:</span> <span id="money-silver">0</span> <span style="margin-left:8px;" class="footer-label">Kupfer:</span> <span id="money-copper">0</span></div>
-  </div>
-
-  <div class="footer-section">
-    <button class="attr-arrow small" id="btn-end-day">Spieltag beenden</button>
-  </div>
 </div>
 
-<!-- End‑Day Popup -->
-<div id="endday-popup-bg" class="popup-bg" style="display:none;">
-  <div id="endday-popup" class="popup" role="dialog" aria-modal="true" style="width:520px;">
-    <h2 style="color:#f5d77a;margin-top:0;">Spieltag Zusammenfassung</h2>
-    <div id="endday-summary" style="margin-bottom:12px;"></div>
-    <button id="endday-close-btn" class="attr-arrow small">Spieltag Abschließen</button>
-  </div>
-</div>
 
-<!-- JS: füge den kompletten JS‑Block direkt nach diesem Kommentar ein -->
 <script>
     
-    /* ============================
-KOPFZEILE – Name + Zusatz
+/* ============================
+TIMELINE
 ============================ */
-function updateKopfzeile() {
-    const name = document.getElementById("charNameInput")?.value || "";
-    const zusatz = document.getElementById("charTitleInput")?.value || "";
-    const ziel = document.getElementById("kopf-name");
-    if (ziel) {
-        ziel.textContent = name
-            ? (zusatz ? `${name} – ${zusatz}` : name)
-            : "";
+function renderTimeline(S) {
+  const top = document.getElementById("s3-timeline-top");
+  const bottom = document.getElementById("s3-timeline-bottom");
+  if (!top || !bottom) return;
+  top.innerHTML = "";
+  bottom.innerHTML = "";
+  for (let i = 1; i <= 60; i++) {
+    const d = document.createElement("div");
+    d.className = "s3-day-btn";
+    d.textContent = i;
+    if (i === S.timeline.story.currentDay) d.classList.add("active");
+    if (S.timeline.story.checked && S.timeline.story.checked.includes(i)) d.classList.add("checked");
+    (i <= 30 ? top : bottom).appendChild(d);
+  }
+}
+
+function checkOffTimelineDay(day) {
+  if (!undra.state.timeline.story.checked) undra.state.timeline.story.checked = [];
+  if (!undra.state.timeline.story.checked.includes(day)) undra.state.timeline.story.checked.push(day);
+  renderTimeline(undra.state);
+}
+function activateNextDay(day) {
+  undra.state.timeline.story.currentDay = Math.min(60, day + 1);
+  renderTimeline(undra.state);
+}
+
+/* ============================
+META + ATTR + VITALS + ARMOR + INVENTAR → PAGE 3
+============================ */
+function undraApplyStateToPage3() {
+  const S = undra.state;
+  const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt ?? ""; };
+
+  // META
+  setText("s3-name", S.meta.name);
+  setText("s3-title", S.meta.title);
+  setText("s3-race", S.meta.race);
+  setText("s3-sub", S.meta.subrace);
+  setText("s3-prof", S.meta.profession);
+  setText("s3-spec", S.meta.special);
+
+  const portrait = document.getElementById("s3-portrait-mirror");
+  if (portrait) {
+    portrait.innerHTML = S.meta.portrait
+      ? `<img src="${S.meta.portrait}" style="width:100%;height:100%;object-fit:cover;">`
+      : "";
+  }
+
+  // CURRENCY
+  setText("s3-gold", S.currency.gold);
+  setText("s3-silver", S.currency.silver);
+  setText("s3-copper", S.currency.copper);
+
+  // SP / DAY
+  setText("s3-sp-total", S.day.totalSP);
+  setText("s3-sp-hidden", S.day.hiddenSP);
+
+  // ATTRIBUTES
+  const attrGrid = document.getElementById("s3-attr-grid");
+  if (attrGrid) {
+    attrGrid.innerHTML = "";
+    for (const key in S.attributes) {
+      const row = document.createElement("div");
+      row.className = "s3-attr-row";
+      row.textContent = `${key}: ${S.attributes[key]}`;
+      attrGrid.appendChild(row);
     }
-}
-try { updateKopfzeile(); } catch(e){}
+  }
 
-/* ============================
-MERKMALE – Übernahme von Seite 1
-============================ */
-function copyMerkmale() {
-    const map = [
-        ["ageInput", "ml-age"],
-        ["heightInput", "ml-height"],
-        ["weightInput", "ml-weight"],
-        ["eyesInput", "ml-eyes"],
-        ["hairInput", "ml-hair"],
-        ["voiceInput", "ml-voice"],
-        ["armorInput", "ml-armor"],
-        ["specialInput", "ml-special"]
-    ];
-    map.forEach(([src, dest]) => {
-        const s = document.getElementById(src);
-        const d = document.getElementById(dest);
-        if (s && d) d.textContent = s.value || "–";
+  // VITALS (nur Anzeige, Berechnung separat)
+  const vitGrid = document.getElementById("s3-vital-grid");
+  if (vitGrid) {
+    vitGrid.innerHTML = "";
+    for (const key in S.vitals) {
+      const row = document.createElement("div");
+      row.className = "s3-vital-row";
+      row.textContent = `${key}: ${S.vitals[key]}`;
+      vitGrid.appendChild(row);
+    }
+  }
+
+  // ARMOR ZONES (Liste)
+  const hitGrid = document.getElementById("s3-hitzones-grid");
+  if (hitGrid) {
+    hitGrid.innerHTML = "";
+    for (let i = 1; i <= 8; i++) {
+      const z = S.armor.zones[i] || { cur: 0, max: 0, type: null };
+      const d = document.createElement("div");
+      d.className = "s3-hitzone-cell";
+      d.textContent = `Zone ${i}: ${z.cur}/${z.max}`;
+      hitGrid.appendChild(d);
+    }
+  }
+
+  // INVENTORY (nur Anzeige)
+  const inv = document.getElementById("s3-inventory-grid");
+  if (inv) {
+    inv.innerHTML = "";
+    const all = [...S.inventory.small, ...S.inventory.medium, ...S.inventory.large];
+    all.forEach(item => {
+      const slot = document.createElement("div");
+      slot.className = "s3-inv-slot";
+      slot.textContent = item || "-";
+      inv.appendChild(slot);
     });
+  }
+
+  renderTimeline(S);
 }
-try { copyMerkmale(); } catch(e){}
 
 /* ============================
-VITALWERTE-LOGIK
+VITALS
 ============================ */
-const magicalClasses = [
-    "Feuermagier","Druide","Necromant","Hexer","Schamane",
-    "Illusionist","Alchemist","Kampfmagier","Drachendisciple"
-];
+const magicalClasses = ["Feuermagier","Druide","Necromant","Hexer","Schamane","Illusionist","Alchemist","Kampfmagier","Drachendisciple"];
 const paladinClass = "Paladin";
 
 function getBonusType(profession) {
-    if (profession === paladinClass) return "SGP";
-    if (magicalClasses.includes(profession)) return "AS";
-    return "AU";
+  if (profession === paladinClass) return "SGP";
+  if (magicalClasses.includes(profession)) return "AS";
+  return "AU";
 }
 function getSpCostForLevel(level) { return level * 1000; }
 function getLinearBonus(level) { return level * 10; }
 function getPercentBonus(level) { return level * 10; }
 
-function loadCharacterFromStorage() {
-    const saved = localStorage.getItem("demoCharacter");
-    if (saved) return JSON.parse(saved);
-    return {
-        name: "Test",
-        profession: "Barbar",
-        race: "Mensch",
-        class: "Krieger",
-        sp: 20000,
-        attributes: {},
-        vitalBonus: { LE: 0, RUEST: 0, DYN: 0, GG: 0, TC: 0 },
-        hp: 100
-    };
-}
-function saveCharacter(c) { localStorage.setItem("demoCharacter", JSON.stringify(c)); }
-
 function ensureVitalBonusStructure(c) {
-    if (!c.vitalBonus) c.vitalBonus = { LE:0, RUEST:0, DYN:0, GG:0, TC:0 };
-}
-
-function renderVitalBonusCrystals(c) {
-    ensureVitalBonusStructure(c);
-
-    const dynType = getBonusType(c.profession);
-    const dynLabelEl = document.getElementById("vb-dyn-label");
-    const dynIconEl = document.getElementById("vb-dyn-icon");
-    if (dynLabelEl) dynLabelEl.textContent =
-        dynType === "AU" ? "(AU)" :
-        dynType === "AS" ? "(AS)" : "(SGP)";
-    if (dynIconEl) dynIconEl.textContent =
-        dynType === "AU" ? "⚡" :
-        dynType === "AS" ? "✨" : "🔆";
-
-    function renderRow(stat, sel) {
-        const container = document.querySelector(sel);
-        if (!container) return;
-        container.innerHTML = "";
-        const lvl = c.vitalBonus[stat] || 0;
-        for (let i=1;i<=7;i++) {
-            const el = document.createElement("div");
-            el.className = "vb-crystal";
-            if (i <= lvl) el.classList.add("active");
-            container.appendChild(el);
-        }
-    }
-
-    renderRow("LE", '.vb-crystals[data-stat="LE"]');
-    renderRow("RUEST", '.vb-crystals[data-stat="RUEST"]');
-    renderRow("DYN", '.vb-crystals[data-stat="DYN"]');
-    renderRow("GG", '.vb-crystals[data-stat="GG"]');
-    renderRow("TC", '.vb-crystals[data-stat="TC"]');
-
-    document.querySelectorAll(".vb-upgrade").forEach(btn => {
-        const stat = btn.dataset.stat;
-        const lvl = c.vitalBonus[stat] || 0;
-        const cost = getSpCostForLevel(lvl+1);
-        btn.disabled = lvl >= 7 || c.sp < cost;
-    });
-}
-
-function setupVitalBonusHandlers(c, onChange) {
-    document.querySelectorAll(".vb-upgrade").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const stat = btn.dataset.stat;
-            let lvl = c.vitalBonus[stat] || 0;
-            if (lvl >= 7) return;
-            const cost = getSpCostForLevel(lvl+1);
-            if (c.sp < cost) return;
-            c.sp -= cost;
-            c.vitalBonus[stat] = lvl+1;
-            renderVitalBonusCrystals(c);
-            if (typeof onChange === "function") onChange(c);
-            saveCharacter(c);
-        });
-    });
-}
-
-function calculateBaseVitals(attr) {
-    return {
-        hp: 100,
-        armorTotal: 10,
-        energy_stamina: 50,
-        energy_ae_spg: 30,
-        sgp: 20,
-        gg: 100,
-        tc: 10
-    };
-}
-function applyVitalBonus(base, race, cls, prof) {
-    return { ...base };
-}
-function applyLevel1Scaling(v) {
-    return { ...v };
+  if (!c.vitalBonus) c.vitalBonus = { LE:0, RUEST:0, DYN:0, GG:0, TC:0 };
 }
 
 function applyVitalBonusToVitals(base, c) {
-    const vb = c.vitalBonus || {};
-    const dynType = getBonusType(c.profession);
-    const r = { ...base };
-
-    r.hp = c.hp ?? r.hp;
-    r.hp += getLinearBonus(vb.LE || 0);
-    r.armorTotal += getLinearBonus(vb.RUEST || 0);
-
-    if (dynType === "AU") r.energy_stamina += getLinearBonus(vb.DYN || 0);
-    else if (dynType === "AS") r.energy_ae_spg += getLinearBonus(vb.DYN || 0);
-    else r.sgp += getLinearBonus(vb.DYN || 0);
-
-    if ((vb.GG || 0) > 0) r.gg = Math.round(r.gg * (1 + getPercentBonus(vb.GG)/100));
-    if ((vb.TC || 0) > 0) r.tc = Math.round(r.tc * (1 + getPercentBonus(vb.TC)/100));
-
-    return r;
+  const vb = c.vitalBonus || {};
+  const dynType = getBonusType(c.meta.profession);
+  const r = { ...base };
+  r.hp = (c.hp ?? r.hp) + getLinearBonus(vb.LE || 0);
+  r.armorTotal += getLinearBonus(vb.RUEST || 0);
+  if (dynType === "AU") r.stamina = (r.stamina || 0) + getLinearBonus(vb.DYN || 0);
+  else if (dynType === "AS") r.ae = (r.ae || 0) + getLinearBonus(vb.DYN || 0);
+  else r.sgp = (r.sgp || 0) + getLinearBonus(vb.DYN || 0);
+  if ((vb.GG || 0) > 0) r.gg = Math.round(r.gg * (1 + getPercentBonus(vb.GG)/100));
+  if ((vb.TC || 0) > 0) r.tc = Math.round(r.tc * (1 + getPercentBonus(vb.TC)/100));
+  return r;
 }
 
-function renderVitalsDisplay(v, c) {
-    const elHp = document.getElementById("vital-le");
-    const elArmor = document.getElementById("vital-ruest");
-    const elGg = document.getElementById("vital-gg");
-    const elTc = document.getElementById("vital-tc");
-    if (elHp) elHp.textContent = v.hp;
-    if (elArmor) elArmor.textContent = v.armorTotal;
-    if (elGg) elGg.textContent = v.gg;
-    if (elTc) elTc.textContent = v.tc;
-
-    const dynType = getBonusType(c.profession);
-    const dynLabel = document.getElementById("vital-dyn-label");
-    if (dynLabel) dynLabel.textContent =
-        dynType === "AU" ? "Ausdauer" :
-        dynType === "AS" ? "Astralenergie" :
-        "Segenspunkte";
-
-    const dynValue = document.getElementById("vital-dyn");
-    if (dynValue) dynValue.textContent =
-        dynType === "AU" ? v.energy_stamina :
-        dynType === "AS" ? v.energy_ae_spg :
-        v.sgp;
+function calculateBaseVitals(attrs) {
+  return { hp: 100, armorTotal: 10, stamina: 50, ae: 0, sgp: 20, gg: 100, tc: 10 };
 }
 
-function updateVitalsDisplay(c) {
-    const base = calculateBaseVitals(c.attributes);
-    const withRaceClass = applyVitalBonus(base, c.race, c.class, c.profession);
-    const scaled = applyLevel1Scaling(withRaceClass);
-    const finalVitals = applyVitalBonusToVitals(scaled, c);
-    renderVitalsDisplay(finalVitals, c);
+function updateVitalsDisplayFromState() {
+  const c = undra.state;
+  const base = calculateBaseVitals(c.attributes);
+  const final = applyVitalBonusToVitals(base, c);
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set("vital-le", final.hp);
+  set("vital-ruest", final.armorTotal);
+  set("vital-gg", final.gg);
+  set("vital-tc", final.tc);
+  const dynType = getBonusType(c.meta.profession);
+  set("vital-dyn-label", dynType === "AU" ? "Ausdauer" : dynType === "AS" ? "Astralenergie" : "Segenspunkte");
+  set("vital-dyn", dynType === "AU" ? final.stamina : dynType === "AS" ? final.ae : final.sgp);
 }
 
 /* ============================
-CURRENCY MODULE
+ARMOR
 ============================ */
-window.undra = window.undra || {};
-undra.engine = undra.engine || {};
+const stageColors = { disabled: "#4b5563", full: "#e8d9f0", yellow: "#fbbf24", orange: "#f59e0b", red: "#ef4444" };
 
-undra.engine.currency = {
-  gold: 0,
-  silver: 0,
-  copper: 0,
-  addCopper(amount) {
-    let total = (this.gold * 10000) + (this.silver * 100) + this.copper + (amount || 0);
-    this.gold = Math.floor(total / 10000);
-    total %= 10000;
-    this.silver = Math.floor(total / 100);
-    this.copper = total % 100;
-    this.render();
-  },
-  render() {
-    const g = document.getElementById("money-gold");
-    const s = document.getElementById("money-silver");
-    const c = document.getElementById("money-copper");
-    if (g) g.textContent = this.gold;
-    if (s) s.textContent = this.silver;
-    if (c) c.textContent = this.copper;
+function getStageColorForZone(zoneObj) {
+  const max = zoneObj?.max || 0;
+  const cur = zoneObj?.cur || 0;
+  if (!max) return stageColors.disabled;
+  if (cur === max) return stageColors.full;
+  const pct = (cur / max) * 100;
+  if (pct >= 75) return stageColors.yellow;
+  if (pct >= 50) return stageColors.orange;
+  if (pct > 0) return stageColors.red;
+  return stageColors.disabled;
+}
+
+function renderZonesFromState() {
+  const zones = undra.state.armor.zones;
+  for (let z = 1; z <= 8; z++) {
+    const el = document.getElementById(`zone${z}`);
+    if (!el) continue;
+    const color = getStageColorForZone(zones[z] || {});
+    try {
+      el.setAttribute("fill", color);
+      el.setAttribute("stroke", undra.state.armor.selected === z ? "#fff" : "#555");
+    } catch(e){}
   }
-};
+  const listEl = document.getElementById("zoneList");
+  if (listEl) {
+    let html = `<p><b>Gold:</b> ${undra.state.currency.gold}</p>`;
+    for (let z=1; z<=8; z++){
+      const zone = undra.state.armor.zones[z] || {cur:0,max:0};
+      const color = getStageColorForZone(zone);
+      html += `<div class="zone-box"><b>${z}. Zone</b><span style="display:inline-block;width:10px;height:10px;background:${color};border-radius:2px;margin-left:4px;"></span><br>Rüstung: ${zone.cur} / ${zone.max}</div>`;
+    }
+    listEl.innerHTML = html;
+  }
+}
 
 /* ============================
-INVENTAR ENGINE + UI
+INVENTORY ENGINE
 ============================ */
-const DM_PIN_LIST = [
-  "1023","3844","9281","5520","7712","4499","6601","8834","1209","3348",
-  "9921","4410","5582","7719","6623","1188","9033","2201","7744","6655",
-  "1102","9901","4488","5567","7723","6644","1199","9077","2233","7788",
-  "6677","1120","9944","4477","5599","7733","6688","1133","9002","2255",
-  "7799","6699","1144","9966","4490","5578","7711","6633","1166","9090",
-  "2288","7700","6600","1111","9999","4444","5555","7777","6666","2222"
-];
+const DM_PIN_LIST = ["1023","3844","9281","5520","7712","4499","6601","8834","1209","3348","9921","4410","5582","7719","6623","1188","9033","2201","7744","6655","1102","9901","4488","5567","7723","6644","1199","9077","2233","7788","6677","1120","9944","4477","5599","7733","6688","1133","9002","2255","7799","6699","1144","9966","4490","5578","7711","6633","1166","9090","2288","7700","6600","1111","9999","4444","5555","7777","6666","2222"];
 
+undra.engine = undra.engine || {};
 undra.engine.inventory = {
   state: {
-    items: { small: Array(10).fill(""), medium: Array(10).fill(""), large: Array(10).fill("") },
+    items: {
+      small: undra.state.inventory.small.slice(),
+      medium: undra.state.inventory.medium.slice(),
+      large: undra.state.inventory.large.slice()
+    },
     dmCodes: DM_PIN_LIST.slice(),
     selected: null
   },
@@ -2621,12 +2632,31 @@ undra.engine.inventory = {
   },
   setItem(category,index,text){
     const cleaned = this.cleanItemText(text);
-    if(!this.validateItemText(cleaned)){ alert("Ungültiger Eintrag. Ein Slot darf nur EIN Item enthalten."); return false; }
+    if(!this.validateItemText(cleaned)){
+      alert("Ungültiger Eintrag. Ein Slot darf nur EIN Item enthalten.");
+      return false;
+    }
     this.state.items[category][index] = cleaned;
+    this.syncToUndraState();
     if(this._onUpdate) this._onUpdate();
     return true;
   },
-  removeItem(category,index){ this.state.items[category][index] = ""; if(this._onUpdate) this._onUpdate(); },
+  removeItem(category,index){
+    this.state.items[category][index] = "";
+    this.syncToUndraState();
+    if(this._onUpdate) this._onUpdate();
+  },
+  discardItem(category,index){
+    this.removeItem(category,index);
+  },
+  sortCategory(category){
+    const arr = this.state.items[category];
+    const filled = arr.filter(x=>x.trim()!=="");
+    const empty = arr.filter(x=>x.trim()==="");
+    this.state.items[category] = [...filled,...empty];
+    this.syncToUndraState();
+    if(this._onUpdate) this._onUpdate();
+  },
   validatePin(pin){ return this.state.dmCodes.includes(pin); },
   convertToCopper(g,s,c){ return (g*10000)+(s*100)+c; },
   sellItem(category,index,g,s,c,pin){
@@ -2636,1049 +2666,458 @@ undra.engine.inventory = {
     this.removeItem(category,index);
     return true;
   },
-  /* ===================== SEITE 3 – ZUSTAND ===================== */
-
-let s3_state = {
-    totalSP: 0,
-    hiddenSP: 0,
-    gold: 0,
-    silver: 0,
-    copper: 0,
-    currentDay: 1,
-    dayFinalized: false,
-    attributePoints: 0,
-    skills: {
-        base: [],
-        race: [],
-        prof: []
-    },
-    vitals: {
-        "Lebenspunkte": 10,
-        "Ausdauer": 10,
-        "Fokus": 10,
-        "Geistige Stabilität": 10,
-        "Regeneration": 1
-    },
-    combatStats: {
-        "Angriff": 0,
-        "Verteidigung": 0,
-        "Trefferchance": 0,
-        "Fernkampf": 0,
-        "Abwehrschlag": 0,
-        "Technik": 0
-    }
+  syncToUndraState(){
+    undra.state.inventory.small = this.state.items.small.slice();
+    undra.state.inventory.medium = this.state.items.medium.slice();
+    undra.state.inventory.large = this.state.items.large.slice();
+  },
+  syncFromUndraState(){
+    this.state.items.small = undra.state.inventory.small.slice();
+    this.state.items.medium = undra.state.inventory.medium.slice();
+    this.state.items.large = undra.state.inventory.large.slice();
+  },
+  init(){
+    this.syncFromUndraState();
+    if(this._onUpdate) this._onUpdate();
+  }
 };
 
-/* Beispielhafte Basis-Fähigkeitspools – Platzhalter */
-const baseSkillList = [
-    "Athletik","Wahrnehmung","Überleben","Diplomatie","Heilkunde","Schleichen","Schlösser öffnen",
-    "Akrobatik","Geschichtenkunde","Magiekunde","Taschendiebstahl","Handel","Bedrohung",
-    "Etikette","Reiten","Schwimmen","Klettern","Analyse","Fokus sammeln","Meditation"
-];
+/* ============================
+CURRENCY ENGINE
+============================ */
+undra.engine.currency = {
+  gold: undra.state.currency.gold || 0,
+  silver: undra.state.currency.silver || 0,
+  copper: undra.state.currency.copper || 0,
+  set(g,s,c){
+    this.gold=g||0; this.silver=s||0; this.copper=c||0;
+    this.render();
+  },
+  addCopper(amount){
+    let total = (this.gold*10000) + (this.silver*100) + this.copper + (amount||0);
+    this.gold = Math.floor(total/10000);
+    total %= 10000;
+    this.silver = Math.floor(total/100);
+    this.copper = total % 100;
+    this.render();
+    undra.state.currency.gold = this.gold;
+    undra.state.currency.silver = this.silver;
+    undra.state.currency.copper = this.copper;
+  },
+  render(){
+    const g = document.getElementById("money-gold");
+    const s = document.getElementById("money-silver");
+    const c = document.getElementById("money-copper");
+    if (g) g.textContent = this.gold;
+    if (s) s.textContent = this.silver;
+    if (c) c.textContent = this.copper;
+  }
+};
 
-/* nur Platzhalter – hier kannst du später rassen-/professionslogische Pools einsetzen */
-const raceSkillPools = { generic: [
-    "Blutlinie","Instinkt","Ahnenruf","Naturverbundenheit","Scharfe Sinne","Zähigkeit",
-    "Stammeskraft","Widerstand","Tierverbundenheit","Jägerinstinkt","Pfadfinder",
-    "Steinherz","Waldläuferinstinkt","Überlebenstraining","Tradition","Regeneration",
-    "Schutzsegen","Wildes Herz","Körperkraft","Willenskraft"
-]};
-
-const professionSkillPools = { generic: [
-    "Waffentraining","Schildkampf","Kampfmagie","Heilmagie","Hinterhalt",
-    "Präzisionsschuss","Taktik","Anführen","Runenwirken","Alchemie",
-    "Illusionen","Berserkerwut","Spähen","Sabotage","Verteidigungshaltung",
-    "Blitzangriff","Konzentration","Barriere","Blutrausch","Fokusstoß"
-]};
-
-/* ===================== SEITE 3 – INIT ===================== */
+/* ============================
+PAGE 3: STATE & DAY-END
+============================ */
+let s3_state = {
+  totalSP: 0,
+  hiddenSP: 0,
+  gold: 0,
+  silver: 0,
+  copper: 0,
+  currentDay: 1,
+  dayFinalized: false,
+  attributePoints: 0,
+  skills: { base: [], race: [], prof: [] },
+  vitals: {},
+  combatStats: {}
+};
 
 function initStep3FromStep1() {
-    // Name & Titel
-    const name = document.getElementById("in-name").value || "-";
-    const title = document.getElementById("in-titel").value || "-";
+  undraSyncPage1();
+  undraApplyStateToPage3();
 
-    document.getElementById("s3-header-name").textContent = name || "Seite 3 – Heldenübersicht";
-    document.getElementById("s3-name").textContent = name;
-    document.getElementById("s3-title").textContent = title;
+  s3_state.totalSP    = undra.state.day.totalSP || 0;
+  s3_state.hiddenSP   = undra.state.day.hiddenSP || 0;
+  s3_state.currentDay = undra.state.timeline.story.currentDay || 1;
+  s3_state.dayFinalized = undra.state.day.finalized || false;
+  s3_state.gold   = undra.state.currency.gold || 0;
+  s3_state.silver = undra.state.currency.silver || 0;
+  s3_state.copper = undra.state.currency.copper || 0;
 
-    // Rasse/Untergruppe/Profession/Spezialfähigkeit
-    document.getElementById("s3-race").textContent = document.getElementById("s-race").textContent;
-    document.getElementById("s3-sub").textContent  = document.getElementById("s-sub").textContent;
-    document.getElementById("s3-prof").textContent = document.getElementById("s-prof").textContent;
-    document.getElementById("s3-spec").innerHTML   = document.getElementById("spec-summary").innerText || "-";
-
-    // Portrait spiegeln
-    const srcBox = document.getElementById("portrait-box");
-    const dstBox = document.getElementById("s3-portrait-mirror");
-    dstBox.innerHTML = srcBox.innerHTML;
-
-    // Attribute übernehmen + Attributpfeile
-    buildS3Attributes();
-
-    // Vitalwerte füllen
-    buildS3Vitals();
-
-    // Kampfwerte aus char.attrs abgeleitet (einfaches Beispiel)
-    syncCombatStatsFromAttrs();
-
-    // Fähigkeiten generieren (Platzhalter: generic Pools)
-    buildS3Skills();
-
-    // Inventar-Slots erzeugen
-    buildS3Inventory();
-
-    // Timeline erzeugen
-    buildS3Timeline();
-
-    // SP/Gold initial anzeigen
-    updateS3SPAndCurrency();
-
-    // Event für Tagesabschluss
-    document.getElementById("btn-s3-dayend").onclick = openDayEndPopup;
-    document.getElementById("btn-dayend-confirm").onclick = finalizeDayEnd;
+  updateS3SPAndCurrency();
+  renderZonesFromState();
+  undra.engine.inventory.init();
 }
-
-/* ===================== SEITE 3 – ATTRIBUTE ===================== */
-
-function buildS3Attributes() {
-    const grid = document.getElementById("s3-attr-grid");
-    grid.innerHTML = "";
-    attributes.forEach(a => {
-        const row = document.createElement("div");
-        row.className = "s3-attr-row";
-        row.id = "s3-attr-row-" + a;
-        const nameSpan = document.createElement("span");
-        nameSpan.className = "s3-attr-name";
-        nameSpan.textContent = a;
-        const valDiv = document.createElement("div");
-        valDiv.className = "s3-attr-value";
-        valDiv.id = "s3-attr-val-" + a;
-
-        const arrow = document.createElement("div");
-        arrow.className = "s3-attr-arrow";
-        arrow.id = "s3-attr-arrow-" + a;
-        arrow.textContent = "▲";
-        arrow.onclick = () => chooseAttributeIncrease(a);
-
-        row.appendChild(nameSpan);
-        row.appendChild(valDiv);
-        row.appendChild(arrow);
-        grid.appendChild(row);
-
-        // Startwerte aus char.attrs + specialBonus
-        const base = char.attrs[a] || 0;
-        const bonus = specialAttrBonus[a] || 0;
-        valDiv.textContent = base + bonus;
-    });
-
-    document.getElementById("s3-attr-points").textContent = s3_state.attributePoints;
-    updateAttributeArrowsState();
-}
-
-function chooseAttributeIncrease(attrName) {
-    if (s3_state.attributePoints <= 0) return;
-    // erhöhe Attribut auf Seite 3 (und optional in char.attrs, wenn du es synchron willst)
-    const valDiv = document.getElementById("s3-attr-val-" + attrName);
-    let val = parseInt(valDiv.textContent,10) || 0;
-    if (val >= 10) return;
-    val++;
-    valDiv.textContent = val;
-    s3_state.attributePoints = 0;
-    document.getElementById("s3-attr-points").textContent = 0;
-    // nach Steigerung Pfeile deaktivieren
-    disableAllAttributeArrows();
-}
-
-function updateAttributeArrowsState() {
-    attributes.forEach(a => {
-        const arrow = document.getElementById("s3-attr-arrow-" + a);
-        if (!arrow) return;
-        if (s3_state.attributePoints > 0 && !s3_state.dayFinalized) {
-            arrow.classList.add("active");
-        } else {
-            arrow.classList.remove("active");
-        }
-    });
-}
-
-function disableAllAttributeArrows() {
-    attributes.forEach(a => {
-        const arrow = document.getElementById("s3-attr-arrow-" + a);
-        if (arrow) arrow.classList.remove("active");
-    });
-}
-
-/* ===================== SEITE 3 – VITALWERTE ===================== */
-
-function buildS3Vitals() {
-    const grid = document.getElementById("s3-vital-grid");
-    grid.innerHTML = "";
-    Object.keys(s3_state.vitals).forEach(key => {
-        const row = document.createElement("div");
-        row.className = "s3-vital-row";
-        const label = document.createElement("span");
-        label.textContent = key;
-        const right = document.createElement("span");
-        const valSpan = document.createElement("span");
-        valSpan.id = "s3-vital-" + key;
-        valSpan.textContent = s3_state.vitals[key];
-        const btn = document.createElement("button");
-        btn.className = "s3-vital-btn";
-        btn.textContent = "+";
-        btn.onclick = () => increaseVital(key);
-        right.appendChild(valSpan);
-        right.appendChild(document.createTextNode(" "));
-        right.appendChild(btn);
-        row.appendChild(label);
-        row.appendChild(right);
-        grid.appendChild(row);
-    });
-}
-
-function increaseVital(key) {
-    // Beispiel: Steigerung kostet 100 SP
-    const cost = 100;
-    if (s3_state.totalSP < cost || s3_state.dayFinalized) return;
-    s3_state.totalSP -= cost;
-    s3_state.vitals[key]++;
-    document.getElementById("s3-vital-" + key).textContent = s3_state.vitals[key];
-    updateS3SPAndCurrency();
-}
-
-/* ===================== SEITE 3 – KAMPFSTATS ===================== */
-
-function syncCombatStatsFromAttrs() {
-    // sehr einfache Ableitungen als Beispiel
-    s3_state.combatStats["Angriff"]      = (char.attrs["Angriff"] || 0);
-    s3_state.combatStats["Verteidigung"] = (char.attrs["Verteidigung"] || 0);
-    s3_state.combatStats["Trefferchance"]= (char.attrs["Trefferchance"] || 0);
-    s3_state.combatStats["Fernkampf"]    = (char.attrs["Fernkampf"] || 0);
-    s3_state.combatStats["Abwehrschlag"] = (char.attrs["Abwehrschlag"] || 0);
-    s3_state.combatStats["Technik"]      = (char.attrs["Technik"] || 0);
-
-    const grid = document.getElementById("s3-combat-grid");
-    grid.innerHTML = "";
-    Object.keys(s3_state.combatStats).forEach(key => {
-        const label = document.createElement("div");
-        label.textContent = key;
-        const val = document.createElement("div");
-        val.textContent = s3_state.combatStats[key];
-        grid.appendChild(label);
-        grid.appendChild(val);
-    });
-}
-
-/* ===================== SEITE 3 – FÄHIGKEITEN ===================== */
-
-function buildS3Skills() {
-    // Basisfähigkeiten
-    s3_state.skills.base = baseSkillList.map(n => ({ name:n, level:1, type:"basis" }));
-    // einfache Pools für Demo
-    const racePool = raceSkillPools.generic;
-    const profPool = professionSkillPools.generic;
-
-    s3_state.skills.race = pickRandomSkills(racePool);
-    s3_state.skills.prof = pickRandomSkills(profPool);
-
-    renderSkillGrid("s3-skill-base", s3_state.skills.base);
-    renderSkillGrid("s3-skill-race", s3_state.skills.race);
-    renderSkillGrid("s3-skill-prof", s3_state.skills.prof);
-}
-
-function pickRandomSkills(pool) {
-    const arr = [...pool];
-    arr.sort(() => Math.random() - 0.5);
-    return arr.slice(0,20).map(n => ({ name:n, level:0, type:"dyn" }));
-}
-
-function renderSkillGrid(containerId, list) {
-    const box = document.getElementById(containerId);
-    box.innerHTML = "";
-    list.forEach((sk, idx) => {
-        const row = document.createElement("div");
-        row.className = "s3-skill-row";
-
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "s3-skill-name";
-        nameDiv.textContent = sk.name;
-
-        const lvlDiv = document.createElement("div");
-        lvlDiv.className = "s3-skill-level";
-        lvlDiv.id = containerId + "-lvl-" + idx;
-        lvlDiv.textContent = "Stufe " + sk.level;
-
-        const btn = document.createElement("button");
-        btn.className = "s3-skill-btn";
-        btn.textContent = "Kaufen";
-        btn.onclick = () => buySkillLevel(containerId, list, idx);
-
-        row.appendChild(nameDiv);
-        row.appendChild(lvlDiv);
-        row.appendChild(btn);
-        box.appendChild(row);
-    });
-}
-
-function buySkillLevel(containerId, list, idx) {
-    if (s3_state.dayFinalized) return;
-    const sk = list[idx];
-    if (sk.level >= 10) return;
-    let cost = 0;
-    if (containerId === "s3-skill-base") {
-        cost = 100 * (sk.level + 1);
-    } else if (containerId === "s3-skill-race") {
-        cost = 400 + 100 * (sk.level + 1);
-    } else {
-        cost = 600 + 100 * (sk.level + 1);
-    }
-    if (s3_state.totalSP < cost) return;
-    s3_state.totalSP -= cost;
-    sk.level++;
-    document.getElementById(containerId + "-lvl-" + idx).textContent = "Stufe " + sk.level;
-    updateS3SPAndCurrency();
-}
-
-/* ===================== SEITE 3 – INVENTAR ===================== */
-
-function buildS3Inventory() {
-    const grid = document.getElementById("s3-inventory-grid");
-    grid.innerHTML = "";
-    for (let i=0;i<32;i++) {
-        const slot = document.createElement("div");
-        slot.className = "s3-inventory-slot";
-        grid.appendChild(slot);
-    }
-}
-
-/* ===================== SEITE 3 – TIMELINE ===================== */
-
-function buildS3Timeline() {
-    const top = document.getElementById("s3-timeline-top");
-    const bottom = document.getElementById("s3-timeline-bottom");
-    top.innerHTML = "";
-    bottom.innerHTML = "";
-    for (let i=1;i<=60;i++) {
-        const d = document.createElement("div");
-        d.className = "s3-day-btn";
-        d.id = "s3-day-" + i;
-        d.textContent = i;
-        if (i === s3_state.currentDay) {
-            d.classList.add("active");
-        }
-        (i <= 30 ? top : bottom).appendChild(d);
-    }
-}
-
-function checkOffTimelineDay(day) {
-    const btn = document.getElementById("s3-day-" + day);
-    if (btn) {
-        btn.classList.remove("active");
-        btn.classList.add("checked");
-    }
-}
-
-function activateNextDay(day) {
-    const next = document.getElementById("s3-day-" + (day+1));
-    if (next) {
-        next.classList.add("active");
-    }
-}
-
-/* ===================== SEITE 3 – SP & GOLD ===================== */
 
 function updateS3SPAndCurrency() {
-    document.getElementById("s3-sp-total").textContent = s3_state.totalSP;
-    document.getElementById("s3-sp-hidden").textContent = s3_state.hiddenSP;
-
-    document.getElementById("s3-gold").textContent = s3_state.gold;
-    document.getElementById("s3-silver").textContent = s3_state.silver;
-    document.getElementById("s3-copper").textContent = s3_state.copper;
+  const s = s3_state;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set("s3-sp-total", s.totalSP);
+  set("s3-sp-hidden", s.hiddenSP);
+  set("s3-gold", s.gold);
+  set("s3-silver", s.silver);
+  set("s3-copper", s.copper);
 }
-
-/* Beispiel: SP hinzufügen – kannst du von Aktionen auf Seite 3 aus aufrufen */
-function addHiddenSP(amount) {
-    if (s3_state.dayFinalized) return;
-    s3_state.hiddenSP += amount;
-    document.getElementById("s3-sp-hidden").textContent = s3_state.hiddenSP;
-}
-
-/* ===================== SEITE 3 – TAGESABSCHLUSS ===================== */
 
 const dayEndMessages = [
-    "Danke, dass du heute wieder Teil von Avalon warst. Deine Reise prägt die Welt.",
-    "Ein weiterer Tag endet – und du hast ihn mit Leben gefüllt. Danke für deine Zeit.",
-    "Wir schätzen deine Anwesenheit in UNDRA. Jeder Schritt, den du machst, hinterlässt Spuren.",
-    "Danke, dass du heute wieder Mut, Wille und Herz gezeigt hast.",
-    "Dein heutiger Weg war nicht selbstverständlich. Danke, dass du ihn gegangen bist.",
-    "Ein Tag mehr, ein Kapitel weiter. Danke, dass du die Geschichte vorantreibst.",
-    "Deine Entscheidungen formen Avalon. Danke, dass du heute dabei warst.",
-    "Wieder ein Tag, an dem du die Welt verändert hast. Danke für deine Teilnahme.",
-    "Danke, dass du UNDRA heute mit deiner Präsenz bereichert hast.",
-    "Dein Einsatz heute war wertvoll. Danke, dass du Teil dieser Welt bist."
+  "Danke, dass du heute wieder Teil von Avalon warst. Deine Reise prägt die Welt.",
+  "Ein weiterer Tag endet – und du hast ihn mit Leben gefüllt. Danke für deine Zeit.",
+  "Wir schätzen deine Anwesenheit in UNDRA. Jeder Schritt, den du machst, hinterlässt Spuren."
 ];
-
-function getRandomDayEndMessage() {
-    const i = Math.floor(Math.random()*dayEndMessages.length);
-    return dayEndMessages[i];
-}
+function getRandomDayEndMessage(){ return dayEndMessages[Math.floor(Math.random()*dayEndMessages.length)]; }
 
 function openDayEndPopup() {
-    if (s3_state.dayFinalized) return;
-
-    // Tagesbonus – Beispiel-Formel: 400 + 100 * Tag
-    const dayBonus = Math.min(400 + 100 * s3_state.currentDay, 6000);
-    s3_state.hiddenSP += dayBonus;
-
-    const spThisDay = s3_state.hiddenSP;
-    const goldGain = Math.floor(spThisDay / 100);
-
-    document.getElementById("dayend-message").textContent = getRandomDayEndMessage();
-    document.getElementById("dayend-sp").textContent = spThisDay;
-    document.getElementById("dayend-gold").textContent = goldGain;
-    document.getElementById("dayend-ap").textContent = 1;
-
-    document.getElementById("dayend-modal").style.display = "flex";
+  if (s3_state.dayFinalized) return;
+  const dayBonus = Math.min(400 + 100 * s3_state.currentDay, 6000);
+  s3_state.hiddenSP += dayBonus;
+  const spThisDay = s3_state.hiddenSP;
+  const goldGain = Math.floor(spThisDay / 100);
+  const msgEl = document.getElementById("dayend-message");
+  const spEl = document.getElementById("dayend-sp");
+  const goldEl = document.getElementById("dayend-gold");
+  if (msgEl) msgEl.textContent = getRandomDayEndMessage();
+  if (spEl) spEl.textContent = spThisDay;
+  if (goldEl) goldEl.textContent = goldGain;
+  const modal = document.getElementById("dayend-modal");
+  if (modal) modal.style.display = "flex";
 }
 
 function finalizeDayEnd() {
-    if (s3_state.dayFinalized) return;
+  if (s3_state.dayFinalized) return;
+  const spThisDay = s3_state.hiddenSP;
+  const goldGain = Math.floor(spThisDay / 100);
+  s3_state.totalSP += spThisDay;
+  s3_state.gold += goldGain;
+  s3_state.hiddenSP = 0;
+  s3_state.attributePoints = 1;
+  s3_state.dayFinalized = true;
 
-    const spThisDay = s3_state.hiddenSP;
-    const goldGain = Math.floor(spThisDay / 100);
+  undra.state.day.totalSP   = s3_state.totalSP;
+  undra.state.day.hiddenSP  = s3_state.hiddenSP;
+  undra.state.day.finalized = s3_state.dayFinalized;
+  undra.state.currency.gold = s3_state.gold;
 
-    // SP & Gold gutschreiben
-    s3_state.totalSP += spThisDay;
-    s3_state.gold += goldGain;
-    s3_state.hiddenSP = 0;
+  updateS3SPAndCurrency();
+  checkOffTimelineDay(s3_state.currentDay);
+  activateNextDay(s3_state.currentDay);
+  s3_state.currentDay++;
+  renderTimeline(undra.state);
 
-    // Attributpunkt vergeben
-    s3_state.attributePoints = 1;
-    document.getElementById("s3-attr-points").textContent = 1;
-    updateAttributeArrowsState();
-
-    updateS3SPAndCurrency();
-
-    // Timeline
-    checkOffTimelineDay(s3_state.currentDay);
-    activateNextDay(s3_state.currentDay);
-    s3_state.currentDay++;
-
-    // Tagesabschluss sperren
-    s3_state.dayFinalized = true;
-    freezePage3();
-
-    // Popup schließen
-    document.getElementById("dayend-modal").style.display = "none";
+  const modal = document.getElementById("dayend-modal");
+  if (modal) modal.style.display = "none";
 }
 
-function freezePage3() {
-    // Overlay aktivieren
-    const overlay = document.getElementById("s3-freeze-overlay");
-    overlay.classList.add("active");
 
-    // alles Freezable ausgrauen
-    document.querySelectorAll(".s3-freezable").forEach(el => {
-        el.classList.add("disabled");
-    });
 
-    // Tagesabschluss-Button deaktivieren
-    document.getElementById("btn-s3-dayend").disabled = true;
 
-    // Attributpfeile bleiben aktiv, bis der Spieler einen Punkt gesetzt hat
-}
 
-/* ===================== SEITE 3 – NAVIGATIONSHOOK ===================== */
 
-/* Wenn du von Seite 2 nach Seite 3 wechselst, rufst du initStep3FromStep1 auf */
 
-function goToStep3() {
-    document.getElementById("step-2").classList.remove("active");
-    document.getElementById("step-3").classList.add("active");
-    initStep3FromStep1();
-}
 
-function backToStep2() {
-    document.getElementById("step-3").classList.remove("active");
-    document.getElementById("step-2").classList.add("active");
-}
-  discardItem(category,index){ this.removeItem(category,index); },
-  sortCategory(category){
-    const arr = this.state.items[category];
-    const filled = arr.filter(x=>x.trim()!=="");
-    const empty = arr.filter(x=>x.trim()==="");
-    this.state.items[category] = [...filled,...empty];
-    if(this._onUpdate) this._onUpdate();
-  },
-  init(){ if(this._onUpdate) this._onUpdate(); }
-};
 
-/* INVENTAR UI */
-(function(){
-  const engine = undra.engine.inventory;
-  const small = document.getElementById("inv-small");
-  const medium = document.getElementById("inv-medium");
-  const large = document.getElementById("inv-large");
-  const actionPopup = document.getElementById("invActionPopup");
-  const sellPopup = document.getElementById("invSellPopup");
-
-  let selCat = null, selIndex = null;
-
-  function renderColumn(container, category){
-    if(!container) return;
-    container.innerHTML = "";
-    for(let i=0;i<10;i++){
-      const row = document.createElement("div"); row.className="inv-row";
-      row.style.display="flex"; row.style.gap="6px"; row.style.marginBottom="6px";
-      const input = document.createElement("input"); input.value = engine.state.items[category][i]||""; input.style.flex="1"; input.draggable=true;
-      input.addEventListener("change", ()=> engine.setItem(category,i,input.value));
-      input.addEventListener("dragstart", e=> e.dataTransfer.setData("text/plain", JSON.stringify({category,index:i})));
-      input.addEventListener("dragover", e=> e.preventDefault());
-      input.addEventListener("drop", e=>{
-        e.preventDefault();
-        try{
-          const data = JSON.parse(e.dataTransfer.getData("text/plain"));
-          const srcCat = data.category, srcIndex = data.index;
-          const temp = engine.state.items[srcCat][srcIndex];
-          engine.state.items[srcCat][srcIndex] = engine.state.items[category][i];
-          engine.state.items[category][i] = temp;
-          if(engine._onUpdate) engine._onUpdate();
-        }catch(err){}
-      });
-      const btn = document.createElement("div"); btn.className="inv-action"; btn.style.width="28px"; btn.style.height="28px"; btn.style.cursor="pointer";
-      btn.addEventListener("click", ()=>{ selCat = category; selIndex = i; if(actionPopup) actionPopup.style.display="flex"; });
-      row.appendChild(input); row.appendChild(btn); container.appendChild(row);
-    }
-  }
-
-  engine.onUpdate(()=>{ renderColumn(small,"small"); renderColumn(medium,"medium"); renderColumn(large,"large"); });
-
-  const sortSmallBtn = document.getElementById("sort-small");
-  const sortMediumBtn = document.getElementById("sort-medium");
-  const sortLargeBtn = document.getElementById("sort-large");
-  if (sortSmallBtn) sortSmallBtn.addEventListener("click", ()=> engine.sortCategory("small"));
-  if (sortMediumBtn) sortMediumBtn.addEventListener("click", ()=> engine.sortCategory("medium"));
-  if (sortLargeBtn) sortLargeBtn.addEventListener("click", ()=> engine.sortCategory("large"));
-
-  if(document.getElementById("invCancelBtn")) document.getElementById("invCancelBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; });
-  if(document.getElementById("invSellBtn")) document.getElementById("invSellBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; if(sellPopup) sellPopup.style.display="flex"; });
-  if(document.getElementById("invDiscardBtn")) document.getElementById("invDiscardBtn").addEventListener("click", ()=> { if(selCat!==null && selIndex!==null) engine.discardItem(selCat,selIndex); if(actionPopup) actionPopup.style.display="none"; });
-
-  if(document.getElementById("sellCancelBtn")) document.getElementById("sellCancelBtn").addEventListener("click", ()=> { if(sellPopup) sellPopup.style.display="none"; });
-  if(document.getElementById("sellConfirmBtn")) document.getElementById("sellConfirmBtn").addEventListener("click", ()=>{
-    const g = parseInt(document.getElementById("sellGold").value)||0;
-    const s = parseInt(document.getElementById("sellSilver").value)||0;
-    const c = parseInt(document.getElementById("sellCopper").value)||0;
-    const pin = document.getElementById("sellPin").value||"";
-    engine.sellItem(selCat,selIndex,g,s,c,pin);
-    if(sellPopup) sellPopup.style.display="none";
-  });
-
-  engine.init();
-})();
 
 /* ============================
-TAP TIMELINE + FORTSCHRITT
+TAP TIMELINE (optional)
 ============================ */
 let TAP = 0;
-
-function saveTimeline() {
+function saveTimelineUI() {
   const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
   const state = [];
   boxes.forEach(box => state.push(box.checked ? 1 : 0));
-  localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(state));
-  localStorage.setItem("UNDRA_TAP_VALUE", TAP.toString());
+  try {
+    localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(state));
+    localStorage.setItem("UNDRA_TAP_VALUE", TAP.toString());
+  } catch(e){}
 }
-
-function loadTimeline() {
-  const savedState = JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]");
-  const savedTAP = parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0;
-  TAP = savedTAP;
-  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
-  boxes.forEach((box, i) => {
-    if (savedState[i] === 1) box.checked = true;
-  });
+function loadTimelineUI() {
+  try {
+    const savedState = JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]");
+    const savedTAP = parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0;
+    TAP = savedTAP;
+    const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
+    boxes.forEach((box, i) => { if (savedState[i] === 1) box.checked = true; });
+  } catch(e){}
 }
-
 function updateTapProgress() {
   const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
   const total = boxes.length;
   let done = 0;
   boxes.forEach(b => { if (b.checked) done++; });
-
   const percent = total ? Math.round((done / total) * 100) : 0;
   const bar = document.getElementById("tap-progress-bar");
   const text = document.getElementById("tap-progress-text");
-
   if (bar) bar.style.width = percent + "%";
   if (text) text.textContent = percent + "%";
+}
 
-  if (bar) {
-    if (percent < 30) bar.style.background = "linear-gradient(90deg, #4b5563, #6b7280)";
-    else if (percent < 60) bar.style.background = "linear-gradient(90deg, #166534, #22c55e)";
-    else bar.style.background = "linear-gradient(90deg, #15803d, #4ade80)";
-    bar.style.animation = "none";
-    setTimeout(() => { bar.style.animation = ""; }, 600);
+        window.undra = window.undra || {};
+
+/* ============================
+RENDER ALL – ZENTRALE FUNKTION
+============================ */
+function renderAll() {
+  try {
+    undraApplyStateToPage3();
+    updateVitalsDisplayFromState();
+    renderZonesFromState();
+    renderTimeline(undra.state);
+    undra.engine.inventory.syncFromUndraState();
+    undra.engine.inventory._onUpdate && undra.engine.inventory._onUpdate();
+    undra.engine.currency.set(
+      undra.state.currency.gold,
+      undra.state.currency.silver,
+      undra.state.currency.copper
+    );
+  } catch (e) {
+    console.error("renderAll Fehler:", e);
   }
 }
 
 /* ============================
-FOOTER: SAVE / LOAD SLOTS + HANDLER
+DOM READY
 ============================ */
-function collectFooterData() {
-  return {
-    tp: parseInt(document.getElementById("footer-tp")?.textContent || "0", 10),
-    sp: parseInt(document.getElementById("footer-sp")?.textContent || "0", 10),
-    currency: {
-      gold: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.gold || 0 : 0,
-      silver: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.silver || 0 : 0,
-      copper: (undra && undra.engine && undra.engine.currency) ? undra.engine.currency.copper || 0 : 0
-    },
-    inventory: (undra && undra.engine && undra.engine.inventory) ? JSON.parse(JSON.stringify(undra.engine.inventory.state.items)) : { small: [], medium: [], large: [] },
-    tapState: JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]"),
-    tapValue: parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0
-  };
-}
-
-function applyFooterData(data) {
-  if (!data) return;
-
-  const tpEl = document.getElementById("footer-tp");
-  const spEl = document.getElementById("footer-sp");
-  if (tpEl) tpEl.textContent = data.tp ?? 0;
-  if (spEl) spEl.textContent = data.sp ?? 0;
-
-  if (data.currency && undra && undra.engine && undra.engine.currency) {
-    undra.engine.currency.gold = data.currency.gold || 0;
-    undra.engine.currency.silver = data.currency.silver || 0;
-    undra.engine.currency.copper = data.currency.copper || 0;
-    if (typeof undra.engine.currency.render === "function") undra.engine.currency.render();
-  }
-
-  if (data.inventory && undra && undra.engine && undra.engine.inventory) {
-    undra.engine.inventory.state.items = JSON.parse(JSON.stringify(data.inventory));
-    if (typeof undra.engine.inventory._onUpdate === "function") undra.engine.inventory._onUpdate();
-  }
-
-  if (Array.isArray(data.tapState)) {
-    localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(data.tapState));
-    localStorage.setItem("UNDRA_TAP_VALUE", String(data.tapValue || 0));
-    if (typeof updateTapProgress === "function") updateTapProgress();
-  }
-}
-
-function saveToSlot(slot, data) {
-  if (!slot) throw new Error("Kein Slot angegeben");
-  localStorage.setItem("UNDRA_SLOT_" + slot, JSON.stringify(data));
-}
-
-function loadFromSlot(slot) {
-  if (!slot) throw new Error("Kein Slot angegeben");
-  const raw = localStorage.getItem("UNDRA_SLOT_" + slot);
-  return raw ? JSON.parse(raw) : null;
-}
-
-/* Button handlers with confirmations */
-document.addEventListener("click", (e) => {
-  if (e.target && e.target.id === "btn-save") {
-    const slot = document.getElementById("save-slot").value;
-    if (!slot) return alert("Bitte Slot wählen!");
-    const existing = loadFromSlot(slot);
-    const data = collectFooterData();
-    if (existing) {
-      if (!confirm("Slot ist belegt. Überschreiben?")) return;
-    }
-    saveToSlot(slot, data);
-    alert("Daten gespeichert.");
-  }
-
-  if (e.target && e.target.id === "btn-load") {
-    const slot = document.getElementById("load-slot").value;
-    if (!slot) return alert("Bitte Slot wählen!");
-    const data = loadFromSlot(slot);
-    if (!data) return alert("Slot ist leer.");
-    applyFooterData(data);
-    alert("Daten geladen.");
-  }
-});
-
-/* End day */
-<div id="step-3" class="step-content">
-
-    <!-- Freeze-Overlay für Tagesabschluss -->
-    <div id="s3-freeze-overlay"></div>
-
-    <!-- 1. Kopfzeile -->
-    <div class="s3-panel s3-freezable" id="s3-header-panel">
-        <h2 class="s3-header-title" id="s3-header-name">Seite 3 – Heldenübersicht</h2>
-    </div>
-
-    <!-- 2. Merkmale, Portrait, SP -->
-    <div class="s3-panel s3-freezable">
-        <div class="s3-row-flex">
-            <!-- Portrait (übernommen aus Seite 1) -->
-            <div class="s3-col-fixed">
-                <div id="s3-portrait-mirror" style="width:150px;height:200px;border:2px solid gold;background:#000;margin-bottom:4px;overflow:hidden;"></div>
-            </div>
-            <!-- Merkmale + SP -->
-            <div class="s3-col">
-                <div class="s3-hero-summary">
-                    <b>Name:</b> <span id="s3-name">-</span><br>
-                    <b>Titel:</b> <span id="s3-title">-</span><br><br>
-                    <b>Rasse:</b> <span id="s3-race">-</span><br>
-                    <b>Untergruppe:</b> <span id="s3-sub">-</span><br>
-                    <b>Profession:</b> <span id="s3-prof">-</span><br><br>
-                    <b>Spezialfähigkeit:</b> <span id="s3-spec">-</span>
-                </div>
-                <div class="s3-sp-box">
-                    SP gesamt: <span class="s3-sp-value" id="s3-sp-total">0</span><br>
-                    Tages-SP (versteckt, für Abschluss): <span id="s3-sp-hidden">0</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. Attribute -->
-    <div class="s3-panel s3-freezable" id="s3-attr-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-            <div><b>Attribute</b></div>
-            <div>Verfügbare Attributpunkte: <span id="s3-attr-points">0</span></div>
-        </div>
-        <div class="s3-attr-grid" id="s3-attr-grid"></div>
-    </div>
-
-    <!-- 4. Vitalwerte -->
-    <div class="s3-panel s3-freezable">
-        <div><b>Vitalwerte</b></div>
-        <div class="s3-vital-grid" id="s3-vital-grid">
-            <!-- wird per JS gefüllt -->
-        </div>
-    </div>
-
-    <!-- 5. Kampfblock / Textfeld / Trefferzonen / Diagramm / Figur / Orb -->
-    <div class="s3-panel s3-freezable">
-        <div><b>Kampf & Trefferzonen</b></div>
-        <div class="s3-combat-layout">
-            <!-- links: Kampfwerte + Textfeld + Trefferzonen -->
-            <div>
-                <div class="s3-combat-grid" id="s3-combat-grid">
-                    <!-- Angriffswerte per JS -->
-                </div>
-                <div style="margin-top:6px;">
-                    <small>Kampfnotizen</small><br>
-                    <textarea class="s3-txtarea" id="s3-combat-notes"></textarea>
-                </div>
-                <div style="margin-top:6px;">
-                    <small>Trefferzonen</small>
-                    <div class="s3-hitzones-grid" id="s3-hitzones-grid">
-                        <div class="s3-hitzone-cell">Kopf</div>
-                        <div class="s3-hitzone-cell">Torso</div>
-                        <div class="s3-hitzone-cell">Arme</div>
-                        <div class="s3-hitzone-cell">Beine</div>
-                        <div class="s3-hitzone-cell">Hände</div>
-                        <div class="s3-hitzone-cell">Füße</div>
-                    </div>
-                </div>
-            </div>
-            <!-- rechts: Diagramm, Figur, Orb -->
-            <div>
-                <div class="s3-diagram-box">Trefferzonen-Diagramm (Platzhalter)</div>
-                <div class="s3-figure-box" style="margin-top:6px;">Figur (Platzhalter)</div>
-                <div class="s3-orb-box" style="margin-top:6px;">Orb (Platzhalter)</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. Fähigkeiten (60 Stück) -->
-    <div class="s3-panel s3-freezable">
-        <div class="s3-skill-section-title">Basisfähigkeiten</div>
-        <div class="s3-skill-grid" id="s3-skill-base"></div>
-
-        <div class="s3-skill-section-title" style="margin-top:8px;">Rassenfähigkeiten</div>
-        <div class="s3-skill-grid" id="s3-skill-race"></div>
-
-        <div class="s3-skill-section-title" style="margin-top:8px;">Professionsfähigkeiten</div>
-        <div class="s3-skill-grid" id="s3-skill-prof"></div>
-    </div>
-
-    <!-- 7. Inventar -->
-    <div class="s3-panel s3-freezable">
-        <div><b>Inventar</b></div>
-        <div class="s3-inventory-grid" id="s3-inventory-grid">
-            <!-- 32 Slots -->
-        </div>
-    </div>
-
-    <!-- 8. Prozentanzeige -->
-    <div class="s3-panel s3-freezable">
-        <div><b>Fortschritt</b></div>
-        <div class="s3-percent-grid">
-            <div class="s3-percent-row">
-                <span>Charakterentwicklung</span>
-                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-char" style="width:10%;"></div></div>
-            </div>
-            <div class="s3-percent-row">
-                <span>Fähigkeiten</span>
-                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-skills" style="width:10%;"></div></div>
-            </div>
-            <div class="s3-percent-row">
-                <span>Vitalwerte</span>
-                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-vital" style="width:10%;"></div></div>
-            </div>
-            <div class="s3-percent-row">
-                <span>Tagesfortschritt</span>
-                <div class="s3-progress-bar"><div class="s3-progress-fill" id="s3-pc-day" style="width:0%;"></div></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 9. Timeline (60 Tage) -->
-    <div class="s3-panel s3-freezable">
-        <div><b>Timeline – 60 Tage</b></div>
-        <div class="s3-timeline-grid" id="s3-timeline-top"></div>
-        <div class="s3-timeline-grid" id="s3-timeline-bottom" style="margin-top:4px;"></div>
-    </div>
-
-    <!-- 10. Footer -->
-    <div id="s3-footer">
-        <div class="s3-footer-group">
-            <button class="s3-footer-btn" id="btn-s3-load">Charakter laden</button>
-        </div>
-        <div class="s3-footer-group">
-            <div class="s3-currency-box">
-                <span><span class="s3-currency-label">Gold:</span> <span id="s3-gold">0</span></span>
-                <span><span class="s3-currency-label">Silber:</span> <span id="s3-silver">0</span></span>
-                <span><span class="s3-currency-label">Kupfer:</span> <span id="s3-copper">0</span></span>
-            </div>
-        </div>
-        <div class="s3-footer-group">
-            <button class="s3-footer-btn" id="btn-s3-save">Zwischenspeichern</button>
-            <button class="s3-footer-btn" id="btn-s3-dayend">Tagesabschluss</button>
-        </div>
-    </div>
-
-</div>
-
-<!-- Tagesabschluss-Popup -->
-<div id="dayend-modal">
-    <div id="dayend-box">
-        <div class="dayend-msg" id="dayend-message"></div>
-        <div class="dayend-row">
-            <span>SP dieses Tages:</span><span id="dayend-sp">0</span>
-        </div>
-        <div class="dayend-row">
-            <span>Gold-Gewinn:</span><span id="dayend-gold">0</span>
-        </div>
-        <div class="dayend-row">
-            <span>Attributspunkte:</span><span id="dayend-ap">1</span>
-        </div>
-        <div style="margin-top:10px;">
-            <button class="s3-footer-btn" id="btn-dayend-confirm">Beenden</button>
-        </div>
-    </div>
-</div>
-/* TP logic (attribute arrows) */
-let TP = 5;
 document.addEventListener("DOMContentLoaded", () => {
-  const tpEl = document.getElementById("footer-tp");
-  if (tpEl) tpEl.textContent = TP;
-  document.querySelectorAll(".attr-arrow").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (TP <= 0 || btn.disabled) return;
-      const slot = btn.closest(".attribute-slot");
-      const levelEl = slot.querySelector(".attr-level");
-      levelEl.textContent = parseInt(levelEl.textContent) + 1;
-      TP--;
-      const tpEl2 = document.getElementById("footer-tp");
-      if (tpEl2) tpEl2.textContent = TP;
-    });
-  });
-});
+  // Inventory UI
+  try {
+    const engine = undra.engine.inventory;
+    const small = document.getElementById("inv-small");
+    const medium = document.getElementById("inv-medium");
+    const large = document.getElementById("inv-large");
+    const actionPopup = document.getElementById("invActionPopup");
+    const sellPopup = document.getElementById("invSellPopup");
+    let selCat = null, selIndex = null;
 
-/* Timeline init */
-document.addEventListener("DOMContentLoaded", () => {
-  const row1 = document.getElementById("tap-row-1");
-  const row2 = document.getElementById("tap-row-2");
-  if (row1 && row2) {
-    for (let i = 1; i <= 60; i++) {
-      const box = document.createElement("div");
-      box.className = "tap-box";
-      box.style.width = "90px";
-      box.style.display = "flex";
-      box.style.alignItems = "center";
-      box.style.gap = "8px";
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.dataset.day = i;
-      const label = document.createElement("label");
-      label.textContent = "Tag " + i;
-      box.appendChild(checkbox);
-      box.appendChild(label);
-      if (i <= 30) row1.appendChild(box);
-      else row2.appendChild(box);
-      checkbox.addEventListener("change", () => { saveTimeline(); updateTapProgress(); });
-    }
-  }
-  loadTimeline();
-  updateTapProgress();
-});
-
-const tapFinishBtn = document.getElementById("tap-finish-btn");
-if (tapFinishBtn) {
-  tapFinishBtn.addEventListener("click", () => {
-    const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
-    for (let i = 0; i < boxes.length; i++) {
-      if (!boxes[i].checked) {
-        boxes[i].checked = true;
-        TAP++;
-        boxes[i].closest(".tap-box").classList.add("glow");
-        setTimeout(() => boxes[i].closest(".tap-box").classList.remove("glow"), 600);
-        saveTimeline();
-        updateTapProgress();
-        return;
+    function renderColumn(container, category){
+      if(!container) return;
+      container.innerHTML = "";
+      for(let i=0;i<10;i++){
+        const row = document.createElement("div");
+        row.className="inv-row";
+        const input = document.createElement("input");
+        input.value = engine.state.items[category][i]||"";
+        input.style.flex="1";
+        input.addEventListener("change", ()=> engine.setItem(category,i,input.value));
+        input.addEventListener("dragstart", e=> e.dataTransfer.setData("text/plain", JSON.stringify({category,index:i})));
+        input.addEventListener("dragover", e=> e.preventDefault());
+        input.addEventListener("drop", e=>{
+          e.preventDefault();
+          try{
+            const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+            const srcCat = data.category, srcIndex = data.index;
+            const temp = engine.state.items[srcCat][srcIndex];
+            engine.state.items[srcCat][srcIndex] = engine.state.items[category][i];
+            engine.state.items[category][i] = temp;
+            engine.syncToUndraState();
+            if(engine._onUpdate) engine._onUpdate();
+          }catch(err){}
+        });
+        const btn = document.createElement("div");
+        btn.className="inv-action";
+        btn.style.width="28px";
+        btn.style.height="28px";
+        btn.style.cursor="pointer";
+        btn.addEventListener("click", ()=>{
+          selCat = category;
+          selIndex = i;
+          if(actionPopup) actionPopup.style.display="flex";
+        });
+        row.appendChild(input);
+        row.appendChild(btn);
+        container.appendChild(row);
       }
     }
-    console.log("Alle 60 Tage abgeschlossen.");
-  });
-}
 
-/* Ensure currency render initial */
-if (undra && undra.engine && undra.engine.currency) undra.engine.currency.render();
+    
+    
+    
+    
+    engine.onUpdate(()=> {
+      renderColumn(small,"small");
+      renderColumn(medium,"medium");
+      renderColumn(large,"large");
+    });
+    engine.init();
 
-/* ============================
-RÜSTUNG / ZONEN (Handlers)
-============================ */
-const stageColors = {
-  disabled: "#4b5563",
-  full: "#e8d9f0",
-  yellow: "#fbbf24",
-  orange: "#f59e0b",
-  red: "#ef4444"
-};
+    const sortSmallBtn = document.getElementById("sort-small");
+    const sortMediumBtn = document.getElementById("sort-medium");
+    const sortLargeBtn = document.getElementById("sort-large");
+    if (sortSmallBtn) sortSmallBtn.addEventListener("click", ()=> engine.sortCategory("small"));
+    if (sortMediumBtn) sortMediumBtn.addEventListener("click", ()=> engine.sortCategory("medium"));
+    if (sortLargeBtn) sortLargeBtn.addEventListener("click", ()=> engine.sortCategory("large"));
 
-let zoneState = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
-let zoneArmor = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
-let zoneMaxArmor = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
-let zoneArmorType = {1:null,2:null,3:null,4:null,5:null,6:null,7:null,8:null};
+    if(document.getElementById("invCancelBtn")) document.getElementById("invCancelBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; });
+    if(document.getElementById("invSellBtn")) document.getElementById("invSellBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; if(sellPopup) sellPopup.style.display="flex"; });
+    if(document.getElementById("invDiscardBtn")) document.getElementById("invDiscardBtn").addEventListener("click", ()=> {
+      if(selCat!==null && selIndex!==null) engine.discardItem(selCat,selIndex);
+      if(actionPopup) actionPopup.style.display="none";
+    });
 
-let gold = 100;
-let selectedZone = 1;
-let popupMode = null;
-
-window.applyVitalDamage = function(dmg) {
-  const c = (typeof loadCharacterFromStorage === "function") ? loadCharacterFromStorage() : { hp:100 };
-  c.hp = Math.max(0, (c.hp ?? 100) - dmg);
-  if (typeof saveCharacter === "function") saveCharacter(c);
-  if (typeof updateVitalsDisplay === "function") updateVitalsDisplay(c);
-};
-
-function getStageColor(zone) {
-  const max = zoneMaxArmor[zone];
-  const cur = zoneArmor[zone];
-  if (!max || max === 0) return stageColors.disabled;
-  if (cur === max) return stageColors.full;
-  const pct = (cur / max) * 100;
-  if (pct >= 75) return stageColors.yellow;
-  if (pct >= 50) return stageColors.orange;
-  if (pct > 0) return stageColors.red;
-  return stageColors.disabled;
-}
-
-function applyDamage() {
-  const input = document.getElementById("damageInput");
-  const dmg = input ? parseInt(input.value) : 0;
-  if (!dmg || dmg <= 0) return;
-  const zone = selectedZone;
-  if (!zoneMaxArmor[zone] || zoneMaxArmor[zone] === 0) {
-    window.applyVitalDamage(dmg);
-    renderZones(); updateFigureColors(); return;
-  }
-  if (dmg <= zoneArmor[zone]) zoneArmor[zone] -= dmg;
-  else { const rest = dmg - zoneArmor[zone]; zoneArmor[zone] = 0; zoneMaxArmor[zone] = 0; zoneArmorType[zone] = null; window.applyVitalDamage(rest); }
-  renderZones(); updateFigureColors();
-}
-
-function openArmorPopup(){
-  const zone = selectedZone; let html = "";
-  if(!zoneMaxArmor[zone] || zoneMaxArmor[zone] === 0){
-    html += `<p>Zone ist deaktiviert.</p><p>Kaufpreis: <b>10 Gold</b></p><p>Rüstungsart wählen:</p>`;
-    html += `<select id="armorTypeSelect"><option value="stoff">Stoff (+1)</option><option value="leder">Leder (+3)</option><option value="stahl">Stahl (+8)</option></select>`;
-    popupMode = "buy";
-  } else { html += `<p>Rüstung: ${zoneArmor[zone]} / ${zoneMaxArmor[zone]}</p><p>Reparatur: <b>5 Gold</b></p>`; popupMode = "repair"; }
-  const titleEl = document.getElementById("popupTitle"); const contentEl = document.getElementById("popupContent"); const popupEl = document.getElementById("armorPopup");
-  if(titleEl) titleEl.innerText = "Zone " + zone; if(contentEl) contentEl.innerHTML = html; if(popupEl) popupEl.style.display = "flex";
-}
-
-function closeArmorPopup(){ const popupEl = document.getElementById("armorPopup"); if(popupEl) popupEl.style.display = "none"; }
-
-function confirmArmorAction(){
-  const zone = selectedZone;
-  if(popupMode === "buy"){
-    if(gold < 10) return alert("Nicht genug Gold!");
-    gold -= 10;
-    const typeEl = document.getElementById("armorTypeSelect"); const type = typeEl ? typeEl.value : "stoff";
-    const bonus = type === "stoff" ? 1 : type === "leder" ? 3 : 8;
-    zoneMaxArmor[zone] = 5 + bonus; zoneArmor[zone] = zoneMaxArmor[zone]; zoneArmorType[zone] = type;
-  } else {
-    if(gold < 5) return alert("Nicht genug Gold!");
-    gold -= 5; zoneArmor[zone] = zoneMaxArmor[zone];
-  }
-  closeArmorPopup(); renderZones(); updateFigureColors();
-}
-
-function renderZones(){
-  const listEl = document.getElementById("zoneList"); if(!listEl) return;
-  let html = `<p><b>Gold:</b> ${gold}</p>`;
-  for(let z=1; z<=8; z++){
-    const color = getStageColor(z);
-    html += `<div class="zone-box"><b>${z}. Zone</b><span style="display:inline-block;width:10px;height:10px;background:${color};border-radius:2px;margin-left:4px;"></span><br>Rüstung: ${zoneArmor[z]} / ${zoneMaxArmor[z]}</div>`;
-  }
-  listEl.innerHTML = html;
-}
-
-function updateFigureColors(){
-  for(let z=1; z<=8; z++){
-    const color = getStageColor(z);
-    const el = document.getElementById(`zone${z}`);
-    if(el) el.setAttribute("fill", color);
-    if(el) el.setAttribute("stroke", (z===selectedZone) ? "#fff" : "#555");
-  }
-  document.querySelectorAll("#zoneSelectGrid div").forEach(el => {
-    const val = parseInt(el.getAttribute("data-value"));
-    el.classList.toggle("active-zone", val === selectedZone);
-  });
-  document.querySelectorAll(".armor-zone").forEach(z => z.classList.remove("active-zone-svg"));
-  const selEl = document.getElementById(`zone${selectedZone}`); if(selEl) selEl.classList.add("active-zone-svg");
-}
-
-/* Attach zone click handlers safely after DOM ready */
-document.addEventListener("DOMContentLoaded", ()=>{
-  document.querySelectorAll("#zoneSelectGrid div").forEach(el=>{
-    el.addEventListener("click", ()=>{ selectedZone = parseInt(el.getAttribute("data-value")); updateFigureColors(); });
-  });
-  for(let z=1; z<=8; z++){
-    const el = document.getElementById(`zone${z}`);
-    if(el) el.addEventListener("click", ()=>{ selectedZone = z; updateFigureColors(); });
+    if(document.getElementById("sellCancelBtn")) document.getElementById("sellCancelBtn").addEventListener("click", ()=> { if(sellPopup) sellPopup.style.display="none"; });
+    if(document.getElementById("sellConfirmBtn")) document.getElementById("sellConfirmBtn").addEventListener("click", ()=>{
+      const g = parseInt(document.getElementById("sellGold").value)||0;
+      const s = parseInt(document.getElementById("sellSilver").value)||0;
+      const c = parseInt(document.getElementById("sellCopper").value)||0;
+      const pin = document.getElementById("sellPin").value||"";
+      engine.sellItem(selCat,selIndex,g,s,c,pin);
+      if(sellPopup) sellPopup.style.display="none";
+    });
+  } catch(e){
+    console.warn("Inventory UI init skipped:", e);
   }
 
-  /* Init character/vitals if functions exist */
-  const c = (typeof loadCharacterFromStorage === "function") ? loadCharacterFromStorage() : { hp:100, profession:"Barbar", sp:20000, attributes:{}, vitalBonus:{LE:0,RUEST:0,DYN:0,GG:0,TC:0} };
-  try { renderVitalBonusCrystals(c); } catch(e){}
-  try { setupVitalBonusHandlers(c, updateVitalsDisplay); } catch(e){}
-  try { updateVitalsDisplay(c); } catch(e){}
-  renderZones(); updateFigureColors();
+  // TAP timeline UI
+  try {
+    const row1 = document.getElementById("tap-row-1");
+    const row2 = document.getElementById("tap-row-2");
+    if (row1 && row2) {
+      for (let i = 1; i <= 60; i++) {
+        const box = document.createElement("div");
+        box.className = "tap-box";
+        box.style.display = "flex";
+        box.style.alignItems = "center";
+        box.style.gap = "8px";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.dataset.day = i;
+        const label = document.createElement("label");
+        label.textContent = "Tag " + i;
+        box.appendChild(checkbox);
+        box.appendChild(label);
+        (i <= 30 ? row1 : row2).appendChild(box);
+        checkbox.addEventListener("change", () => { saveTimelineUI(); updateTapProgress(); });
+      }
+    }
+    loadTimelineUI();
+    updateTapProgress();
+  } catch(e){}
 
-  /* Anmerkung counter */
-  const an = document.getElementById("anmerkungText"); const ac = document.getElementById("anmerkungCounter");
-  if(an && ac){ an.addEventListener("input", ()=> { ac.textContent = `${an.value.length} / 500`; }); }
+  // Armor zone click wiring
+  try {
+    document.querySelectorAll("#zoneSelectGrid div").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        const v = parseInt(el.getAttribute("data-value"));
+        if(!isNaN(v)){
+          undra.state.armor.selected = v;
+          renderZonesFromState();
+        }
+      });
+    });
+    for(let z=1; z<=8; z++){
+      const el = document.getElementById(`zone${z}`);
+      if(el) el.addEventListener("click", ()=>{
+        undra.state.armor.selected = z;
+        renderZonesFromState();
+      });
+    }
+  } catch(e){}
+
+ 
 });
 
-/* SAFEGUARDS: ensure demo data and timeline exist */
-if(!localStorage.getItem("demoCharacter")) localStorage.setItem("demoCharacter", JSON.stringify({name:"Testheld",profession:"Barbar",race:"Mensch",class:"Krieger",sp:20000,attributes:{},vitalBonus:{LE:0,RUEST:0,DYN:0,GG:0,TC:0},hp:100}));
-if(!localStorage.getItem("UNDRA_TAP_STATE")){ localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(Array(60).fill(0))); localStorage.setItem("UNDRA_TAP_VALUE","0"); }
 
-/* Ensure inventory render once DOM loaded */
-window.addEventListener("load", ()=>{ if(undra && undra.engine && undra.engine.inventory && typeof undra.engine.inventory._onUpdate === "function") undra.engine.inventory._onUpdate(); });</script>
 
+
+
+
+
+
+
+
+/* ============================
+CLOUD SAVE / LOAD
+============================ */
+async function savePage3ToCloud() {
+  const id = `undra_${(undra.state.meta.name || "namenlos")
+    .trim().toLowerCase()}_${(undra.state.meta.title || "ohne")
+    .trim().toLowerCase()}`.replace(/\s+/g, "_");
+
+  try {
+    const res = await fetch(`https://undra.djdrear.workers.dev/save/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(undra.state)
+    });
+
+    if (!res.ok) {
+      alert("Fehler beim Cloud‑Speichern.");
+      console.error(await res.text());
+      return;
+    }
+
+    alert("Charakter erfolgreich gespeichert.");
+  } catch (err) {
+    console.error(err);
+    alert("Netzwerkfehler beim Cloud‑Speichern.");
+  }
+}
+
+async function loadPage3FromCloud(name, title) {
+  const id = `undra_${(name || "namenlos")
+    .trim().toLowerCase()}_${(title || "ohne")
+    .trim().toLowerCase()}`.replace(/\s+/g, "_");
+
+  try {
+    const res = await fetch(`https://undra.djdrear.workers.dev/load/${id}`);
+
+    if (!res.ok) {
+      alert("Charakter nicht gefunden.");
+      console.error(await res.text());
+      return;
+    }
+
+    const data = await res.json();
+
+    if (!data || typeof data !== "object" || !data.meta || !data.meta.name) {
+      alert("Ungültige Cloud‑Daten.");
+      console.error("Geladene Daten:", data);
+      return;
+    }
+
+    undra.state = JSON.parse(JSON.stringify(data));
+    renderAll();
+
+    alert(`Charakter "${undra.state.meta.name}" geladen.`);
+  } catch (err) {
+    console.error(err);
+    alert("Fehler beim Cloud‑Laden.");
+  }
+}
+
+/* ============================
+FOOTER BUTTONS & POPUP
+============================ */
+document.getElementById("uf-load").addEventListener("click", () => {
+  document.getElementById("uf-load-popup-bg").style.display = "flex";
+});
+
+document.getElementById("uf-load-cancel").addEventListener("click", () => {
+  document.getElementById("uf-load-popup-bg").style.display = "none";
+});
+
+document.getElementById("uf-load-confirm").addEventListener("click", () => {
+  const name  = document.getElementById("uf-load-name").value.trim();
+  const title = document.getElementById("uf-load-title").value.trim();
+
+  if (!name) {
+    alert("Bitte einen Namen eingeben.");
+    return;
+  }
+
+  document.getElementById("uf-load-popup-bg").style.display = "none";
+  loadPage3FromCloud(name, title);
+});
+
+document.getElementById("uf-save").addEventListener("click", () => {
+  savePage3ToCloud();
+});
+
+/* ============================
+EXPOSE (optional)
+============================ */
+window.undraApplyStateToPage3 = undraApplyStateToPage3;
+window.undraUpdateVitals = updateVitalsDisplayFromState;
+window.undraRenderZones = renderZonesFromState;
+window.undraRenderAll = renderAll;
+
+</script>
 </body>
 </html>
