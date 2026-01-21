@@ -1048,6 +1048,13 @@ VITALWERTE – BOXEN (Bloodcore R2)
         inset 0 0 4px rgba(255,255,255,0.08);
 }
 
+
+
+
+
+
+
+
 /* ============================
 VITALWERTE – TITEL (Bloodcore R2)
 ============================ */
@@ -1228,6 +1235,13 @@ AUFWERTUNGEN – OPTIMIERTE ABSTÄNDE (Bloodcore R2)
     transition: 0.2s;
 }
 
+
+
+
+
+
+
+
 .vb-crystal.active {
     background: linear-gradient(90deg, #ffe9a8, #e2b44a);
     box-shadow:
@@ -1366,6 +1380,13 @@ RECHTER BLOCK – RÜSTUNGSSYSTEM (Bloodcore R2)
         inset 0 0 10px rgba(255, 0, 40, 0.25),
         inset 0 0 4px rgba(255,255,255,0.08);
 }
+
+
+
+
+
+
+
 
 /* ============================
 RÜSTUNGSSYSTEM – INNENBLOCK
@@ -1730,6 +1751,13 @@ INVENTAR, TIMELINE, FOOTER – Bloodcore R2
     width:360px;
     color:#ffe7c2;
 }
+
+
+
+
+
+
+
 
 .uf-popup-title {
     margin-top:0;
@@ -2232,15 +2260,6 @@ KAMPF + RÜSTUNGSSYSTEM
                              Z"
                           fill="#0d0d0d" stroke="#3a1f47" stroke-width="2"/>
 
-
-
-
-
-
-
-
-
-
                     <!-- Kopf -->
                     <circle id="zone1" cx="60" cy="35" r="22"
                             class="zone-click armor-zone"/>
@@ -2364,7 +2383,7 @@ POPUP: Cloud-Laden (Name + Zuname)
 
     <div style="margin-top:12px; display:flex; justify-content:space-between;">
       <button id="uf-load-cancel" class="uf-btn">Abbrechen</button>
-      <button id="uf-load-confirm" class="uf-btn">Laden</button>
+      <button onclick="triggerLoadChar()">Charakter laden</button>
     </div>
   </div>
 </div>
@@ -2376,7 +2395,7 @@ UNDRA FOOTER (NEU)
 <div id="undra-footer">
 
   <!-- LINKS: Charakter Laden -->
-  <button id="uf-load" class="uf-btn">Charakter Laden</button>
+  <button onclick="openLoadPopup()" class="uf-btn">Charakter laden</button>
 
   <!-- MITTE: SP & ATB -->
   <div id="uf-center">
@@ -2395,622 +2414,320 @@ UNDRA FOOTER (NEU)
 
   <!-- RECHTS: Speichern -->
   <button id="uf-save" class="uf-btn">Speichern</button>
-
+  
 </div>
 
-
 <script>
-    
 /* ============================
-TIMELINE
+STATE & LOCAL STORAGE (char‑basiert)
 ============================ */
-function renderTimeline(S) {
-  const top = document.getElementById("s3-timeline-top");
-  const bottom = document.getElementById("s3-timeline-bottom");
-  if (!top || !bottom) return;
-  top.innerHTML = "";
-  bottom.innerHTML = "";
-  for (let i = 1; i <= 60; i++) {
-    const d = document.createElement("div");
-    d.className = "s3-day-btn";
-    d.textContent = i;
-    if (i === S.timeline.story.currentDay) d.classList.add("active");
-    if (S.timeline.story.checked && S.timeline.story.checked.includes(i)) d.classList.add("checked");
-    (i <= 30 ? top : bottom).appendChild(d);
-  }
-}
+window.char = window.char || {};   // char global verfügbar machen
 
-function checkOffTimelineDay(day) {
-  if (!undra.state.timeline.story.checked) undra.state.timeline.story.checked = [];
-  if (!undra.state.timeline.story.checked.includes(day)) undra.state.timeline.story.checked.push(day);
-  renderTimeline(undra.state);
-}
-function activateNextDay(day) {
-  undra.state.timeline.story.currentDay = Math.min(60, day + 1);
-  renderTimeline(undra.state);
-}
-
-/* ============================
-META + ATTR + VITALS + ARMOR + INVENTAR → PAGE 3
-============================ */
-function undraApplyStateToPage3() {
-  const S = undra.state;
-  const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt ?? ""; };
-
-  // META
-  setText("s3-name", S.meta.name);
-  setText("s3-title", S.meta.title);
-  setText("s3-race", S.meta.race);
-  setText("s3-sub", S.meta.subrace);
-  setText("s3-prof", S.meta.profession);
-  setText("s3-spec", S.meta.special);
-
-  const portrait = document.getElementById("s3-portrait-mirror");
-  if (portrait) {
-    portrait.innerHTML = S.meta.portrait
-      ? `<img src="${S.meta.portrait}" style="width:100%;height:100%;object-fit:cover;">`
-      : "";
-  }
-
-  // CURRENCY
-  setText("s3-gold", S.currency.gold);
-  setText("s3-silver", S.currency.silver);
-  setText("s3-copper", S.currency.copper);
-
-  // SP / DAY
-  setText("s3-sp-total", S.day.totalSP);
-  setText("s3-sp-hidden", S.day.hiddenSP);
-
-  // ATTRIBUTES
-  const attrGrid = document.getElementById("s3-attr-grid");
-  if (attrGrid) {
-    attrGrid.innerHTML = "";
-    for (const key in S.attributes) {
-      const row = document.createElement("div");
-      row.className = "s3-attr-row";
-      row.textContent = `${key}: ${S.attributes[key]}`;
-      attrGrid.appendChild(row);
+function loadFromLocal() {
+  try {
+    const raw = localStorage.getItem("char");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        window.char = parsed;
+        return;
+      }
     }
+  } catch(e){
+    console.warn("Lokale Daten ungültig, Fallback.");
   }
 
-  // VITALS (nur Anzeige, Berechnung separat)
-  const vitGrid = document.getElementById("s3-vital-grid");
-  if (vitGrid) {
-    vitGrid.innerHTML = "";
-    for (const key in S.vitals) {
-      const row = document.createElement("div");
-      row.className = "s3-vital-row";
-      row.textContent = `${key}: ${S.vitals[key]}`;
-      vitGrid.appendChild(row);
-    }
-  }
-
-  // ARMOR ZONES (Liste)
-  const hitGrid = document.getElementById("s3-hitzones-grid");
-  if (hitGrid) {
-    hitGrid.innerHTML = "";
-    for (let i = 1; i <= 8; i++) {
-      const z = S.armor.zones[i] || { cur: 0, max: 0, type: null };
-      const d = document.createElement("div");
-      d.className = "s3-hitzone-cell";
-      d.textContent = `Zone ${i}: ${z.cur}/${z.max}`;
-      hitGrid.appendChild(d);
-    }
-  }
-
-  // INVENTORY (nur Anzeige)
-  const inv = document.getElementById("s3-inventory-grid");
-  if (inv) {
-    inv.innerHTML = "";
-    const all = [...S.inventory.small, ...S.inventory.medium, ...S.inventory.large];
-    all.forEach(item => {
-      const slot = document.createElement("div");
-      slot.className = "s3-inv-slot";
-      slot.textContent = item || "-";
-      inv.appendChild(slot);
-    });
-  }
-
-  renderTimeline(S);
-}
-
-/* ============================
-VITALS
-============================ */
-const magicalClasses = ["Feuermagier","Druide","Necromant","Hexer","Schamane","Illusionist","Alchemist","Kampfmagier","Drachendisciple"];
-const paladinClass = "Paladin";
-
-function getBonusType(profession) {
-  if (profession === paladinClass) return "SGP";
-  if (magicalClasses.includes(profession)) return "AS";
-  return "AU";
-}
-function getSpCostForLevel(level) { return level * 1000; }
-function getLinearBonus(level) { return level * 10; }
-function getPercentBonus(level) { return level * 10; }
-
-function ensureVitalBonusStructure(c) {
-  if (!c.vitalBonus) c.vitalBonus = { LE:0, RUEST:0, DYN:0, GG:0, TC:0 };
-}
-
-function applyVitalBonusToVitals(base, c) {
-  const vb = c.vitalBonus || {};
-  const dynType = getBonusType(c.meta.profession);
-  const r = { ...base };
-  r.hp = (c.hp ?? r.hp) + getLinearBonus(vb.LE || 0);
-  r.armorTotal += getLinearBonus(vb.RUEST || 0);
-  if (dynType === "AU") r.stamina = (r.stamina || 0) + getLinearBonus(vb.DYN || 0);
-  else if (dynType === "AS") r.ae = (r.ae || 0) + getLinearBonus(vb.DYN || 0);
-  else r.sgp = (r.sgp || 0) + getLinearBonus(vb.DYN || 0);
-  if ((vb.GG || 0) > 0) r.gg = Math.round(r.gg * (1 + getPercentBonus(vb.GG)/100));
-  if ((vb.TC || 0) > 0) r.tc = Math.round(r.tc * (1 + getPercentBonus(vb.TC)/100));
-  return r;
-}
-
-function calculateBaseVitals(attrs) {
-  return { hp: 100, armorTotal: 10, stamina: 50, ae: 0, sgp: 20, gg: 100, tc: 10 };
-}
-
-function updateVitalsDisplayFromState() {
-  const c = undra.state;
-  const base = calculateBaseVitals(c.attributes);
-  const final = applyVitalBonusToVitals(base, c);
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  set("vital-le", final.hp);
-  set("vital-ruest", final.armorTotal);
-  set("vital-gg", final.gg);
-  set("vital-tc", final.tc);
-  const dynType = getBonusType(c.meta.profession);
-  set("vital-dyn-label", dynType === "AU" ? "Ausdauer" : dynType === "AS" ? "Astralenergie" : "Segenspunkte");
-  set("vital-dyn", dynType === "AU" ? final.stamina : dynType === "AS" ? final.ae : final.sgp);
-}
-
-/* ============================
-ARMOR
-============================ */
-const stageColors = { disabled: "#4b5563", full: "#e8d9f0", yellow: "#fbbf24", orange: "#f59e0b", red: "#ef4444" };
-
-function getStageColorForZone(zoneObj) {
-  const max = zoneObj?.max || 0;
-  const cur = zoneObj?.cur || 0;
-  if (!max) return stageColors.disabled;
-  if (cur === max) return stageColors.full;
-  const pct = (cur / max) * 100;
-  if (pct >= 75) return stageColors.yellow;
-  if (pct >= 50) return stageColors.orange;
-  if (pct > 0) return stageColors.red;
-  return stageColors.disabled;
-}
-
-function renderZonesFromState() {
-  const zones = undra.state.armor.zones;
-  for (let z = 1; z <= 8; z++) {
-    const el = document.getElementById(`zone${z}`);
-    if (!el) continue;
-    const color = getStageColorForZone(zones[z] || {});
-    try {
-      el.setAttribute("fill", color);
-      el.setAttribute("stroke", undra.state.armor.selected === z ? "#fff" : "#555");
-    } catch(e){}
-  }
-  const listEl = document.getElementById("zoneList");
-  if (listEl) {
-    let html = `<p><b>Gold:</b> ${undra.state.currency.gold}</p>`;
-    for (let z=1; z<=8; z++){
-      const zone = undra.state.armor.zones[z] || {cur:0,max:0};
-      const color = getStageColorForZone(zone);
-      html += `<div class="zone-box"><b>${z}. Zone</b><span style="display:inline-block;width:10px;height:10px;background:${color};border-radius:2px;margin-left:4px;"></span><br>Rüstung: ${zone.cur} / ${zone.max}</div>`;
-    }
-    listEl.innerHTML = html;
-  }
-}
-
-/* ============================
-INVENTORY ENGINE
-============================ */
-const DM_PIN_LIST = ["1023","3844","9281","5520","7712","4499","6601","8834","1209","3348","9921","4410","5582","7719","6623","1188","9033","2201","7744","6655","1102","9901","4488","5567","7723","6644","1199","9077","2233","7788","6677","1120","9944","4477","5599","7733","6688","1133","9002","2255","7799","6699","1144","9966","4490","5578","7711","6633","1166","9090","2288","7700","6600","1111","9999","4444","5555","7777","6666","2222"];
-
-undra.engine = undra.engine || {};
-undra.engine.inventory = {
-  state: {
-    items: {
-      small: undra.state.inventory.small.slice(),
-      medium: undra.state.inventory.medium.slice(),
-      large: undra.state.inventory.large.slice()
+  // Fallback-Struktur
+  window.char = {
+    meta: { name: "", title: "" },
+    currency: { gold: 0, silver: 0, copper: 0 },
+    inventory: {
+      small: Array(10).fill(""),
+      medium: Array(10).fill(""),
+      large: Array(10).fill("")
     },
-    dmCodes: DM_PIN_LIST.slice(),
-    selected: null
-  },
-  _onUpdate: null,
-  onUpdate(cb){ this._onUpdate = cb; },
-  cleanItemText(text){ return (text||"").trim().replace(/\s{2,}/g," "); },
-  validateItemText(text){
-    if(!text) return true;
-    if(/[,\/|;]/.test(text)) return false;
-    if(/\s{3,}/.test(text)) return false;
-    return true;
-  },
-  setItem(category,index,text){
-    const cleaned = this.cleanItemText(text);
-    if(!this.validateItemText(cleaned)){
-      alert("Ungültiger Eintrag. Ein Slot darf nur EIN Item enthalten.");
-      return false;
+    vitals: {},
+    upgrades: {},
+    zones: {
+      Z1: 0, Z2: 0, Z3: 0, Z4: 0, Z5: 0, Z6: 0, Z7: 0, Z8: 0
     }
-    this.state.items[category][index] = cleaned;
-    this.syncToUndraState();
-    if(this._onUpdate) this._onUpdate();
-    return true;
-  },
-  removeItem(category,index){
-    this.state.items[category][index] = "";
-    this.syncToUndraState();
-    if(this._onUpdate) this._onUpdate();
-  },
-  discardItem(category,index){
-    this.removeItem(category,index);
-  },
-  sortCategory(category){
-    const arr = this.state.items[category];
-    const filled = arr.filter(x=>x.trim()!=="");
-    const empty = arr.filter(x=>x.trim()==="");
-    this.state.items[category] = [...filled,...empty];
-    this.syncToUndraState();
-    if(this._onUpdate) this._onUpdate();
-  },
-  validatePin(pin){ return this.state.dmCodes.includes(pin); },
-  convertToCopper(g,s,c){ return (g*10000)+(s*100)+c; },
-  sellItem(category,index,g,s,c,pin){
-    if(!this.validatePin(pin)){ alert("PIN ungültig."); return false; }
-    const totalCopper = this.convertToCopper(g,s,c);
-    undra.engine.currency.addCopper(totalCopper);
-    this.removeItem(category,index);
-    return true;
-  },
-  syncToUndraState(){
-    undra.state.inventory.small = this.state.items.small.slice();
-    undra.state.inventory.medium = this.state.items.medium.slice();
-    undra.state.inventory.large = this.state.items.large.slice();
-  },
-  syncFromUndraState(){
-    this.state.items.small = undra.state.inventory.small.slice();
-    this.state.items.medium = undra.state.inventory.medium.slice();
-    this.state.items.large = undra.state.inventory.large.slice();
-  },
-  init(){
-    this.syncFromUndraState();
-    if(this._onUpdate) this._onUpdate();
+  };
+}
+
+function saveToLocal() {
+  try {
+    localStorage.setItem("char", JSON.stringify(window.char));
+  } catch(e){
+    console.warn("Konnte lokalen Speicher nicht schreiben.", e);
   }
-};
+}
+
+loadFromLocal();
+
+
+
+
 
 /* ============================
-CURRENCY ENGINE
+CURRENCY ENGINE (char‑basiert)
 ============================ */
-undra.engine.currency = {
-  gold: undra.state.currency.gold || 0,
-  silver: undra.state.currency.silver || 0,
-  copper: undra.state.currency.copper || 0,
-  set(g,s,c){
-    this.gold=g||0; this.silver=s||0; this.copper=c||0;
+const currencyEngine = {
+  gold: char.currency?.gold || 0,
+  silver: char.currency?.silver || 0,
+  copper: char.currency?.copper || 0,
+
+  set(g, s, c) {
+    this.gold = g || 0;
+    this.silver = s || 0;
+    this.copper = c || 0;
+
     this.render();
+
+    // In char zurückschreiben
+    char.currency.gold = this.gold;
+    char.currency.silver = this.silver;
+    char.currency.copper = this.copper;
+
+    saveToLocal();
   },
-  addCopper(amount){
-    let total = (this.gold*10000) + (this.silver*100) + this.copper + (amount||0);
-    this.gold = Math.floor(total/10000);
+
+  addCopper(amount) {
+    let total =
+      this.gold * 10000 +
+      this.silver * 100 +
+      this.copper +
+      (amount || 0);
+
+    this.gold = Math.floor(total / 10000);
     total %= 10000;
-    this.silver = Math.floor(total/100);
+
+    this.silver = Math.floor(total / 100);
     this.copper = total % 100;
-    this.render();
-    undra.state.currency.gold = this.gold;
-    undra.state.currency.silver = this.silver;
-    undra.state.currency.copper = this.copper;
+
+    this.set(this.gold, this.silver, this.copper);
   },
-  render(){
+
+  render() {
     const g = document.getElementById("money-gold");
     const s = document.getElementById("money-silver");
     const c = document.getElementById("money-copper");
+
     if (g) g.textContent = this.gold;
     if (s) s.textContent = this.silver;
     if (c) c.textContent = this.copper;
   }
 };
 
+
+
+
 /* ============================
-PAGE 3: STATE & DAY-END
+VITALWERTE
 ============================ */
-let s3_state = {
-  totalSP: 0,
-  hiddenSP: 0,
-  gold: 0,
-  silver: 0,
-  copper: 0,
-  currentDay: 1,
-  dayFinalized: false,
-  attributePoints: 0,
-  skills: { base: [], race: [], prof: [] },
-  vitals: {},
-  combatStats: {}
-};
+function updateVitalsDisplayFromState() {
+  const v = char.vitals || {};
+  const u = char.upgrades || {};
 
-function initStep3FromStep1() {
-  undraSyncPage1();
-  undraApplyStateToPage3();
+  const set = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
 
-  s3_state.totalSP    = undra.state.day.totalSP || 0;
-  s3_state.hiddenSP   = undra.state.day.hiddenSP || 0;
-  s3_state.currentDay = undra.state.timeline.story.currentDay || 1;
-  s3_state.dayFinalized = undra.state.day.finalized || false;
-  s3_state.gold   = undra.state.currency.gold || 0;
-  s3_state.silver = undra.state.currency.silver || 0;
-  s3_state.copper = undra.state.currency.copper || 0;
+  // Vitalwerte
+  set("vital-le", v.LE || 0);
+  set("vital-dyn", v.AU || 0);       // Ausdauer / Dynamik
+  set("vital-ruest", v.RUEST || 0);
+  set("vital-gg", v.GG || 0);
+  set("vital-tc", v.TC || 0);
 
-  updateS3SPAndCurrency();
+  // Aufwertungen
+  set("upgrade-le", u.LE || 0);
+  set("upgrade-ruest", u.RUEST || 0);
+  set("upgrade-au", u.AU || 0);
+  set("upgrade-gg", u.GG || 0);
+  set("upgrade-tc", u.TC || 0);
+}
+
+/* ============================
+INVENTAR
+============================ */
+function renderInventoryColumn(container, category) {
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (let i = 0; i < 10; i++) {
+    const row = document.createElement("div");
+    row.className = "inv-row";
+
+    const input = document.createElement("input");
+    input.value = char.inventory[category][i] || "";
+    input.style.flex = "1";
+
+    input.addEventListener("change", () => {
+      char.inventory[category][i] = input.value.trim();
+      saveToLocal();
+    });
+
+    input.setAttribute("draggable", "true");
+
+    input.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", JSON.stringify({ category, index: i }));
+    });
+
+    input.addEventListener("dragover", e => e.preventDefault());
+
+    input.addEventListener("drop", e => {
+      e.preventDefault();
+      try {
+        const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+
+        const temp = char.inventory[data.category][data.index];
+        char.inventory[data.category][data.index] = char.inventory[category][i];
+        char.inventory[category][i] = temp;
+
+        saveToLocal();
+        renderInventory();
+      } catch (err) {}
+    });
+
+    row.appendChild(input);
+    container.appendChild(row);
+  }
+}
+
+function renderInventory() {
+  renderInventoryColumn(document.getElementById("inv-small"), "small");
+  renderInventoryColumn(document.getElementById("inv-medium"), "medium");
+  renderInventoryColumn(document.getElementById("inv-large"), "large");
+}
+
+
+
+
+
+
+
+/* ============================
+ZONEN & RÜSTUNGSSYSTEM
+============================ */
+function renderZonesFromState() {
+  const zoneList = document.getElementById("zoneList");
+  if (!zoneList) return;
+
+  const zones = char.zones || {};
+  zoneList.innerHTML = "";
+
+  for (let i = 1; i <= 8; i++) {
+    const name =
+      document.querySelector(`#zoneSelectGrid div[data-value="${i}"]`)
+        ?.textContent || `Zone ${i}`;
+
+    const value = zones[`Z${i}`] ?? 0;
+
+    const row = document.createElement("div");
+    row.className = "zone-row";
+    row.textContent = `${name}: ${value}`;
+    zoneList.appendChild(row);
+  }
+}
+
+function applyDamage() {
+  const selected = document.querySelector("#zoneSelectGrid .active-zone");
+  const input = document.getElementById("damageInput");
+  const damage = parseInt(input?.value || "0");
+
+  if (!selected || isNaN(damage)) return;
+
+  const zoneId = selected.getAttribute("data-value");
+  const key = `Z${zoneId}`;
+
+  const zones = char.zones || {};
+  zones[key] = Math.max(0, (zones[key] || 0) - damage);
+
+  char.zones = zones;
+  saveToLocal();
   renderZonesFromState();
-  undra.engine.inventory.init();
 }
 
-function updateS3SPAndCurrency() {
-  const s = s3_state;
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  set("s3-sp-total", s.totalSP);
-  set("s3-sp-hidden", s.hiddenSP);
-  set("s3-gold", s.gold);
-  set("s3-silver", s.silver);
-  set("s3-copper", s.copper);
+function openArmorPopup() {
+  const selected = document.querySelector("#zoneSelectGrid .active-zone");
+  if (!selected) return;
+
+  const zoneId = selected.getAttribute("data-value");
+  const name = selected.textContent;
+  const key = `Z${zoneId}`;
+
+  const value = char.zones?.[key] ?? 0;
+
+  document.getElementById("popupTitle").textContent = name;
+  document.getElementById("popupContent").innerHTML =
+    `<input id="armorValueInput" type="number" value="${value}" />`;
+
+  document.getElementById("armorPopup").style.display = "flex";
 }
 
-const dayEndMessages = [
-  "Danke, dass du heute wieder Teil von Avalon warst. Deine Reise prägt die Welt.",
-  "Ein weiterer Tag endet – und du hast ihn mit Leben gefüllt. Danke für deine Zeit.",
-  "Wir schätzen deine Anwesenheit in UNDRA. Jeder Schritt, den du machst, hinterlässt Spuren."
-];
-function getRandomDayEndMessage(){ return dayEndMessages[Math.floor(Math.random()*dayEndMessages.length)]; }
+function confirmArmorAction() {
+  const selected = document.querySelector("#zoneSelectGrid .active-zone");
+  const input = document.getElementById("armorValueInput");
+  const value = parseInt(input?.value || "0");
 
-function openDayEndPopup() {
-  if (s3_state.dayFinalized) return;
-  const dayBonus = Math.min(400 + 100 * s3_state.currentDay, 6000);
-  s3_state.hiddenSP += dayBonus;
-  const spThisDay = s3_state.hiddenSP;
-  const goldGain = Math.floor(spThisDay / 100);
-  const msgEl = document.getElementById("dayend-message");
-  const spEl = document.getElementById("dayend-sp");
-  const goldEl = document.getElementById("dayend-gold");
-  if (msgEl) msgEl.textContent = getRandomDayEndMessage();
-  if (spEl) spEl.textContent = spThisDay;
-  if (goldEl) goldEl.textContent = goldGain;
-  const modal = document.getElementById("dayend-modal");
-  if (modal) modal.style.display = "flex";
+  if (!selected || isNaN(value)) return;
+
+  const zoneId = selected.getAttribute("data-value");
+  const key = `Z${zoneId}`;
+
+  const zones = char.zones || {};
+  zones[key] = value;
+
+  char.zones = zones;
+  saveToLocal();
+  renderZonesFromState();
+  closeArmorPopup();
 }
 
-function finalizeDayEnd() {
-  if (s3_state.dayFinalized) return;
-  const spThisDay = s3_state.hiddenSP;
-  const goldGain = Math.floor(spThisDay / 100);
-  s3_state.totalSP += spThisDay;
-  s3_state.gold += goldGain;
-  s3_state.hiddenSP = 0;
-  s3_state.attributePoints = 1;
-  s3_state.dayFinalized = true;
-
-  undra.state.day.totalSP   = s3_state.totalSP;
-  undra.state.day.hiddenSP  = s3_state.hiddenSP;
-  undra.state.day.finalized = s3_state.dayFinalized;
-  undra.state.currency.gold = s3_state.gold;
-
-  updateS3SPAndCurrency();
-  checkOffTimelineDay(s3_state.currentDay);
-  activateNextDay(s3_state.currentDay);
-  s3_state.currentDay++;
-  renderTimeline(undra.state);
-
-  const modal = document.getElementById("dayend-modal");
-  if (modal) modal.style.display = "none";
+function closeArmorPopup() {
+  document.getElementById("armorPopup").style.display = "none";
 }
 
+/* Zonen-Auswahl + SVG-Sync */
+function highlightSvgZone(zoneId) {
+  document
+    .querySelectorAll(".armor-zone")
+    .forEach(z => z.classList.remove("active-zone-svg"));
 
-
-
-
-
-
-
-
-
-/* ============================
-TAP TIMELINE (optional)
-============================ */
-let TAP = 0;
-function saveTimelineUI() {
-  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
-  const state = [];
-  boxes.forEach(box => state.push(box.checked ? 1 : 0));
-  try {
-    localStorage.setItem("UNDRA_TAP_STATE", JSON.stringify(state));
-    localStorage.setItem("UNDRA_TAP_VALUE", TAP.toString());
-  } catch(e){}
-}
-function loadTimelineUI() {
-  try {
-    const savedState = JSON.parse(localStorage.getItem("UNDRA_TAP_STATE") || "[]");
-    const savedTAP = parseInt(localStorage.getItem("UNDRA_TAP_VALUE") || "0", 10) || 0;
-    TAP = savedTAP;
-    const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
-    boxes.forEach((box, i) => { if (savedState[i] === 1) box.checked = true; });
-  } catch(e){}
-}
-function updateTapProgress() {
-  const boxes = document.querySelectorAll(".tap-box input[type='checkbox']");
-  const total = boxes.length;
-  let done = 0;
-  boxes.forEach(b => { if (b.checked) done++; });
-  const percent = total ? Math.round((done / total) * 100) : 0;
-  const bar = document.getElementById("tap-progress-bar");
-  const text = document.getElementById("tap-progress-text");
-  if (bar) bar.style.width = percent + "%";
-  if (text) text.textContent = percent + "%";
+  const svgZone = document.getElementById(`zone${zoneId}`);
+  if (svgZone) svgZone.classList.add("active-zone-svg");
 }
 
-        window.undra = window.undra || {};
-
-/* ============================
-RENDER ALL – ZENTRALE FUNKTION
-============================ */
-function renderAll() {
-  try {
-    undraApplyStateToPage3();
-    updateVitalsDisplayFromState();
-    renderZonesFromState();
-    renderTimeline(undra.state);
-    undra.engine.inventory.syncFromUndraState();
-    undra.engine.inventory._onUpdate && undra.engine.inventory._onUpdate();
-    undra.engine.currency.set(
-      undra.state.currency.gold,
-      undra.state.currency.silver,
-      undra.state.currency.copper
-    );
-  } catch (e) {
-    console.error("renderAll Fehler:", e);
-  }
-}
-
-/* ============================
-DOM READY
-============================ */
 document.addEventListener("DOMContentLoaded", () => {
-  // Inventory UI
-  try {
-    const engine = undra.engine.inventory;
-    const small = document.getElementById("inv-small");
-    const medium = document.getElementById("inv-medium");
-    const large = document.getElementById("inv-large");
-    const actionPopup = document.getElementById("invActionPopup");
-    const sellPopup = document.getElementById("invSellPopup");
-    let selCat = null, selIndex = null;
+  document.querySelectorAll("#zoneSelectGrid div").forEach(el => {
+    el.addEventListener("click", () => {
+      document
+        .querySelectorAll("#zoneSelectGrid div")
+        .forEach(d => d.classList.remove("active-zone"));
 
-    function renderColumn(container, category){
-      if(!container) return;
-      container.innerHTML = "";
-      for(let i=0;i<10;i++){
-        const row = document.createElement("div");
-        row.className="inv-row";
-        const input = document.createElement("input");
-        input.value = engine.state.items[category][i]||"";
-        input.style.flex="1";
-        input.addEventListener("change", ()=> engine.setItem(category,i,input.value));
-        input.addEventListener("dragstart", e=> e.dataTransfer.setData("text/plain", JSON.stringify({category,index:i})));
-        input.addEventListener("dragover", e=> e.preventDefault());
-        input.addEventListener("drop", e=>{
-          e.preventDefault();
-          try{
-            const data = JSON.parse(e.dataTransfer.getData("text/plain"));
-            const srcCat = data.category, srcIndex = data.index;
-            const temp = engine.state.items[srcCat][srcIndex];
-            engine.state.items[srcCat][srcIndex] = engine.state.items[category][i];
-            engine.state.items[category][i] = temp;
-            engine.syncToUndraState();
-            if(engine._onUpdate) engine._onUpdate();
-          }catch(err){}
-        });
-        const btn = document.createElement("div");
-        btn.className="inv-action";
-        btn.style.width="28px";
-        btn.style.height="28px";
-        btn.style.cursor="pointer";
-        btn.addEventListener("click", ()=>{
-          selCat = category;
-          selIndex = i;
-          if(actionPopup) actionPopup.style.display="flex";
-        });
-        row.appendChild(input);
-        row.appendChild(btn);
-        container.appendChild(row);
-      }
-    }
-
-    
-    
-    
-    
-    engine.onUpdate(()=> {
-      renderColumn(small,"small");
-      renderColumn(medium,"medium");
-      renderColumn(large,"large");
+      el.classList.add("active-zone");
+      highlightSvgZone(el.getAttribute("data-value"));
     });
-    engine.init();
+  });
 
-    const sortSmallBtn = document.getElementById("sort-small");
-    const sortMediumBtn = document.getElementById("sort-medium");
-    const sortLargeBtn = document.getElementById("sort-large");
-    if (sortSmallBtn) sortSmallBtn.addEventListener("click", ()=> engine.sortCategory("small"));
-    if (sortMediumBtn) sortMediumBtn.addEventListener("click", ()=> engine.sortCategory("medium"));
-    if (sortLargeBtn) sortLargeBtn.addEventListener("click", ()=> engine.sortCategory("large"));
+  document.querySelectorAll(".armor-zone").forEach(svg => {
+    svg.addEventListener("click", () => {
+      const zoneId = svg.id.replace("zone", "");
 
-    if(document.getElementById("invCancelBtn")) document.getElementById("invCancelBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; });
-    if(document.getElementById("invSellBtn")) document.getElementById("invSellBtn").addEventListener("click", ()=> { if(actionPopup) actionPopup.style.display="none"; if(sellPopup) sellPopup.style.display="flex"; });
-    if(document.getElementById("invDiscardBtn")) document.getElementById("invDiscardBtn").addEventListener("click", ()=> {
-      if(selCat!==null && selIndex!==null) engine.discardItem(selCat,selIndex);
-      if(actionPopup) actionPopup.style.display="none";
+      document
+        .querySelectorAll("#zoneSelectGrid div")
+        .forEach(d => d.classList.remove("active-zone"));
+
+      const match = document.querySelector(
+        `#zoneSelectGrid div[data-value="${zoneId}"]`
+      );
+
+      if (match) match.classList.add("active-zone");
+
+      highlightSvgZone(zoneId);
     });
-
-    if(document.getElementById("sellCancelBtn")) document.getElementById("sellCancelBtn").addEventListener("click", ()=> { if(sellPopup) sellPopup.style.display="none"; });
-    if(document.getElementById("sellConfirmBtn")) document.getElementById("sellConfirmBtn").addEventListener("click", ()=>{
-      const g = parseInt(document.getElementById("sellGold").value)||0;
-      const s = parseInt(document.getElementById("sellSilver").value)||0;
-      const c = parseInt(document.getElementById("sellCopper").value)||0;
-      const pin = document.getElementById("sellPin").value||"";
-      engine.sellItem(selCat,selIndex,g,s,c,pin);
-      if(sellPopup) sellPopup.style.display="none";
-    });
-  } catch(e){
-    console.warn("Inventory UI init skipped:", e);
-  }
-
-  // TAP timeline UI
-  try {
-    const row1 = document.getElementById("tap-row-1");
-    const row2 = document.getElementById("tap-row-2");
-    if (row1 && row2) {
-      for (let i = 1; i <= 60; i++) {
-        const box = document.createElement("div");
-        box.className = "tap-box";
-        box.style.display = "flex";
-        box.style.alignItems = "center";
-        box.style.gap = "8px";
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.dataset.day = i;
-        const label = document.createElement("label");
-        label.textContent = "Tag " + i;
-        box.appendChild(checkbox);
-        box.appendChild(label);
-        (i <= 30 ? row1 : row2).appendChild(box);
-        checkbox.addEventListener("change", () => { saveTimelineUI(); updateTapProgress(); });
-      }
-    }
-    loadTimelineUI();
-    updateTapProgress();
-  } catch(e){}
-
-  // Armor zone click wiring
-  try {
-    document.querySelectorAll("#zoneSelectGrid div").forEach(el=>{
-      el.addEventListener("click", ()=>{
-        const v = parseInt(el.getAttribute("data-value"));
-        if(!isNaN(v)){
-          undra.state.armor.selected = v;
-          renderZonesFromState();
-        }
-      });
-    });
-    for(let z=1; z<=8; z++){
-      const el = document.getElementById(`zone${z}`);
-      if(el) el.addEventListener("click", ()=>{
-        undra.state.armor.selected = z;
-        renderZonesFromState();
-      });
-    }
-  } catch(e){}
-
- 
+  });
 });
 
 
@@ -3018,106 +2735,344 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/* ============================
+ATTRIBUTE / SEITE 3 APPLY
+============================ */
+function undraApplyStateToPage3() {
+  const set = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
 
+  const a = char.attributes || {};
 
+  set("val-ff", a.FF || 0);
+  set("val-kk", a.KK || 0);
+  set("val-kb", a.KB || 0);
+  set("val-ch", a.CH || 0);
+  set("val-gz", a.GZ || 0);
+  set("val-it", a.IT || 0);
+  set("val-ve", a.VE || 0);
+  set("val-fk", a.FK || 0);
+  set("val-ge", a.GE || 0);
+  set("val-ko", a.KO || 0);
+  set("val-ss", a.SS || 0);
+  set("val-an", a.AN || 0);
+  set("val-as", a.AS || 0);
+  set("val-tc", a.TC || 0);
+  set("val-te", a.TE || 0);
 
+  updateVitalsDisplayFromState();
+}
 
 /* ============================
-CLOUD SAVE / LOAD
+CLOUD SAVE / LOAD (ENTFERNT)
 ============================ */
-async function savePage3ToCloud() {
-  const id = `undra_${(undra.state.meta.name || "namenlos")
-    .trim().toLowerCase()}_${(undra.state.meta.title || "ohne")
-    .trim().toLowerCase()}`.replace(/\s+/g, "_");
+// Dieser Block wurde vollständig entfernt,
+// da Seite 3 künftig über GitHub Gist lädt und speichert.
+
+
+
+
+async function loadPage3FromGist(name, title) {
+  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}.json`;
 
   try {
-    const res = await fetch(`https://undra.djdrear.workers.dev/save/${id}`, {
+    const res = await fetch("https://api.github.com/users/djdrear/gists");
+    const gists = await res.json();
+
+    if (!Array.isArray(gists)) {
+      alert("Konnte Gist-Liste nicht laden.");
+      return;
+    }
+
+    let rawUrl = null;
+
+    for (const gist of gists) {
+      const files = gist.files || {};
+      for (const key in files) {
+        if (key.toLowerCase() === filename) {
+          rawUrl = files[key].raw_url;
+          break;
+        }
+      }
+      if (rawUrl) break;
+    }
+
+    if (!rawUrl) {
+      alert(`Charakter "${name} ${title}" nicht gefunden.`);
+      return;
+    }
+
+    const dataRes = await fetch(rawUrl);
+    const data = await dataRes.json();
+
+    // Fallbacks ergänzen
+    data.meta = data.meta || { name, title };
+    data.currency = data.currency || { gold: 0, silver: 0, copper: 0 };
+    data.inventory = data.inventory || {
+      small: Array(10).fill(""),
+      medium: Array(10).fill(""),
+      large: Array(10).fill("")
+    };
+    data.vitals = data.vitals || {};
+    data.upgrades = data.upgrades || {};
+    data.zones = data.zones || {
+      Z1: 0, Z2: 0, Z3: 0, Z4: 0, Z5: 0, Z6: 0, Z7: 0, Z8: 0
+    };
+
+    window.char = JSON.parse(JSON.stringify(data));
+    saveToLocal();
+    renderAll();
+
+    alert(`Charakter "${char.meta.name}" erfolgreich geladen.`);
+  } catch (err) {
+    console.error(err);
+    alert("Fehler beim Laden aus Gist.");
+  }
+}
+async function savePage3ToGist() {
+  const filename = `undra_${char.meta.name.trim().toLowerCase()}_${char.meta.title.trim().toLowerCase()}.json`;
+  const token = localStorage.getItem("github_token"); // Token muss vorher gespeichert werden
+
+  if (!token) {
+    alert("Kein GitHub‑Token gefunden.");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://api.github.com/gists", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(undra.state)
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        description: "UNDRA Character Save",
+        public: false,
+        files: {
+          [filename]: {
+            content: JSON.stringify(char, null, 2)
+          }
+        }
+      })
     });
 
     if (!res.ok) {
-      alert("Fehler beim Cloud‑Speichern.");
-      console.error(await res.text());
+      alert("Fehler beim Speichern in Gist.");
       return;
     }
 
     alert("Charakter erfolgreich gespeichert.");
   } catch (err) {
     console.error(err);
-    alert("Netzwerkfehler beim Cloud‑Speichern.");
+    alert("Netzwerkfehler beim Speichern.");
+  }
+}
+async function searchCharactersInGist(query) {
+  try {
+    const res = await fetch("https://api.github.com/users/djdrear/gists");
+    const gists = await res.json();
+
+    if (!Array.isArray(gists)) {
+      alert("Konnte Gist-Liste nicht laden.");
+      return;
+    }
+
+    const results = [];
+
+    for (const gist of gists) {
+      const files = gist.files || {};
+      for (const key in files) {
+        if (key.toLowerCase().includes("undra_") && key.toLowerCase().includes(query.toLowerCase())) {
+          results.push(key);
+        }
+      }
+    }
+
+    if (results.length === 0) {
+      alert("Keine passenden Charaktere gefunden.");
+    } else {
+      alert(`Gefundene Charaktere:\n\n${results.join("\n")}`);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Fehler bei der Gist‑Suche.");
+  }
+}
+async function migrateLocalCharToGist() {
+  const name = char?.meta?.name?.trim();
+  const title = char?.meta?.title?.trim();
+  if (!name || !title) return;
+
+  const filename = `undra_${name.toLowerCase()}_${title.toLowerCase()}.json`;
+  const token = localStorage.getItem("github_token");
+
+  if (!token) return;
+
+  try {
+    const res = await fetch("https://api.github.com/users/djdrear/gists");
+    const gists = await res.json();
+
+    let exists = false;
+    for (const gist of gists) {
+      const files = gist.files || {};
+      if (filename in files) {
+        exists = true;
+        break;
+      }
+    }
+
+    if (!exists) {
+      await savePage3ToGist();
+      console.log("Charakter wurde automatisch in Gist migriert.");
+    }
+  } catch (err) {
+    console.warn("Migration fehlgeschlagen:", err);
+  }
+}
+function setGithubToken(token) {
+  localStorage.setItem("github_token", token.trim());
+  alert("GitHub‑Token gespeichert.");
+}
+
+/* ============================
+RENDER ALL
+============================ */
+function renderAll() {
+  currencyEngine.render();
+  renderInventory();
+  renderZonesFromState();
+  updateVitalsDisplayFromState();
+  undraApplyStateToPage3();
+}
+/* ============================
+POPUP: GIST-LADEN (FINAL & FIXED)
+============================ */
+
+/* Popup öffnen */
+function openLoadPopup() {
+  const bg = document.getElementById("uf-load-popup-bg");
+
+  if (!bg) {
+    console.error("Popup-Element 'uf-load-popup-bg' NICHT gefunden!");
+    return;
+  }
+
+  console.log("Popup wird geöffnet…");
+  bg.style.display = "flex";
+}
+
+/* Popup schließen */
+function closeLoadPopup() {
+  const bg = document.getElementById("uf-load-popup-bg");
+  if (bg) bg.style.display = "none";
+}
+
+/* Charakter laden */
+function triggerLoadChar() {
+  const name = document.getElementById("uf-load-name")?.value.trim();
+  const title = document.getElementById("uf-load-title")?.value.trim();
+
+  if (!name || !title) {
+    alert("Bitte Name und Titel eingeben.");
+    return;
+  }
+
+  closeLoadPopup();
+  loadPage3FromGist(name, title);
+}
+
+/* Cancel-Button erst nach DOM-Load verbinden */
+document.addEventListener("DOMContentLoaded", () => {
+  const cancelBtn = document.getElementById("uf-load-cancel");
+
+  if (!cancelBtn) {
+    console.error("Cancel-Button 'uf-load-cancel' NICHT gefunden!");
+    return;
+  }
+
+  cancelBtn.addEventListener("click", closeLoadPopup);
+  console.log("Cancel-Button erfolgreich verbunden.");
+});
+async function loadPage3FromCloud(name, title) {
+  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}.json`;
+  
+  async function debugLoadFromCloud(name, title) {
+  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}`;
+  const url = `https://undra.djdrear.workers.dev/load/${filename}`;
+
+  console.log("🔍 Debug: Ladeversuch für", filename);
+  console.log("🔗 URL:", url);
+
+  try {
+    const res = await fetch(url);
+    console.log("🌐 Response-Status:", res.status);
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn("⚠️ Fehlertext vom Worker:", text);
+      alert(`Fehler beim Laden:\n\nStatus ${res.status}\n${text}`);
+      return;
+    }
+
+    const data = await res.json();
+    console.log("📦 Geladene Daten:", data);
+
+    if (!data || typeof data !== "object") {
+      alert("⚠️ Ungültiges JSON erhalten.");
+      return;
+    }
+
+    alert(`✅ Charakter "${data.name || name}" erfolgreich geladen (Debug-Modus).`);
+  } catch (err) {
+    console.error("❌ Netzwerkfehler:", err);
+    alert("❌ Netzwerkfehler beim Laden.");
   }
 }
 
-async function loadPage3FromCloud(name, title) {
-  const id = `undra_${(name || "namenlos")
-    .trim().toLowerCase()}_${(title || "ohne")
-    .trim().toLowerCase()}`.replace(/\s+/g, "_");
 
   try {
-    const res = await fetch(`https://undra.djdrear.workers.dev/load/${id}`);
+    const res = await fetch(`https://undra.djdrear.workers.dev/load/${filename}`);
 
     if (!res.ok) {
-      alert("Charakter nicht gefunden.");
-      console.error(await res.text());
+      alert(`Charakter "${name} ${title}" nicht gefunden.`);
       return;
     }
 
     const data = await res.json();
 
-    if (!data || typeof data !== "object" || !data.meta || !data.meta.name) {
-      alert("Ungültige Cloud‑Daten.");
-      console.error("Geladene Daten:", data);
-      return;
-    }
+    // Fallbacks ergänzen
+    data.meta = data.meta || { name, title };
+    data.currency = data.currency || { gold: 0, silver: 0, copper: 0 };
+    data.inventory = data.inventory || {
+      small: Array(10).fill(""),
+      medium: Array(10).fill(""),
+      large: Array(10).fill("")
+    };
+    data.vitals = data.vitals || {};
+    data.upgrades = data.upgrades || {};
+    data.zones = data.zones || {
+      Z1: 0, Z2: 0, Z3: 0, Z4: 0, Z5: 0, Z6: 0, Z7: 0, Z8: 0
+    };
 
-    undra.state = JSON.parse(JSON.stringify(data));
+    window.char = JSON.parse(JSON.stringify(data));
+    saveToLocal();
     renderAll();
 
-    alert(`Charakter "${undra.state.meta.name}" geladen.`);
+    alert(`Charakter "${char.meta.name}" erfolgreich geladen.`);
   } catch (err) {
     console.error(err);
-    alert("Fehler beim Cloud‑Laden.");
+    alert("Fehler beim Laden aus Cloudflare.");
   }
 }
-
 /* ============================
-FOOTER BUTTONS & POPUP
-============================ */
-document.getElementById("uf-load").addEventListener("click", () => {
-  document.getElementById("uf-load-popup-bg").style.display = "flex";
-});
-
-document.getElementById("uf-load-cancel").addEventListener("click", () => {
-  document.getElementById("uf-load-popup-bg").style.display = "none";
-});
-
-document.getElementById("uf-load-confirm").addEventListener("click", () => {
-  const name  = document.getElementById("uf-load-name").value.trim();
-  const title = document.getElementById("uf-load-title").value.trim();
-
-  if (!name) {
-    alert("Bitte einen Namen eingeben.");
-    return;
-  }
-
-  document.getElementById("uf-load-popup-bg").style.display = "none";
-  loadPage3FromCloud(name, title);
-});
-
-document.getElementById("uf-save").addEventListener("click", () => {
-  savePage3ToCloud();
-});
-
-/* ============================
-EXPOSE (optional)
+EXPOSE
 ============================ */
 window.undraApplyStateToPage3 = undraApplyStateToPage3;
 window.undraUpdateVitals = updateVitalsDisplayFromState;
 window.undraRenderZones = renderZonesFromState;
 window.undraRenderAll = renderAll;
-
 </script>
 </body>
 </html>
