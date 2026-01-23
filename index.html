@@ -23,13 +23,71 @@
 }
 
 /* Kopfzeile Seite 3 */
-.s3-header-title {
-    font-size: 18px;
-    color: #f3e3a2;
-    text-align: center;
-    margin: 0;
-    text-shadow: 0 0 6px rgba(255,215,0,0.5);
+/* =========================================
+   Außencontainer
+   ========================================= */
+#undra-header {
+  width: 950px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 6px auto;
+  padding: 2px 0;
+  box-sizing: border-box;
 }
+
+/* =========================================
+   Innenbanner – jetzt mit sichtbarer Umrandung
+   ========================================= */
+.undra-banner {
+  width: 475px;
+  height: 75px;
+
+  background: linear-gradient(to right,
+      rgba(25, 25, 35, 0.95),
+      rgba(15, 15, 25, 0.9)
+  );
+
+  border: 2px solid rgba(255, 215, 100, 0.7);   /* deutliche goldene Umrandung */
+  border-radius: 6px;
+
+  box-shadow:
+    0 0 8px rgba(255, 215, 100, 0.35),          /* äußerer Glow */
+    inset 0 0 6px rgba(255, 215, 100, 0.25);    /* innerer Glow */
+
+  padding: 2px 8px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   Titel
+   ========================================= */
+.undra-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: gold;
+  text-shadow:
+    0 0 6px rgba(255, 215, 100, 0.7),
+    0 0 12px rgba(255, 215, 100, 0.4);
+  letter-spacing: 0.5px;
+  margin-top: -2px;
+}
+
+/* =========================================
+   Untertitel (Name + Titel)
+   ========================================= */
+.undra-subtitle {
+  font-size: 25px;
+  font-family: 'Segoe Script', 'Dancing Script', cursive;
+  color: #ddd;
+  margin-top: -1px;
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+}
+
+
 
 /* Zeile 2: Merkmale / Portrait / SP */
 .s3-row-flex {
@@ -70,10 +128,14 @@
     text-shadow: 0 0 6px rgba(255,215,0,0.5);
 }
 
+
+
+
+
 /* Attribute (Zeile 3) – Raster einfach gehalten */
 .s3-attr-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 4px 12px;
     font-size: 12px;
 }
@@ -111,6 +173,8 @@
     cursor: pointer;
 }
 
+
+
 /* Zeile 4: Vitalwerte */
 .s3-vital-grid {
     display: grid;
@@ -124,15 +188,6 @@
     justify-content: space-between;
     align-items: center;
 }
-
-
-
-
-
-
-
-
-
 .s3-vital-btn {
     padding: 2px 8px;
     font-size: 11px;
@@ -351,6 +406,23 @@ body {
         radial-gradient(circle at 80% 80%, rgba(255, 200, 80, 0.06), transparent 60%);
 }
 
+#undra-alert.hidden {
+  display: none !important;
+}
+
+#undra-alert .uf-popup {
+  background:#120a12;
+  border:2px solid gold;
+  border-radius:10px;
+  padding:16px;
+  width:360px;
+  color:#ffe7c2;
+  box-shadow:
+    0 0 22px rgba(0,0,0,1),
+    0 0 18px rgba(255,60,60,0.45),
+    inset 0 0 12px rgba(255,200,80,0.18);
+}
+
 /* ============================
 ANMERKUNG – BOX (Bloodcore R2)
 ============================ */
@@ -539,6 +611,247 @@ KOPFZEILE – NAME (Bloodcore R2)
     opacity: 0.9;
     letter-spacing: 1px;
 }
+
+
+/* =========================================
+   UNDRA – Topbar unter dem Header
+   ========================================= */
+#undra-topbar {
+  width: 950px;
+  height: 28px;
+  margin: 4px auto 10px auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 2px 4px;
+  box-sizing: border-box;
+
+  background: rgba(20, 20, 30, 0.85);
+  border: 1px solid rgba(255, 215, 100, 0.4);
+  border-radius: 6px;
+
+  box-shadow:
+    0 0 6px rgba(255, 215, 100, 0.25),
+    inset 0 0 4px rgba(255, 215, 100, 0.15);
+}
+
+.undra-btn {
+  padding: 6px 12px;
+  background: #3a2b4d;
+  color: #f0e6ff;
+  border: 1px solid #7c5ca3;
+  border-radius: 4px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Popup Hintergrund */
+.undra-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 10, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Popup Box */
+.undra-popup-inner {
+  width: 300px;
+  padding: 16px;
+  background: rgba(20, 20, 30, 0.95);
+  border: 2px solid gold;
+  border-radius: 8px;
+  box-shadow:
+    0 0 12px rgba(255, 215, 100, 0.4),
+    inset 0 0 8px rgba(255, 215, 100, 0.25);
+  text-align: center;
+}
+
+/* Titel */
+.undra-popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 12px;
+  text-shadow: 0 0 6px rgba(255, 215, 100, 0.6);
+}
+
+/* Inventar Zeilen */
+.inv-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 4px;
+  margin-bottom: 6px;
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid rgba(255, 215, 100, 0.3);
+  border-radius: 4px;
+}
+
+.inv-label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.inv-count {
+  color: gold;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.inv-category {
+  padding: 12px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.inv-category.active {
+  border-color: #cfaaff;
+  box-shadow: 0 0 12px #cfaaff;
+}
+
+/* Close Button */
+.undra-popup-close {
+  margin-top: 12px;
+  padding: 4px 12px;
+  background: rgba(30, 30, 40, 0.9);
+  border: 1px solid gold;
+  border-radius: 4px;
+  color: gold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.undra-popup-close:hover {
+  background: rgba(255, 215, 100, 0.15);
+  box-shadow: 0 0 6px gold;
+}
+
+.undra-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 10, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.hidden {
+  display: none;
+}
+
+.undra-popup-inner {
+  width: 300px;
+  padding: 16px;
+  background: rgba(20, 20, 30, 0.95);
+  border: 2px solid gold;
+  border-radius: 8px;
+  box-shadow:
+    0 0 12px rgba(255, 215, 100, 0.4),
+    inset 0 0 8px rgba(255, 215, 100, 0.25);
+  text-align: center;
+}
+
+.undra-popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 12px;
+  text-shadow: 0 0 6px rgba(255, 215, 100, 0.6);
+}
+
+.inv-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 4px;
+  margin-bottom: 6px;
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid rgba(255, 215, 100, 0.3);
+  border-radius: 4px;
+}
+
+.inv-label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.inv-count {
+  color: gold;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.undra-popup-close {
+  margin-top: 12px;
+  padding: 4px 12px;
+  background: rgba(30, 30, 40, 0.9);
+  border: 1px solid gold;
+  border-radius: 4px;
+  color: gold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.undra-popup-close:hover {
+  background: rgba(255, 215, 100, 0.15);
+  box-shadow: 0 0 6px gold;
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
+.undra-top-btn {
+  height: 22px;
+  padding: 0 10px;
+
+  background: rgba(30, 30, 40, 0.9);
+  border: 1px solid rgba(255, 215, 100, 0.4);
+  border-radius: 4px;
+
+  color: gold;
+  font-size: 12px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  text-shadow: 0 0 4px rgba(255, 215, 100, 0.5);
+}
+
+.inv-item.glow {
+  outline: 2px solid #cfaaff;
+  box-shadow: 0 0 8px #cfaaff;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Hover */
+.undra-top-btn:hover {
+  background: rgba(255, 215, 100, 0.15);
+  border-color: gold;
+  box-shadow:
+    0 0 6px rgba(255, 215, 100, 0.4),
+    inset 0 0 4px rgba(255, 215, 100, 0.2);
+  transform: translateY(-1px);
+}
+
 
 /* ============================
 DREIER-LINIE – Bloodcore R2
@@ -1657,6 +1970,7 @@ POPUP – Bloodcore R2
     outline: 3px solid rgba(255,200,80,0.25);
     outline-offset: 2px;
 }
+
 /* ============================
 INVENTAR, TIMELINE, FOOTER – Bloodcore R2
 ============================ */
@@ -1751,13 +2065,6 @@ INVENTAR, TIMELINE, FOOTER – Bloodcore R2
     width:360px;
     color:#ffe7c2;
 }
-
-
-
-
-
-
-
 
 .uf-popup-title {
     margin-top:0;
@@ -1943,9 +2250,9 @@ FOOTER
 
 #uf-center {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;   /* WICHTIG */
     align-items: center;
-    gap: 2px;
+    gap: 20px;             /* Abstand zwischen SP, ATB, Währung */
 }
 
 .uf-value {
@@ -1955,6 +2262,21 @@ FOOTER
 
 .uf-label {
     color: gold;
+}
+
+.uf-popup-bg.hidden {
+  display: none !important;
+}
+
+.uf-popup-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 /* ============================
 RESPONSIVE TWEAKS (Bloodcore R2)
@@ -1971,15 +2293,27 @@ RESPONSIVE TWEAKS (Bloodcore R2)
 </head>
 
 <body>
-
 <!-- ============================
 KOPFZEILE
 ============================ -->
-<div id="heldenbriefBanner">
-    <div class="heldenbriefText">
-        <div class="heldenbriefTitel">Heldenbrief</div>
-        <div class="heldenbriefName" id="heldenbriefName"></div>
-    </div>
+<div id="undra-header">
+  <div class="undra-banner">
+    <div class="undra-title">Helden‑Charakterbogen</div>
+    <div class="undra-subtitle" id="undra-char-name">Charakter</div>
+  </div>
+</div>
+
+<!-- ============================
+TOPBAR
+============================ -->
+<div id="undra-topbar">
+  <button class="undra-top-btn" onclick="openPopup('grunddaten')">Grunddaten</button>
+  <button class="undra-top-btn" onclick="openPopup('kurzbeschreibung')">Kurzbeschreibung</button>
+  <button class="undra-top-btn" onclick="openPopup('hintergruende')">Hintergründe</button>
+  <button class="undra-top-btn" onclick="openPopup('inventar')">Inventar</button>
+  <button class="undra-top-btn" onclick="openPopup('vornachteile')">Vor/Nachteile</button>
+  <button class="undra-top-btn" onclick="openPopup('wuerfel')">Würfel</button>
+  <button class="undra-top-btn" onclick="openPopup('bonis')">Bonis</button>
 </div>
 
 <!-- ============================
@@ -1987,35 +2321,36 @@ DREIER-LINIE
 ============================ -->
 <div id="merkmale-row">
 
-    <!-- Merkmale links -->
-    <div id="merkmale-links">
-        <div class="merk-title">KÖRPERLICHE MERKMALE</div>
-        <div class="merk-list">
-            <div class="merk-item"><span>Alter</span><span id="ml-age">–</span></div>
-            <div class="merk-item"><span>Größe</span><span id="ml-height">–</span></div>
-            <div class="merk-item"><span>Gewicht</span><span id="ml-weight">–</span></div>
-            <div class="merk-item"><span>Augenfarbe</span><span id="ml-eyes">–</span></div>
-            <div class="merk-item"><span>Haarfarbe</span><span id="ml-hair">–</span></div>
-            <div class="merk-item"><span>Stimme</span><span id="ml-voice">–</span></div>
-            <div class="merk-item"><span>Kleidung / Rüstung</span><span id="ml-armor">–</span></div>
-            <div class="merk-item"><span>Besondere Merkmale</span><span id="ml-special">–</span></div>
-        </div>
+  <!-- Merkmale links -->
+  <div id="merkmale-links">
+    <div class="merk-title">KÖRPERLICHE MERKMALE</div>
+    <div class="merk-list">
+      <div class="merk-item"><span>Alter</span><span id="ml-age">–</span></div>
+      <div class="merk-item"><span>Größe</span><span id="ml-height">–</span></div>
+      <div class="merk-item"><span>Gewicht</span><span id="ml-weight">–</span></div>
+      <div class="merk-item"><span>Augenfarbe</span><span id="ml-eyes">–</span></div>
+      <div class="merk-item"><span>Haarfarbe</span><span id="ml-hair">–</span></div>
+      <div class="merk-item"><span>Stimme</span><span id="ml-voice">–</span></div>
+      <div class="merk-item"><span>Kleidung / Rüstung</span><span id="ml-armor">–</span></div>
+      <div class="merk-item"><span>Besondere Merkmale</span><span id="ml-special">–</span></div>
     </div>
+  </div>
+  
 
-    <!-- Portrait -->
-    <div id="portrait-block">
-        <div id="portrait-inner">
-            <img id="portrait-img" src="" alt="Portrait">
-            <div id="portrait-placeholder">PORTRAIT</div>
-        </div>
+  <!-- Portrait -->
+  <div id="portrait-block">
+    <div id="portrait-inner">
+      <img id="portrait-img" src="" alt="Portrait">
+      <div id="portrait-placeholder">PORTRAIT</div>
     </div>
+  </div>
 
-    <!-- Diagramm -->
-    <div id="diagramm-block">
-        <div id="diagramm-inner">
-            <canvas id="radarCanvas" width="175" height="175"></canvas>
-        </div>
+  <!-- Diagramm -->
+  <div id="diagramm-block">
+    <div id="diagramm-inner">
+      <canvas id="radarCanvas" width="175" height="175"></canvas>
     </div>
+  </div>
 
 </div>
 
@@ -2023,52 +2358,40 @@ DREIER-LINIE
 ATTRIBUTE-BLOCK
 ============================ -->
 <div id="attribute-block">
-    <div id="attribute-title">Attribut‑Fähigkeiten</div>
-    <div id="attribute-grid">
+  <div id="attribute-title">Basis-Attribute</div>
 
-        <div class="row">
-            <div class="attribute-slot" data-short="MU"><span class="attr-name">Mut (MU)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            
-            <div class="attribute-slot" data-short="IN"><span class="attr-name">Intelligenz (IN)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="FF"><span class="attr-name">Fingerfertigkeit (FF)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="GE"><span class="attr-name">Gewandtheit (GE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="KK"><span class="attr-name">Körperkraft (KK)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-        </div>
+  <div id="attribute-grid">
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="row">
-            <div class="attribute-slot" data-short="KB"><span class="attr-name">Körperbewusstsein (KB)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="KO"><span class="attr-name">Konstitution (KO)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="CH"><span class="attr-name">Charisma (CH)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="SS"><span class="attr-name">Sozialstatus (SS)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="GZ"><span class="attr-name">Geistiger Zustand (GZ)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-        </div>
-
-        <div class="row">
-            <div class="attribute-slot" data-short="IT"><span class="attr-name">Intuition (IT)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="AN"><span class="attr-name">Angriff (AN)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="VE"><span class="attr-name">Verteidigung (VE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="AS"><span class="attr-name">Abwehrschlag (AS)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="FK"><span class="attr-name">Fernkampf (FK)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-        </div>
-
-        <div class="row center-row">
-            <div class="attribute-slot" data-short="TC"><span class="attr-name">Trefferchance (TC)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-            <div class="attribute-slot" data-short="TE"><span class="attr-name">Technik (TE)</span><span class="attr-level">0</span><button class="attr-arrow">▲</button></div>
-        </div>
-
+    <div class="row">
+      <div class="attribute-slot" data-short="MU"><span class="attr-name">Mut (MU)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="IN"><span class="attr-name">Intelligenz (IN)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="FF"><span class="attr-name">Fingerfertigkeit (FF)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="GE"><span class="attr-name">Gewandtheit (GE)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="KK"><span class="attr-name">Körperkraft (KK)</span><span class="attr-level">0</span></div>
     </div>
+
+    <div class="row">
+      <div class="attribute-slot" data-short="KB"><span class="attr-name">Körperbewusstsein (KB)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="KO"><span class="attr-name">Konstitution (KO)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="CH"><span class="attr-name">Charisma (CH)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="SS"><span class="attr-name">Sozialstatus (SS)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="GZ"><span class="attr-name">Geistiger Zustand (GZ)</span><span class="attr-level">0</span></div>
+    </div>
+
+    <div class="row">
+      <div class="attribute-slot" data-short="IT"><span class="attr-name">Intuition (IT)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="AN"><span class="attr-name">Angriff (AN)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="VE"><span class="attr-name">Verteidigung (VE)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="AS"><span class="attr-name">Abwehrschlag (AS)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="FK"><span class="attr-name">Fernkampf (FK)</span><span class="attr-level">0</span></div>
+    </div>
+
+    <div class="row center-row">
+      <div class="attribute-slot" data-short="TC"><span class="attr-name">Trefferchance (TC)</span><span class="attr-level">0</span></div>
+      <div class="attribute-slot" data-short="TE"><span class="attr-name">Technik (TE)</span><span class="attr-level">0</span></div>
+    </div>
+
+  </div>
 </div>
 
 <!-- ============================
@@ -2076,84 +2399,80 @@ VITALWERTE + AUFWERTUNGEN
 ============================ -->
 <div id="vitalWrapper">
 
-    <!-- LINKER BLOCK: Vitalwerte -->
-    <div id="vitalDisplay">
-        <div class="vital-title">Vitalwerte</div>
+  <!-- LINKER BLOCK: Vitalwerte -->
+  <div id="vitalDisplay">
+    <div class="vital-title">Vitalwerte</div>
 
-        <div class="vital-row">
-            <div class="vital-icon heart">❤️</div>
-            <div class="vital-label">Leben</div>
-            <div class="vital-value" id="vital-le">–</div>
-        </div>
-
-        <div class="vital-row">
-            <div class="vital-icon energy">⚡</div>
-            <div class="vital-label" id="vital-dyn-label">Ausdauer</div>
-            <div class="vital-value" id="vital-dyn">–</div>
-        </div>
-
-        <div class="vital-row">
-            <div class="vital-icon shield">🛡️</div>
-            <div class="vital-label">Rüstung</div>
-            <div class="vital-value" id="vital-ruest">–</div>
-        </div>
-
-        <div class="vital-row">
-            <div class="vital-icon brain">🧠</div>
-            <div class="vital-label">Geistige Gesundheit</div>
-            <div class="vital-value" id="vital-gg">–</div>
-        </div>
-
-        <div class="vital-row">
-            <div class="vital-icon target">🎯</div>
-            <div class="vital-label">Trefferchance</div>
-            <div class="vital-value" id="vital-tc">–</div>
-        </div>
+    <div class="vital-row">
+      <div class="vital-icon heart">❤️</div>
+      <div class="vital-label">Leben</div>
+      <div class="vital-value" id="vital-le">–</div>
     </div>
 
-
-
-
-
-    <!-- RECHTER BLOCK: Aufwertungen -->
-    <div id="vitalBonusPanel">
-        <div class="vital-title">Aufwertungen</div>
-
-        <div class="vb-row">
-            <div class="vb-label">(LE)</div>
-            <div class="vb-icon">❤️</div>
-            <div class="vb-crystals" data-stat="LE"></div>
-            <button class="vb-upgrade" data-stat="LE">▲</button>
-        </div>
-
-        <div class="vb-row">
-            <div class="vb-label">(Rüst)</div>
-            <div class="vb-icon">🛡️</div>
-            <div class="vb-crystals" data-stat="RUEST"></div>
-            <button class="vb-upgrade" data-stat="RUEST">▲</button>
-        </div>
-
-        <div class="vb-row" id="vb-dynamic-row">
-            <div class="vb-label" id="vb-dyn-label">(AU)</div>
-            <div class="vb-icon" id="vb-dyn-icon">⚡</div>
-            <div class="vb-crystals" data-stat="DYN"></div>
-            <button class="vb-upgrade" data-stat="DYN">▲</button>
-        </div>
-
-        <div class="vb-row">
-            <div class="vb-label">(GG)</div>
-            <div class="vb-icon">🧠</div>
-            <div class="vb-crystals" data-stat="GG"></div>
-            <button class="vb-upgrade" data-stat="GG">▲</button>
-        </div>
-
-        <div class="vb-row">
-            <div class="vb-label">(TC)</div>
-            <div class="vb-icon">🎯</div>
-            <div class="vb-crystals" data-stat="TC"></div>
-            <button class="vb-upgrade" data-stat="TC">▲</button>
-        </div>
+    <div class="vital-row">
+      <div class="vital-icon energy">⚡</div>
+      <div class="vital-label" id="vital-dyn-label">Ausdauer</div>
+      <div class="vital-value" id="vital-dyn">–</div>
     </div>
+
+    <div class="vital-row">
+      <div class="vital-icon shield">🛡️</div>
+      <div class="vital-label">Rüstung</div>
+      <div class="vital-value" id="vital-ruest">–</div>
+    </div>
+
+    <div class="vital-row">
+      <div class="vital-icon brain">🧠</div>
+      <div class="vital-label">Geistige Gesundheit</div>
+      <div class="vital-value" id="vital-gg">–</div>
+    </div>
+
+    <div class="vital-row">
+      <div class="vital-icon target">🎯</div>
+      <div class="vital-label">Trefferchance</div>
+      <div class="vital-value" id="vital-tc">–</div>
+    </div>
+  </div>
+
+  <!-- RECHTER BLOCK: Aufwertungen -->
+  <div id="vitalBonusPanel">
+    <div class="vital-title">Aufwertungen</div>
+
+    <div class="vb-row">
+      <div class="vb-label">(LE)</div>
+      <div class="vb-icon">❤️</div>
+      <div class="vb-crystals" data-stat="LE"></div>
+      <button class="vb-upgrade" data-stat="LE">▲</button>
+    </div>
+
+    <div class="vb-row">
+      <div class="vb-label">(Rüst)</div>
+      <div class="vb-icon">🛡️</div>
+      <div class="vb-crystals" data-stat="RUEST"></div>
+      <button class="vb-upgrade" data-stat="RUEST">▲</button>
+    </div>
+
+    <div class="vb-row" id="vb-dynamic-row">
+      <div class="vb-label" id="vb-dyn-label">(AU)</div>
+      <div class="vb-icon" id="vb-dyn-icon">⚡</div>
+      <div class="vb-crystals" data-stat="DYN"></div>
+      <button class="vb-upgrade" data-stat="DYN">▲</button>
+    </div>
+
+    <div class="vb-row">
+      <div class="vb-label">(GG)</div>
+      <div class="vb-icon">🧠</div>
+      <div class="vb-crystals" data-stat="GG"></div>
+      <button class="vb-upgrade" data-stat="GG">▲</button>
+    </div>
+
+    <div class="vb-row">
+      <div class="vb-label">(TC)</div>
+      <div class="vb-icon">🎯</div>
+      <div class="vb-crystals" data-stat="TC"></div>
+      <button class="vb-upgrade" data-stat="TC">▲</button>
+    </div>
+  </div>
 
 </div>
 
@@ -2162,214 +2481,142 @@ KAMPF + RÜSTUNGSSYSTEM
 ============================ -->
 <div id="kampfWrapper">
 
-    <!-- LINKER BLOCK: Angriffsblock -->
-    <div id="angriffsBlock" class="kampf-panel">
-        <div class="vital-title">Angriffsblock</div>
+  <!-- LINKER BLOCK: Angriffsblock -->
+  <div id="angriffsBlock" class="kampf-panel">
+    <div class="vital-title">Angriffsblock</div>
 
-        <div class="kampf-row">
-            <div class="kampf-label">Angriff</div>
-            <div class="kampf-value" id="kampf-angriff">–</div>
-        </div>
-
-        <div class="kampf-row">
-            <div class="kampf-label">Verteidigung</div>
-            <div class="kampf-value" id="kampf-verteidigung">–</div>
-        </div>
-
-        <div class="kampf-row">
-            <div class="kampf-label">Abwehr</div>
-            <div class="kampf-value" id="kampf-abwehr">–</div>
-        </div>
-
-        <div class="kampf-row">
-            <div class="kampf-label">Gegenangriff</div>
-            <div class="kampf-value" id="kampf-gegenangriff">–</div>
-        </div>
-
-        <div class="kampf-row">
-            <div class="kampf-label">Statusveränderung</div>
-            <div class="kampf-value" id="kampf-status">–</div>
-        </div>
-
-        <div class="kampf-row">
-            <div class="kampf-label">Verbesserte Anpassungen</div>
-            <div class="kampf-value" id="kampf-anpassungen">–</div>
-        </div>
-        <div id="anmerkungBlock">
-    <div class="anmerkung-title">Anmerkung</div>
-    <textarea id="anmerkungText" maxlength="500"></textarea>
-    <div id="anmerkungCounter">0 / 500</div>
-</div>
+    <div class="kampf-row">
+      <div class="kampf-label">Angriff</div>
+      <div class="kampf-value" id="kampf-angriff">–</div>
     </div>
 
-
-
-
-
-
-
-
-
-    <!-- RECHTER BLOCK: Rüstungssystem -->
-    <div id="ruestungsBlock">
-        <div class="vital-title">Rüstungssystem</div>
-
-        <div id="armorSystem">
-
-            <!-- Linke Seite -->
-            <div id="armorLeft">
-
-                <div id="zoneSelectGrid">
-                    <div data-value="1">1. Kopf</div>
-                    <div data-value="2">2. Hals</div>
-                    <div data-value="3">3. Oberkörper</div>
-                    <div data-value="4">4. Linker Arm</div>
-                    <div data-value="5">5. Rechter Arm</div>
-                    <div data-value="6">6. Unterkörper</div>
-                    <div data-value="7">7. Linkes Bein</div>
-                    <div data-value="8">8. Rechtes Bein</div>
-                </div>
-
-                <input id="damageInput" type="number" placeholder="Schaden">
-                <button onclick="applyDamage()">Treffer anwenden</button>
-                <button onclick="openArmorPopup()">Rüstwert</button>
-
-                <div id="zoneList"></div>
-            </div>
-
-            <!-- Rechte Seite: Figur -->
-            <div id="armorRight">
-                <svg id="zoneFigure" viewBox="0 0 120 360">
-
-                    <!-- Körper-Silhouette -->
-                    <path d="M60 10
-                             C45 10, 40 25, 40 40
-                             L40 70
-                             C40 85, 30 95, 30 110
-                             L30 160
-                             C30 180, 40 200, 40 220
-                             L40 260
-                             C40 280, 50 300, 60 300
-                             C70 300, 80 280, 80 260
-                             L80 220
-                             C80 200, 90 180, 90 160
-                             L90 110
-                             C90 95, 80 85, 80 70
-                             L80 40
-                             C80 25, 75 10, 60 10
-                             Z"
-                          fill="#0d0d0d" stroke="#3a1f47" stroke-width="2"/>
-
-                    <!-- Kopf -->
-                    <circle id="zone1" cx="60" cy="35" r="22"
-                            class="zone-click armor-zone"/>
-
-                    <!-- Hals -->
-                    <rect id="zone2" x="50" y="55" width="20" height="18" rx="4"
-                          class="zone-click armor-zone"/>
-
-                    <!-- Brust / Oberkörper -->
-                    <rect id="zone3" x="35" y="75" width="50" height="70" rx="10"
-                          class="zone-click armor-zone"/>
-
-                    <!-- Linker Arm -->
-                    <rect id="zone4" x="20" y="80" width="12" height="80" rx="6"
-                          class="zone-click armor-zone"/>
-
-                    <!-- Rechter Arm -->
-                    <rect id="zone5" x="88" y="80" width="12" height="80" rx="6"
-                          class="zone-click armor-zone"/>
-
-                    <!-- Unterkörper -->
-                    <rect id="zone6" x="45" y="150" width="30" height="40" rx="8"
-                          class="zone-click armor-zone"/>
-
-                    <!-- Linkes Bein -->
-                    <rect id="zone7" x="48" y="190" width="12" height="120" rx="6"
-                          class="zone-click  armor-zone"/>
-
-                    <!-- Rechtes Bein -->
-                    <rect id="zone8" x="60" y="190" width="12" height="120" rx="6"
-                          class="zone-click armor-zone"/>
-
-                </svg>
-            </div>
-
-        </div>
-
-        <div id="armorPopup" class="popup-bg">
-            <div class="popup">
-                <h3 id="popupTitle"></h3>
-                <div id="popupContent"></div>
-                <button onclick="confirmArmorAction()">Bestätigen</button>
-                <button onclick="closeArmorPopup()">Abbrechen</button>
-            </div>
-        </div>
-
+    <div class="kampf-row">
+      <div class="kampf-label">Verteidigung</div>
+      <div class="kampf-value" id="kampf-verteidigung">–</div>
     </div>
 
-</div>
+    <div class="kampf-row">
+      <div class="kampf-label">Abwehr</div>
+      <div class="kampf-value" id="kampf-abwehr">–</div>
+    </div>
 
+    <div class="kampf-row">
+      <div class="kampf-label">Gegenangriff</div>
+      <div class="kampf-value" id="kampf-gegenangriff">–</div>
+    </div>
+
+    <div class="kampf-row">
+      <div class="kampf-label">Statusveränderung</div>
+      <div class="kampf-value" id="kampf-status">–</div>
+    </div>
+
+    <div class="kampf-row">
+      <div class="kampf-label">Verbesserte Anpassungen</div>
+      <div class="kampf-value" id="kampf-anpassungen">–</div>
+    </div>
+
+    <div id="anmerkungBlock">
+      <div class="anmerkung-title">Anmerkung</div>
+      <textarea id="anmerkungText" maxlength="500"></textarea>
+      <div id="anmerkungCounter">0 / 500</div>
+    </div>
+  </div>
+
+  <!-- RECHTER BLOCK: Rüstungssystem -->
+  <div id="ruestungsBlock">
+    <div class="vital-title">Rüstungssystem</div>
+
+    <div id="armorSystem">
+
+      <!-- Linke Seite -->
+      <div id="armorLeft">
+
+        <div id="zoneSelectGrid">
+          <div data-value="1">1. Kopf</div>
+          <div data-value="2">2. Hals</div>
+          <div data-value="3">3. Oberkörper</div>
+          <div data-value="4">4. Linker Arm</div>
+          <div data-value="5">5. Rechter Arm</div>
+          <div data-value="6">6. Unterkörper</div>
+          <div data-value="7">7. Linkes Bein</div>
+          <div data-value="8">8. Rechtes Bein</div>
+        </div>
+
+        <input id="damageInput" type="number" placeholder="Schaden">
+        <button onclick="applyDamage()">Treffer anwenden</button>
+        <button onclick="openArmorPopup()">Rüstwert</button>
+
+        <div id="zoneList"></div>
+      </div>
+
+      <!-- Rechte Seite: Figur -->
+      <div id="armorRight">
+        <svg id="zoneFigure" viewBox="0 0 120 360">
+
+          <!-- Körper-Silhouette -->
+          <path d="M60 10
+                   C45 10, 40 25, 40 40
+                   L40 70
+                   C40 85, 30 95, 30 110
+                   L30 160
+                   C30 180, 40 200, 40 220
+                   L40 260
+                   C40 280, 50 300, 60 300
+                   C70 300, 80 280, 80 260
+                   L80 220
+                   C80 200, 90 180, 90 160
+                   L90 110
+                   C90 95, 80 85, 80 70
+                   L80 40
+                   C80 25, 75 10, 60 10
+                   Z"
+                fill="#0d0d0d" stroke="#3a1f47" stroke-width="2"/>
+
+          <!-- Kopf -->
+          <circle id="zone1" cx="60" cy="35" r="22" class="armor-zone"/>
+
+          <!-- Hals -->
+          <rect id="zone2" x="50" y="55" width="20" height="18" rx="4" class="armor-zone"/>
+
+          <!-- Brust -->
+          <rect id="zone3" x="35" y="75" width="50" height="70" rx="10" class="armor-zone"/>
+
+          <!-- Linker Arm -->
+          <rect id="zone4" x="20" y="80" width="12" height="80" rx="6" class="armor-zone"/>
+
+          <!-- Rechter Arm -->
+          <rect id="zone5" x="88" y="80" width="12" height="80" rx="6" class="armor-zone"/>
+
+          <!-- Unterkörper -->
+          <rect id="zone6" x="45" y="150" width="30" height="40" rx="8" class="armor-zone"/>
+
+          <!-- Linkes Bein -->
+          <rect id="zone7" x="48" y="190" width="12" height="120" rx="6" class="armor-zone"/>
+
+          <!-- Rechtes Bein -->
+          <rect id="zone8" x="60" y="190" width="12" height="120" rx="6" class="armor-zone"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 <!-- ============================
-INVENTAR (ergänzt)
+ARMOR POPUP
 ============================ -->
-<div id="inventoryWrapper">
-  <div id="inventoryPanel">
-    <div class="inv-column">
-      <div class="inv-title">Klein</div>
-      <button class="inv-sort" id="sort-small">Sortieren</button>
-      <div class="inv-list" id="inv-small"></div>
-    </div>
-
-    <div class="inv-column">
-      <div class="inv-title">Mittel</div>
-      <button class="inv-sort" id="sort-medium">Sortieren</button>
-      <div class="inv-list" id="inv-medium"></div>
-    </div>
-
-    <div class="inv-column">
-      <div class="inv-title">Groß</div>
-      <button class="inv-sort" id="sort-large">Sortieren</button>
-      <div class="inv-list" id="inv-large"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Inventar Popups -->
-<div id="invActionPopup" class="popup-bg" aria-hidden="true">
-  <div class="popup" role="dialog" aria-modal="true">
-    <h3>Aktion wählen</h3>
-    <div style="display:flex;gap:8px;">
-      <button id="invSellBtn">Verkaufen</button>
-      <button id="invDiscardBtn">Wegwerfen</button>
-      <button id="invCancelBtn">Abbrechen</button>
-    </div>
-  </div>
-</div>
-
-<div id="invSellPopup" class="popup-bg" aria-hidden="true">
-  <div class="popup" role="dialog" aria-modal="true">
-    <h3>Verkauf</h3>
-    <label for="sellGold">Gold</label>
-    <input id="sellGold" type="number" min="0" value="0">
-    
-    <label for="sellSilver">Silber</label>
-    <input id="sellSilver" type="number" min="0" value="0">
-    
-    <label for="sellCopper">Kupfer</label>
-    <input id="sellCopper" type="number" min="0" value="0">
-    <label for="sellPin">PIN (vom DM)</label>
-    <input id="sellPin" type="text" maxlength="4" value="">
-    <div style="display:flex;gap:8px;margin-top:10px;">
-      <button id="sellConfirmBtn">Verkaufen</button>
-      <button id="sellCancelBtn">Abbrechen</button>
-    </div>
+<div id="armorPopup" class="popup-bg hidden">
+  <div class="popup">
+    <h3 id="popupTitle"></h3>
+    <div id="popupContent"></div>
+    <button onclick="confirmArmorAction()">Bestätigen</button>
+    <button onclick="closeArmorPopup()">Abbrechen</button>
   </div>
 </div>
 
 <!-- ============================
-POPUP: Cloud-Laden (Name + Zuname)
+POPUP: Cloud-Laden (Name + Titel)
 ============================ -->
 <div id="uf-load-popup-bg" class="uf-popup-bg" style="display:none;">
   <div id="uf-load-popup" class="uf-popup">
@@ -2383,45 +2630,258 @@ POPUP: Cloud-Laden (Name + Zuname)
 
     <div style="margin-top:12px; display:flex; justify-content:space-between;">
       <button id="uf-load-cancel" class="uf-btn">Abbrechen</button>
-      <button onclick="triggerLoadChar()">Charakter laden</button>
+      <button onclick="triggerLoadChar()" class="uf-btn">Laden</button>
     </div>
   </div>
 </div>
 
 
 <!-- ============================
-UNDRA FOOTER (NEU)
+UNDRA FOOTER (NEU, BEREINIGT)
 ============================ -->
 <div id="undra-footer">
+    
 
   <!-- LINKS: Charakter Laden -->
   <button onclick="openLoadPopup()" class="uf-btn">Charakter laden</button>
 
-  <!-- MITTE: SP & ATB -->
+  <!-- MITTE: SP, ATB, WÄHRUNG -->
   <div id="uf-center">
+
+    <!-- SP -->
     <div class="uf-value">
       <span class="uf-label">SP:</span>
       <span id="uf-sp-used">0</span> /
       <span id="uf-sp-left">0</span>
     </div>
 
+    <!-- ATB -->
     <div class="uf-value">
       <span class="uf-label">ATB:</span>
       <span id="uf-atb-used">0</span> /
       <span id="uf-atb-left">0</span>
     </div>
+
+    <!-- WÄHRUNG -->
+    <div id="uf-currency">
+      <div class="uf-value">
+        <span class="uf-label">Gold:</span>
+        <span id="money-gold">0</span>
+      </div>
+
+      <div class="uf-value">
+        <span class="uf-label">Silber:</span>
+        <span id="money-silver">0</span>
+      </div>
+
+      <div class="uf-value">
+        <span class="uf-label">Kupfer:</span>
+        <span id="money-copper">0</span>
+      </div>
+    </div>
+
   </div>
 
-  <!-- RECHTS: Speichern -->
-  <button id="uf-save" class="uf-btn">Speichern</button>
-  
+  <!-- ============================
+POPUP: SPEICHERN
+============================ -->
+<div id="savePopup" class="uf-popup-bg" style="display:none;">
+  <div class="uf-popup">
+    <h2 class="uf-popup-title">Charakter speichern</h2>
+
+    <label class="uf-label">Name:</label>
+    <input id="save-name" class="uf-input" type="text">
+
+    <label class="uf-label">Titel:</label>
+    <input id="save-title" class="uf-input" type="text">
+
+    <div style="margin-top:12px; display:flex; justify-content:space-between;">
+      <button id="save-cancel" class="uf-btn">Abbrechen</button>
+      <button id="save-confirm" class="uf-btn">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<button id="uf-save" class="uf-btn" onclick="openSavePopup()">Speichern</button>
+
+<!-- ============================
+INVENTAR POPUP (NEU, BEREINIGT)
+============================ -->
+<div id="popup-inventar" class="undra-popup hidden">
+    
+  <div class="undra-popup-inner">
+
+    <div class="undra-popup-title">Inventar</div>
+
+    <!-- Kategorie-Schalter -->
+    <div class="inv-tabs">
+      <button onclick="showInvCategory('small')" class="undra-btn">Klein</button>
+      <button onclick="showInvCategory('medium')" class="undra-btn">Mittel</button>
+      <button onclick="showInvCategory('large')" class="undra-btn">Groß</button>
+    </div>
+
+    <!-- Klein -->
+    <div id="inv-cat-small" class="inv-category">
+      <div class="inv-title">Klein</div>
+      <button class="inv-sort" id="sort-small">Sortieren</button>
+      <div class="inv-list" id="inv-small"></div>
+    </div>
+
+    <!-- Mittel -->
+    <div id="inv-cat-medium" class="inv-category hidden">
+      <div class="inv-title">Mittel</div>
+      <button class="inv-sort" id="sort-medium">Sortieren</button>
+      <div class="inv-list" id="inv-medium"></div>
+    </div>
+
+    <!-- Groß -->
+    <div id="inv-cat-large" class="inv-category hidden">
+      <div class="inv-title">Groß</div>
+      <button class="inv-sort" id="sort-large">Sortieren</button>
+      <div class="inv-list" id="inv-large"></div>
+    </div>
+
+    <!-- Zusammenfassung -->
+    <div class="inv-summary">
+      <div class="inv-row">
+        <span class="inv-label">Klein:</span>
+        <span class="inv-count" id="inv-small-count">0/10</span>
+      </div>
+      <div class="inv-row">
+        <span class="inv-label">Mittel:</span>
+        <span class="inv-count" id="inv-medium-count">0/10</span>
+      </div>
+      <div class="inv-row">
+        <span class="inv-label">Groß:</span>
+        <span class="inv-count" id="inv-large-count">0/10</span>
+      </div>
+    </div>
+    <button class="undra-popup-close" onclick="closePopup('inventar')">Schließen</button>
+
+    <!-- ============================
+VERKAUFS-POPUP (EINZIGES!)
+============================ -->
+<div id="invSellPopup" class="uf-popup-bg hidden">
+  <div class="uf-popup">
+    <h2 class="uf-popup-title">Verkaufen</h2>
+
+    <label class="uf-label">Gold:</label>
+    <input id="sellGold" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">Silber:</label>
+    <input id="sellSilver" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">Kupfer:</label>
+    <input id="sellCopper" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">PIN:</label>
+    <input id="sellPin" class="uf-input" type="password" maxlength="4">
+
+    <div style="margin-top:12px; display:flex; justify-content:space-between;">
+      <button id="sellCancelBtn" class="uf-btn">Abbrechen</button>
+      <button id="sellConfirmBtn" class="uf-btn">Verkaufen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+POPUPS FÜR GRUNDDATEN / KURZBESCHREIBUNG / HINTERGRÜNDE / ETC.
+(LEERE SHELLS – werden durch JS gefüllt)
+============================ -->
+
+<div id="popup-grunddaten" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Grunddaten</div>
+    <div id="grunddaten-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('grunddaten')">Schließen</button>
+  </div>
+</div>
+
+<div id="popup-kurzbeschreibung" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Kurzbeschreibung</div>
+    <div id="kurzbeschreibung-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('kurzbeschreibung')">Schließen</button>
+  </div>
+</div>
+
+<div id="popup-hintergruende" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Hintergründe</div>
+    <div id="hintergruende-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('hintergruende')">Schließen</button>
+  </div>
+</div>
+
+<div id="popup-vornachteile" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Vor- und Nachteile</div>
+    <div id="vornachteile-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('vornachteile')">Schließen</button>
+  </div>
+</div>
+
+<div id="popup-wuerfel" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Würfel</div>
+    <div id="wuerfel-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('wuerfel')">Schließen</button>
+  </div>
+</div>
+
+<div id="popup-bonis" class="undra-popup hidden">
+  <div class="undra-popup-inner">
+    <div class="undra-popup-title">Bonis</div>
+    <div id="bonis-content"></div>
+    <button class="undra-popup-close" onclick="closePopup('bonis')">Schließen</button>
+  </div>
+</div>
+
+
+
+<div id="invSellPopup" class="uf-popup-bg hidden">
+  <div class="uf-popup">
+    <h2 class="uf-popup-title">Verkaufen</h2>
+
+    <label class="uf-label">Gold:</label>
+    <input id="sellGold" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">Silber:</label>
+    <input id="sellSilver" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">Kupfer:</label>
+    <input id="sellCopper" class="uf-input" type="number" min="0" value="0">
+
+    <label class="uf-label">PIN:</label>
+    <input id="sellPin" class="uf-input" type="password" maxlength="4">
+
+    <div style="margin-top:12px; display:flex; justify-content:space-between;">
+      <button id="sellCancelBtn" class="uf-btn">Abbrechen</button>
+      <button id="sellConfirmBtn" class="uf-btn">Verkaufen</button>
+    </div>
+  </div>
+</div>
+
+<div id="undra-alert" class="uf-popup-bg hidden">
+  <div class="uf-popup">
+    <h2 class="uf-popup-title" id="undra-alert-title">Hinweis</h2>
+    <div id="undra-alert-message" style="margin: 12px 0; color:#ffe7c2;"></div>
+
+    <div style="text-align:right;">
+      <button class="uf-btn" onclick="closeUndraAlert()">OK</button>
+    </div>
+  </div>
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("sellConfirmBtn").addEventListener("click", confirmSellFromPopup);
+  document.getElementById("sellCancelBtn").addEventListener("click", closeSellPopup);
+});
 /* ============================
 STATE & LOCAL STORAGE (char‑basiert)
 ============================ */
-window.char = window.char || {};   // char global verfügbar machen
+window.char = window.char || {};
 
 function loadFromLocal() {
   try {
@@ -2433,7 +2893,7 @@ function loadFromLocal() {
         return;
       }
     }
-  } catch(e){
+  } catch (e) {
     console.warn("Lokale Daten ungültig, Fallback.");
   }
 
@@ -2457,16 +2917,12 @@ function loadFromLocal() {
 function saveToLocal() {
   try {
     localStorage.setItem("char", JSON.stringify(window.char));
-  } catch(e){
+  } catch (e) {
     console.warn("Konnte lokalen Speicher nicht schreiben.", e);
   }
 }
 
 loadFromLocal();
-
-
-
-
 
 /* ============================
 CURRENCY ENGINE (char‑basiert)
@@ -2483,7 +2939,6 @@ const currencyEngine = {
 
     this.render();
 
-    // In char zurückschreiben
     char.currency.gold = this.gold;
     char.currency.silver = this.silver;
     char.currency.copper = this.copper;
@@ -2518,9 +2973,6 @@ const currencyEngine = {
   }
 };
 
-
-
-
 /* ============================
 VITALWERTE
 ============================ */
@@ -2528,32 +2980,34 @@ function updateVitalsDisplayFromState() {
   const v = char.vitals || {};
   const u = char.upgrades || {};
 
-  const set = (id, value) => {
+  const setText = (id, value) => {
     const el = document.getElementById(id);
     if (el) el.textContent = value;
   };
 
-  // Vitalwerte
-  set("vital-le", v.LE || 0);
-  set("vital-dyn", v.AU || 0);       // Ausdauer / Dynamik
-  set("vital-ruest", v.RUEST || 0);
-  set("vital-gg", v.GG || 0);
-  set("vital-tc", v.TC || 0);
+  setText("vital-le", v.LE || 0);
+  setText("vital-dyn", v.AU || 0);
+  setText("vital-ruest", v.RUEST || 0);
+  setText("vital-gg", v.GG || 0);
+  setText("vital-tc", v.TC || 0);
 
-  // Aufwertungen
-  set("upgrade-le", u.LE || 0);
-  set("upgrade-ruest", u.RUEST || 0);
-  set("upgrade-au", u.AU || 0);
-  set("upgrade-gg", u.GG || 0);
-  set("upgrade-tc", u.TC || 0);
+  setText("upgrade-le", u.LE || 0);
+  setText("upgrade-ruest", u.RUEST || 0);
+  setText("upgrade-au", u.AU || 0);
+  setText("upgrade-gg", u.GG || 0);
+  setText("upgrade-tc", u.TC || 0);
 }
 
 /* ============================
-INVENTAR
+INVENTAR (RENDER + VERKAUF)
 ============================ */
+let sellContext = { category: null, index: null };
+
 function renderInventoryColumn(container, category) {
   if (!container) return;
   container.innerHTML = "";
+
+  let used = 0;
 
   for (let i = 0; i < 10; i++) {
     const row = document.createElement("div");
@@ -2563,15 +3017,21 @@ function renderInventoryColumn(container, category) {
     input.value = char.inventory[category][i] || "";
     input.style.flex = "1";
 
+    if (input.value.trim() !== "") used++;
+
     input.addEventListener("change", () => {
       char.inventory[category][i] = input.value.trim();
       saveToLocal();
+      updateInventoryCounters();
     });
 
     input.setAttribute("draggable", "true");
 
     input.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("text/plain", JSON.stringify({ category, index: i }));
+      e.dataTransfer.setData(
+        "text/plain",
+        JSON.stringify({ category, index: i })
+      );
     });
 
     input.addEventListener("dragover", e => e.preventDefault());
@@ -2587,25 +3047,194 @@ function renderInventoryColumn(container, category) {
 
         saveToLocal();
         renderInventory();
-      } catch (err) {}
+      } catch (err) {
+        console.warn("Fehler beim Drag&Drop im Inventar:", err);
+      }
     });
 
+    const sellBtn = document.createElement("button");
+    sellBtn.className = "inv-sell-btn";
+    sellBtn.textContent = "$";
+    sellBtn.onclick = () => openSellPopup(category, i);
+
     row.appendChild(input);
+    row.appendChild(sellBtn);
     container.appendChild(row);
   }
+
+  char.inventory[category + "_used"] = used;
 }
 
 function renderInventory() {
   renderInventoryColumn(document.getElementById("inv-small"), "small");
   renderInventoryColumn(document.getElementById("inv-medium"), "medium");
   renderInventoryColumn(document.getElementById("inv-large"), "large");
+
+  updateInventoryCounters();
 }
 
+function updateInventoryCounters() {
+  const small = document.getElementById("inv-small-count");
+  const medium = document.getElementById("inv-medium-count");
+  const large = document.getElementById("inv-large-count");
 
+  if (small) small.textContent = `${char.inventory.small_used || 0}/10`;
+  if (medium) medium.textContent = `${char.inventory.medium_used || 0}/10`;
+  if (large) large.textContent = `${char.inventory.large_used || 0}/10`;
+}
 
+/* ============================
+VERKAUFS-POPUP
+============================ */
+function openSellPopup(category, index) {
+  sellContext.category = category;
+  sellContext.index = index;
 
+  const popup = document.getElementById("invSellPopup");
+  if (popup) popup.classList.remove("hidden");
 
+  document.getElementById("sellGold").value = "0";
+  document.getElementById("sellSilver").value = "0";
+  document.getElementById("sellCopper").value = "0";
+  document.getElementById("sellPin").value = "";
+}
 
+function closeSellPopup() {
+  const popup = document.getElementById("invSellPopup");
+  if (popup) popup.classList.add("hidden");
+}
+
+function confirmSellFromPopup() {
+  const { category, index } = sellContext;
+  if (category == null || index == null) return;
+
+  const item = char.inventory[category][index];
+  if (!item || item.trim() === "") {
+    undraAlert("Kein Gegenstand in diesem Slot.");
+    return;
+  }
+
+  const gold = parseInt(document.getElementById("sellGold").value || "0", 10);
+  const silver = parseInt(document.getElementById("sellSilver").value || "0", 10);
+  const copper = parseInt(document.getElementById("sellCopper").value || "0", 10);
+  const pin = document.getElementById("sellPin").value || "";
+
+  if ((gold + silver + copper) <= 0) {
+    undraAlert("Bitte einen gültigen Preis eingeben.");
+    return;
+  }
+
+  const DM_PIN = "1234";
+  if (pin !== DM_PIN) {
+    undraAlert("Falsche PIN.");
+    return;
+  }
+
+  const totalCopper = gold * 10000 + silver * 100 + copper;
+  currencyEngine.addCopper(totalCopper);
+
+  char.inventory[category][index] = "";
+
+  renderInventory();
+  saveToLocal();
+
+  savePage3ToCloud();
+
+  closeSellPopup();
+}
+
+/* Event-Bindings */
+document.getElementById("sellConfirmBtn").addEventListener("click", confirmSellFromPopup);
+document.getElementById("sellCancelBtn").addEventListener("click", closeSellPopup);
+document.addEventListener("DOMContentLoaded", () => {
+  const sellConfirmBtn = document.getElementById("sellConfirmBtn");
+  const sellCancelBtn = document.getElementById("sellCancelBtn");
+
+  if (sellConfirmBtn) {
+    sellConfirmBtn.addEventListener("click", confirmSellFromPopup);
+  } else {
+    console.warn("sellConfirmBtn nicht gefunden!");
+  }
+
+  if (sellCancelBtn) {
+    sellCancelBtn.addEventListener("click", closeSellPopup);
+  } else {
+    console.warn("sellCancelBtn nicht gefunden!");
+  }
+
+  // Rest deiner DOM-Initialisierung …
+});
+
+/* ============================
+VERKAUFS-POPUP
+============================ */
+function openSellPopup(category, index) {
+  sellContext.category = category;
+  sellContext.index = index;
+
+  const popup = document.getElementById("invSellPopup");
+  if (popup) popup.classList.remove("hidden");
+
+  document.getElementById("sellGold").value = "0";
+  document.getElementById("sellSilver").value = "0";
+  document.getElementById("sellCopper").value = "0";
+  document.getElementById("sellPin").value = "";
+}
+
+function closeSellPopup() {
+  const popup = document.getElementById("invSellPopup");
+  if (popup) popup.classList.add("hidden");
+}
+
+function confirmSellFromPopup() {
+  const { category, index } = sellContext;
+  if (category == null || index == null) return;
+
+  const item = char.inventory[category][index];
+  if (!item || item.trim() === "") {
+    undraAlert("Kein Gegenstand in diesem Slot.");
+    return;
+  }
+
+  const gold = parseInt(document.getElementById("sellGold").value || "0", 10);
+  const silver = parseInt(document.getElementById("sellSilver").value || "0", 10);
+  const copper = parseInt(document.getElementById("sellCopper").value || "0", 10);
+  const pin = document.getElementById("sellPin").value || "";
+
+  if ((gold + silver + copper) <= 0) {
+    undraAlert("Bitte einen gültigen Preis eingeben.");
+    return;
+  }
+
+  const DM_PINS = [
+  "1023","3849","5561","9982","4410","7721","6304","2199","8450","1102",
+  "9033","6678","1209","4788","5501","3344","9012","7780","6623","8891",
+  "2301","9910","4567","8123","7004","6409","5522","1288","9901","3144",
+  "2048","7777","8888","9999","1234","4321","2468","1357","8080","9090",
+  "1111","2222","3333","4444","5555","6666","1212","3434","5656","7878",
+  "1010","2020","3030","4040","5050","6060","7070","8081","9091","9191",
+  "1717","1818","1919","2021","2121","2323","2424","2525","2626","2727",
+  "2828","2929","3131","3232","3535","3636","3737","3838","3939","4041",
+  "4141","4242","4343","4545","4646","4747","4848","4949","5051","5151",
+  "5252","5353","5454","5657","5757","5858","5959","6061","6161","6262"
+];
+  if (!DM_PINS.includes(pin)) {
+  undraAlert("Falsche PIN.");
+  return;
+}
+  const totalCopper = gold * 10000 + silver * 100 + copper;
+  currencyEngine.addCopper(totalCopper);
+
+  char.inventory[category][index] = "";
+
+  renderInventory();
+  saveToLocal();
+
+  // WICHTIG: Cloudflare-Speichern, nicht Gist!
+  savePage3ToCloud();
+
+  closeSellPopup();
+}
 
 /* ============================
 ZONEN & RÜSTUNGSSYSTEM
@@ -2634,7 +3263,7 @@ function renderZonesFromState() {
 function applyDamage() {
   const selected = document.querySelector("#zoneSelectGrid .active-zone");
   const input = document.getElementById("damageInput");
-  const damage = parseInt(input?.value || "0");
+  const damage = parseInt(input?.value || "0", 10);
 
   if (!selected || isNaN(damage)) return;
 
@@ -2669,7 +3298,7 @@ function openArmorPopup() {
 function confirmArmorAction() {
   const selected = document.querySelector("#zoneSelectGrid .active-zone");
   const input = document.getElementById("armorValueInput");
-  const value = parseInt(input?.value || "0");
+  const value = parseInt(input?.value || "0", 10);
 
   if (!selected || isNaN(value)) return;
 
@@ -2689,7 +3318,6 @@ function closeArmorPopup() {
   document.getElementById("armorPopup").style.display = "none";
 }
 
-/* Zonen-Auswahl + SVG-Sync */
 function highlightSvgZone(zoneId) {
   document
     .querySelectorAll(".armor-zone")
@@ -2699,115 +3327,199 @@ function highlightSvgZone(zoneId) {
   if (svgZone) svgZone.classList.add("active-zone-svg");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("#zoneSelectGrid div").forEach(el => {
-    el.addEventListener("click", () => {
-      document
-        .querySelectorAll("#zoneSelectGrid div")
-        .forEach(d => d.classList.remove("active-zone"));
-
-      el.classList.add("active-zone");
-      highlightSvgZone(el.getAttribute("data-value"));
-    });
-  });
-
-  document.querySelectorAll(".armor-zone").forEach(svg => {
-    svg.addEventListener("click", () => {
-      const zoneId = svg.id.replace("zone", "");
-
-      document
-        .querySelectorAll("#zoneSelectGrid div")
-        .forEach(d => d.classList.remove("active-zone"));
-
-      const match = document.querySelector(
-        `#zoneSelectGrid div[data-value="${zoneId}"]`
-      );
-
-      if (match) match.classList.add("active-zone");
-
-      highlightSvgZone(zoneId);
-    });
-  });
-});
-
-
-
-
-
-
 /* ============================
-ATTRIBUTE / SEITE 3 APPLY
+ATTRIBUTE-NORMALISIERUNG
 ============================ */
-function undraApplyStateToPage3() {
-  const set = (id, value) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
+function normalizeAttributes(data) {
+  const raw = data.attributes || data.attrs || data.meta?.attributes || {};
+
+  const map = {
+    MU: ["Mut", "MU"],
+    FF: ["Fingerfertigkeit", "FF"],
+    KK: ["Körperkraft", "KK"],
+    KB: ["Körperbewusstsein", "KB"],
+    CH: ["Charisma", "CH"],
+    GZ: ["Geistiger Zustand", "GZ"],
+    IT: ["Intuition", "IT"],
+    VE: ["Verteidigung", "VE"],
+    FK: ["Fernkampf", "FK"],
+    IN: ["Intelligenz", "IN"],
+    GE: ["Gewandtheit", "GE"],
+    KO: ["Konstitution", "KO"],
+    SS: ["Sozialstatus", "SS"],
+    AN: ["Angriff", "AN"],
+    AS: ["Abwehrschlag", "AS"],
+    TC: ["Trefferchance", "TC"],
+    TE: ["Technik", "TE"]
   };
 
-  const a = char.attributes || {};
+  const result = {};
+  for (const key in map) {
+    const [long, short] = map[key];
+    result[key] = raw[long] ?? raw[short] ?? 0;
+  }
 
-  set("val-ff", a.FF || 0);
-  set("val-kk", a.KK || 0);
-  set("val-kb", a.KB || 0);
-  set("val-ch", a.CH || 0);
-  set("val-gz", a.GZ || 0);
-  set("val-it", a.IT || 0);
-  set("val-ve", a.VE || 0);
-  set("val-fk", a.FK || 0);
-  set("val-ge", a.GE || 0);
-  set("val-ko", a.KO || 0);
-  set("val-ss", a.SS || 0);
-  set("val-an", a.AN || 0);
-  set("val-as", a.AS || 0);
-  set("val-tc", a.TC || 0);
-  set("val-te", a.TE || 0);
+  data.attributes = result;
+  return data;
+}
+
+/* ============================
+STATE → UI (ATTRIBUTES)
+============================ */
+function setAttrSlot(id, value) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.textContent = value;
+    return;
+  }
+
+  const slot = document.querySelector(
+    `.attribute-slot[data-short="${id.replace("val-", "").toUpperCase()}"]`
+  );
+  if (slot) {
+    const level = slot.querySelector(".attr-level");
+    if (level) level.textContent = value;
+    else console.warn("setAttrSlot(): .attr-level fehlt in Slot:", id);
+  } else {
+    console.warn("setAttrSlot(): Slot nicht gefunden für:", id);
+  }
+}
+
+function undraApplyStateToPage3() {
+  const a = (window.char && window.char.attributes) || {};
+
+  setAttrSlot("val-mu", a.MU || 0);
+  setAttrSlot("val-ff", a.FF || 0);
+  setAttrSlot("val-kk", a.KK || 0);
+  setAttrSlot("val-kb", a.KB || 0);
+  setAttrSlot("val-ch", a.CH || 0);
+  setAttrSlot("val-gz", a.GZ || 0);
+  setAttrSlot("val-it", a.IT || 0);
+  setAttrSlot("val-ve", a.VE || 0);
+  setAttrSlot("val-fk", a.FK || 0);
+  setAttrSlot("val-in", a.IN || 0);
+  setAttrSlot("val-ge", a.GE || 0);
+  setAttrSlot("val-ko", a.KO || 0);
+  setAttrSlot("val-ss", a.SS || 0);
+  setAttrSlot("val-an", a.AN || 0);
+  setAttrSlot("val-as", a.AS || 0);
+  setAttrSlot("val-tc", a.TC || 0);
+  setAttrSlot("val-te", a.TE || 0);
 
   updateVitalsDisplayFromState();
 }
 
+
 /* ============================
-CLOUD SAVE / LOAD (ENTFERNT)
+CLOUD SAVE (FINAL)
 ============================ */
-// Dieser Block wurde vollständig entfernt,
-// da Seite 3 künftig über GitHub Gist lädt und speichert.
+async function savePage3ToCloud() {
+  const name = document.getElementById("save-name").value.trim();
+  const title = document.getElementById("save-title").value.trim();
 
+  if (!name || !title) {
+    undraAlert("Verkauf erfolgreich.");
+    return;
+  }
 
+  const filename = `undra_${name.toLowerCase()}_${title.toLowerCase()}`;
+  const url = `https://undra.djdrear.workers.dev/save/${filename}`;
 
+  const payload = {
+    ...window.char,
+    meta: { name, title }
+  };
 
-async function loadPage3FromGist(name, title) {
-  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}.json`;
+  console.log("💾 Speichere:", url, payload);
 
   try {
-    const res = await fetch("https://api.github.com/users/djdrear/gists");
-    const gists = await res.json();
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-    if (!Array.isArray(gists)) {
-      alert("Konnte Gist-Liste nicht laden.");
+    const text = await res.text();
+    console.log("Antwort:", text);
+
+    if (!res.ok) {
+      undraAlert("Fehler beim Speichern:\n" + text);
       return;
     }
 
-    let rawUrl = null;
+    closeSavePopup();
+    undraAlert(`Charakter "${name}" erfolgreich gespeichert.`);
+  } catch (err) {
+    console.error("Speicherfehler:", err);
+    undraAlert("Netzwerkfehler beim Speichern.");
+  }
+}
 
-    for (const gist of gists) {
-      const files = gist.files || {};
-      for (const key in files) {
-        if (key.toLowerCase() === filename) {
-          rawUrl = files[key].raw_url;
-          break;
-        }
-      }
-      if (rawUrl) break;
-    }
+function openSavePopup() {
+  const popup = document.getElementById("savePopup");
+  popup.style.display = "flex";
 
-    if (!rawUrl) {
-      alert(`Charakter "${name} ${title}" nicht gefunden.`);
+  const meta = window.char?.meta || {};
+  document.getElementById("save-name").value = meta.name || "";
+  document.getElementById("save-title").value = meta.title || "";
+}
+
+function closeSavePopup() {
+  document.getElementById("savePopup").style.display = "none";
+}
+
+document.getElementById("save-confirm").addEventListener("click", savePage3ToCloud);
+document.getElementById("save-cancel").addEventListener("click", closeSavePopup);
+
+function openLoadPopup() {
+  document.getElementById("uf-load-popup-bg").style.display = "flex";
+}
+
+function closeLoadPopup() {
+  document.getElementById("uf-load-popup-bg").style.display = "none";
+}
+
+function triggerLoadChar() {
+  const name = document.getElementById("uf-load-name").value.trim();
+  const title = document.getElementById("uf-load-title").value.trim();
+
+  if (!name || !title) {
+    undraAlert("Bitte Name und Titel eingeben.");
+    return;
+  }
+
+  closeLoadPopup();
+  loadPage3FromCloud(name, title);
+}
+
+ /* ============================================================
+CLOUD LOAD (FINAL)
+============================================================ */
+
+async function loadPage3FromCloud(name, title) {
+  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}`;
+  const url = `https://undra.djdrear.workers.dev/load/${filename}`;
+
+  console.log("🌐 Lade aus Cloud:", url);
+
+  try {
+    const res = await fetch(url);
+
+    console.log("Status:", res.status);
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn("Fehlertext:", text);
+      undraAlert(`Charakter "${name} ${title}" nicht gefunden.\n\nStatus ${res.status}\n${text}`);
       return;
     }
 
-    const dataRes = await fetch(rawUrl);
-    const data = await dataRes.json();
+    let data = await res.json();
+    console.log("📦 Geladene Daten (roh):", data);
 
-    // Fallbacks ergänzen
+    data = normalizeAttributes(data);
+    console.log("📦 Geladene Daten (normalisiert):", data);
+
+    // ======= Fallbacks =======
     data.meta = data.meta || { name, title };
     data.currency = data.currency || { gold: 0, silver: 0, copper: 0 };
     data.inventory = data.inventory || {
@@ -2818,254 +3530,146 @@ async function loadPage3FromGist(name, title) {
     data.vitals = data.vitals || {};
     data.upgrades = data.upgrades || {};
     data.zones = data.zones || {
-      Z1: 0, Z2: 0, Z3: 0, Z4: 0, Z5: 0, Z6: 0, Z7: 0, Z8: 0
+      Z1: 0, Z2: 0, Z3: 0, Z4: 0,
+      Z5: 0, Z6: 0, Z7: 0, Z8: 0
     };
 
+    // ⭐ WICHTIG: Merkmale-Fallback
+    data.merkmale = data.merkmale || {
+      age: "",
+      height: "",
+      weight: "",
+      eyes: "",
+      hair: "",
+      voice: "",
+      armor: "",
+      special: ""
+    };
+
+    // ======= State übernehmen =======
     window.char = JSON.parse(JSON.stringify(data));
     saveToLocal();
     renderAll();
 
-    alert(`Charakter "${char.meta.name}" erfolgreich geladen.`);
+    const headerName = document.getElementById("undra-char-name");
+    if (headerName && window.char.meta) {
+      headerName.textContent = `${window.char.meta.name} ${window.char.meta.title}`;
+    }
+
+    undraAlert(`Charakter "${window.char.meta.name}" erfolgreich geladen.`);
   } catch (err) {
-    console.error(err);
-    alert("Fehler beim Laden aus Gist.");
+    console.error("Netzwerk-/Cloud-/Script-Fehler:", err);
+    undraAlert("Fehler beim Laden aus Cloudflare / Script (Details in Konsole).");
   }
 }
-async function savePage3ToGist() {
-  const filename = `undra_${char.meta.name.trim().toLowerCase()}_${char.meta.title.trim().toLowerCase()}.json`;
-  const token = localStorage.getItem("github_token"); // Token muss vorher gespeichert werden
+function updateMerkmaleDisplay() {
+  const m = window.char.merkmale || {};
 
-  if (!token) {
-    alert("Kein GitHub‑Token gefunden.");
-    return;
-  }
+  document.getElementById("ml-age").textContent = m.age || "–";
+  document.getElementById("ml-height").textContent = m.height || "–";
+  document.getElementById("ml-weight").textContent = m.weight || "–";
+  document.getElementById("ml-eyes").textContent = m.eyes || "–";
+  document.getElementById("ml-hair").textContent = m.hair || "–";
+  document.getElementById("ml-voice").textContent = m.voice || "–";
+  document.getElementById("ml-armor").textContent = m.armor || "–";
+  document.getElementById("ml-special").textContent = m.special || "–";
 
-  try {
-    const res = await fetch("https://api.github.com/gists", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        description: "UNDRA Character Save",
-        public: false,
-        files: {
-          [filename]: {
-            content: JSON.stringify(char, null, 2)
-          }
-        }
-      })
-    });
-
-    if (!res.ok) {
-      alert("Fehler beim Speichern in Gist.");
-      return;
-    }
-
-    alert("Charakter erfolgreich gespeichert.");
-  } catch (err) {
-    console.error(err);
-    alert("Netzwerkfehler beim Speichern.");
-  }
 }
-async function searchCharactersInGist(query) {
-  try {
-    const res = await fetch("https://api.github.com/users/djdrear/gists");
-    const gists = await res.json();
-
-    if (!Array.isArray(gists)) {
-      alert("Konnte Gist-Liste nicht laden.");
-      return;
-    }
-
-    const results = [];
-
-    for (const gist of gists) {
-      const files = gist.files || {};
-      for (const key in files) {
-        if (key.toLowerCase().includes("undra_") && key.toLowerCase().includes(query.toLowerCase())) {
-          results.push(key);
-        }
-      }
-    }
-
-    if (results.length === 0) {
-      alert("Keine passenden Charaktere gefunden.");
-    } else {
-      alert(`Gefundene Charaktere:\n\n${results.join("\n")}`);
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Fehler bei der Gist‑Suche.");
-  }
-}
-async function migrateLocalCharToGist() {
-  const name = char?.meta?.name?.trim();
-  const title = char?.meta?.title?.trim();
-  if (!name || !title) return;
-
-  const filename = `undra_${name.toLowerCase()}_${title.toLowerCase()}.json`;
-  const token = localStorage.getItem("github_token");
-
-  if (!token) return;
-
-  try {
-    const res = await fetch("https://api.github.com/users/djdrear/gists");
-    const gists = await res.json();
-
-    let exists = false;
-    for (const gist of gists) {
-      const files = gist.files || {};
-      if (filename in files) {
-        exists = true;
-        break;
-      }
-    }
-
-    if (!exists) {
-      await savePage3ToGist();
-      console.log("Charakter wurde automatisch in Gist migriert.");
-    }
-  } catch (err) {
-    console.warn("Migration fehlgeschlagen:", err);
-  }
-}
-function setGithubToken(token) {
-  localStorage.setItem("github_token", token.trim());
-  alert("GitHub‑Token gespeichert.");
-}
-
-/* ============================
-RENDER ALL
-============================ */
 function renderAll() {
   currencyEngine.render();
   renderInventory();
   renderZonesFromState();
   updateVitalsDisplayFromState();
   undraApplyStateToPage3();
+
+  // ⭐ Seite 3 Renderer
+  updateMerkmaleDisplay();
 }
-/* ============================
-POPUP: GIST-LADEN (FINAL & FIXED)
-============================ */
 
-/* Popup öffnen */
-function openLoadPopup() {
-  const bg = document.getElementById("uf-load-popup-bg");
+/* ============================================================
+POPUPS (INVENTAR)
+============================================================ */
 
-  if (!bg) {
-    console.error("Popup-Element 'uf-load-popup-bg' NICHT gefunden!");
-    return;
+function openPopup(type) {
+  switch (type) {
+    case "inventar":
+      document.getElementById("popup-inventar").classList.remove("hidden");
+      renderInventory();
+      showInvCategory("small");
+      break;
   }
-
-  console.log("Popup wird geöffnet…");
-  bg.style.display = "flex";
 }
 
-/* Popup schließen */
-function closeLoadPopup() {
-  const bg = document.getElementById("uf-load-popup-bg");
-  if (bg) bg.style.display = "none";
+function closePopup(type) {
+  const popup = document.getElementById(`popup-${type}`);
+  if (popup) popup.classList.add("hidden");
 }
 
-/* Charakter laden */
-function triggerLoadChar() {
-  const name = document.getElementById("uf-load-name")?.value.trim();
-  const title = document.getElementById("uf-load-title")?.value.trim();
+function showInvCategory(type) {
+  const all = ["small", "medium", "large"];
+  all.forEach(cat => {
+    const el = document.getElementById(`inv-cat-${cat}`);
+    if (el) {
+      el.classList.add("hidden");
+      el.classList.remove("active");
+    }
+  });
 
-  if (!name || !title) {
-    alert("Bitte Name und Titel eingeben.");
-    return;
+  const active = document.getElementById(`inv-cat-${type}`);
+  if (active) {
+    active.classList.remove("hidden");
+    active.classList.add("active");
   }
-
-  closeLoadPopup();
-  loadPage3FromGist(name, title);
 }
 
-/* Cancel-Button erst nach DOM-Load verbinden */
+/* ============================================================
+DOM-EVENTS
+============================================================ */
+
 document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = document.getElementById("uf-load-cancel");
+  if (cancelBtn) cancelBtn.addEventListener("click", closeLoadPopup);
 
-  if (!cancelBtn) {
-    console.error("Cancel-Button 'uf-load-cancel' NICHT gefunden!");
-    return;
-  }
+  const sellConfirmBtn = document.getElementById("sellConfirmBtn");
+  if (sellConfirmBtn) sellConfirmBtn.addEventListener("click", confirmSellFromPopup);
 
-  cancelBtn.addEventListener("click", closeLoadPopup);
-  console.log("Cancel-Button erfolgreich verbunden.");
-});
-async function loadPage3FromCloud(name, title) {
-  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}.json`;
-  
-  async function debugLoadFromCloud(name, title) {
-  const filename = `undra_${name.trim().toLowerCase()}_${title.trim().toLowerCase()}`;
-  const url = `https://undra.djdrear.workers.dev/load/${filename}`;
+  const sellCancelBtn = document.getElementById("sellCancelBtn");
+  if (sellCancelBtn) sellCancelBtn.addEventListener("click", closeSellPopup);
 
-  console.log("🔍 Debug: Ladeversuch für", filename);
-  console.log("🔗 URL:", url);
+  document.querySelectorAll("#zoneSelectGrid div").forEach(el => {
+    el.addEventListener("click", () => {
+      document.querySelectorAll("#zoneSelectGrid div").forEach(d => d.classList.remove("active-zone"));
+      el.classList.add("active-zone");
+      highlightSvgZone(el.getAttribute("data-value"));
+    });
+  });
+    });
 
-  try {
-    const res = await fetch(url);
-    console.log("🌐 Response-Status:", res.status);
+  document.querySelectorAll(".armor-zone").forEach(svg => {
+    svg.addEventListener("click", () => {
+      const zoneId = svg.id.replace("zone", "");
 
-    if (!res.ok) {
-      const text = await res.text();
-      console.warn("⚠️ Fehlertext vom Worker:", text);
-      alert(`Fehler beim Laden:\n\nStatus ${res.status}\n${text}`);
-      return;
-    }
+      document.querySelectorAll("#zoneSelectGrid div").forEach(d => d.classList.remove("active-zone"));
 
-    const data = await res.json();
-    console.log("📦 Geladene Daten:", data);
+      const match = document.querySelector(`#zoneSelectGrid div[data-value="${zoneId}"]`);
+      if (match) match.classList.add("active-zone");
 
-    if (!data || typeof data !== "object") {
-      alert("⚠️ Ungültiges JSON erhalten.");
-      return;
-    }
+      highlightSvgZone(zoneId);
+    });
+  });
 
-    alert(`✅ Charakter "${data.name || name}" erfolgreich geladen (Debug-Modus).`);
-  } catch (err) {
-    console.error("❌ Netzwerkfehler:", err);
-    alert("❌ Netzwerkfehler beim Laden.");
-  }
+function undraAlert(message, title = "Hinweis") {
+  document.getElementById("undra-alert-title").textContent = title;
+  document.getElementById("undra-alert-message").textContent = message;
+
+  const popup = document.getElementById("undra-alert");
+  popup.classList.remove("hidden");
 }
 
-
-  try {
-    const res = await fetch(`https://undra.djdrear.workers.dev/load/${filename}`);
-
-    if (!res.ok) {
-      alert(`Charakter "${name} ${title}" nicht gefunden.`);
-      return;
-    }
-
-    const data = await res.json();
-
-    // Fallbacks ergänzen
-    data.meta = data.meta || { name, title };
-    data.currency = data.currency || { gold: 0, silver: 0, copper: 0 };
-    data.inventory = data.inventory || {
-      small: Array(10).fill(""),
-      medium: Array(10).fill(""),
-      large: Array(10).fill("")
-    };
-    data.vitals = data.vitals || {};
-    data.upgrades = data.upgrades || {};
-    data.zones = data.zones || {
-      Z1: 0, Z2: 0, Z3: 0, Z4: 0, Z5: 0, Z6: 0, Z7: 0, Z8: 0
-    };
-
-    window.char = JSON.parse(JSON.stringify(data));
-    saveToLocal();
-    renderAll();
-
-    alert(`Charakter "${char.meta.name}" erfolgreich geladen.`);
-  } catch (err) {
-    console.error(err);
-    alert("Fehler beim Laden aus Cloudflare.");
-  }
+function closeUndraAlert() {
+  document.getElementById("undra-alert").classList.add("hidden");
 }
+
 /* ============================
 EXPOSE
 ============================ */
